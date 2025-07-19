@@ -13,7 +13,7 @@
   console.keyMap = "sv-latin1";
 
   # Graphical (X11) keyboard layout (often overridden by DEs, but good fallback)
-  services.xserver.layout = "se";
+  services.xserver.xkb.layout = "se";
   # Optional X server keyboard options, e.g., to enable Ctrl+Alt+Backspace to kill X
   # services.xserver.xkbOptions = "terminate:ctrl_alt_bksp";
 

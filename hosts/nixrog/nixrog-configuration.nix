@@ -5,43 +5,33 @@
 
 {
   imports = [
-    # Hardware-specific configuration for this machine.
+    # ... (all your existing imports) ...
     ./nixrog-hardware-configuration.nix
-
-    # Host-specific user definitions.
     ./nixrog-users.nix
-
-    # This will now be more general system settings, as localization is separate.
     ../../modules/common/common.nix
-    # Audio configuration.
     ../../modules/common/sound.nix
-    # Localization settings (timezone, keyboard layouts, locales).
     ../../modules/common/localization.nix
-    # Display manager configuration (SDDM, handling multiple DEs).
     ../../modules/common/display-manager.nix
-
-    # Desktop Environment modules (enable one or more to switch between).
     ../../modules/desktop/plasma.nix
     ../../modules/desktop/hyprland.nix
-    ../../modules/desktop/deepin.nix # Keep this if you want Deepin available
+    ../../modules/desktop/deepin.nix
   ];
 
-  # Host-specific settings (unique to 'nixrog').
+  # ... (existing host-specific settings) ...
   networking.hostName = "nixrog";
   system.stateVersion = "25.05";
 
-  # Basic system services.
+  # === FIX FOR CONFLICTING DEFAULT SESSIONS ===
+  # Force Hyprland to be the default session, even if other DEs try to set their own.
+  # This assumes 'hyprland' is the session name, which is standard.
+  services.displayManager.defaultSession = lib.mkForce "hyprland";
+
+  # ... (rest of your configuration) ...
   services.openssh.enable = true;
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true;
-
-  # Networking (if not handled by NetworkManager alone or requires specific settings).
-  networking.useDHCP = lib.mkForce true; # Force DHCP
-
-  # Nix-specific settings.
+  networking.useDHCP = lib.mkForce true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Bootloader configuration.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 }

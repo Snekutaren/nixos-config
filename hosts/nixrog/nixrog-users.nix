@@ -6,7 +6,7 @@
 {
   users.users.owdious = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # 'networkmanager' for GUI network control
+    extraGroups = [ "wheel" "networkmanager" "audio"]; # 'networkmanager' for GUI network control
     password = "password"; # WARNING: Use a hash or set post-install in production!
                            # For production, consider using 'mkpasswd -m sha512' to generate a hash.
   };

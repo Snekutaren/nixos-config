@@ -15,16 +15,10 @@
   ];
 
   # --- System Packages (Deepin-specific, if not pulled by DDE module) ---
-  environment.systemPackages = with pkgs; [
-    # deepin.deepin-terminal
-    # deepin.deepin-file-manager
+  environment.systemPackages = [
+    # pkgs.deepin-terminal          # <--- REMOVED THIS LINE for now, as it was not found
+    pkgs.deepin.dde-file-manager  # <--- CORRECTED THIS LINE with the found name
   ];
 
-  # REMOVED:
-  # - services.xserver.enable (now in common.nix)
-  # - services.xserver.displayManager.lightdm.enable (now in display-manager.nix)
-  # - Audio config (now in modules/common/sound.nix)
-  # - services.dbus.enable (now in common.nix)
-  # - networking.networkmanager.enable (now in common.nix)
-  # - Keyboard/Timezone (now in common.nix or common/localization.nix)
+  # REMOVED: ...
 }

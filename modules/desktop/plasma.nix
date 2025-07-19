@@ -18,6 +18,7 @@
     kdePackages.dolphin
     kdePackages.konsole
     kdePackages.spectacle
+    kdePackages.plasma-pa
   ];
 
   # REMOVED:
