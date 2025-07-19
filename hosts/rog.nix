@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -11,11 +11,9 @@
 
   system.stateVersion = "25.05";
 
-  # Your user
   users.users.owdious = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    # Use hashedPassword in production!
     password = "password";
   };
 
@@ -23,7 +21,8 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true;
 
-  networking.useDHCP = true;
+  # Force this to avoid conflicts
+  networking.useDHCP = lib.mkForce true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
