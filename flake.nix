@@ -1,5 +1,5 @@
 {
-  description = "NixOS config with Deepin";
+  description = "NixROG 25.05";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
@@ -9,10 +9,10 @@
       pkgs = import nixpkgs { inherit system; };
     in {
       nixosConfigurations = {
-        rog = nixpkgs.lib.nixosSystem {
+        nixrog = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/rog.nix
+            ./hosts/nixrog/nixrog-configuration.nix
           ];
           pkgs = pkgs;
         };
