@@ -14,9 +14,6 @@
   # Enable NetworkManager for graphical and command-line network management.
   networking.networkmanager.enable = true;
 
-  # Allow unfree packages (e.g., proprietary drivers, Steam, certain fonts).
-  nixpkgs.config.allowUnfree = true;
-
   # Common system-wide packages (CLI tools, etc.).
   environment.systemPackages = with pkgs; [
     vim
