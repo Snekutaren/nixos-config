@@ -1,19 +1,21 @@
 {
-  description = "Minimal NixOS flake config";
+  description = "NixOS config with Deepin";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations = {
-      rog = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/rog/hardware-configuration.nix
-          ./hosts/rog/configuration.nix
-        ];
+  outputs = { self, nixpkgs }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+    in {
+      nixosConfigurations = {
+        rog = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/rog.nix
+          ];
+          pkgs = pkgs;
+        };
       };
     };
-  };
 }
