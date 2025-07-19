@@ -1,16 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  services.xserver = {
-    enable = true;
+  services.xserver.enable = true;
 
-    desktopManager.deepin.enable = true;
+  services.xserver.desktopManager.deepin.enable = true;
 
-    windowManager = {
-      default = "deepin";
-      deepin.enable = true;
-    };
-  };
+  services.xserver.windowManager.default = "deepin";
 
   services.displayManager.lightdm.enable = true;
   services.displayManager.default = "lightdm";
@@ -23,5 +18,14 @@
   fonts.fonts = with pkgs; [ noto-fonts ];
 
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+
+  # Disable PulseAudio and enable PipeWire with PulseAudio compatibility
+  hardware.pulseaudio.enable = false;
+
+  hardware.pipewire = {
+    enable = true;
+    pulse = {
+      enable = true;
+    };
+  };
 }
