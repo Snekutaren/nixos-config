@@ -22,7 +22,7 @@
     wofi         # An application launcher
     waybar       # A customizable Wayland status bar
     dunst        # Notification daemon
-    polkit-gnome # A Polkit agent for graphical authentication
+    #polkit-gnome # A Polkit agent for graphical authentication
     grim         # Screenshot tool
     slurp        # Region selection for grim
     wl-clipboard # Clipboard manager
