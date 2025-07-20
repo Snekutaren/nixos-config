@@ -15,6 +15,7 @@
     ../../modules/desktop/plasma.nix
     ../../modules/desktop/hyprland.nix
     ../../modules/desktop/deepin.nix
+    ../../modules/services/monitoring.nix
   ];
 
   # ... (existing host-specific settings) ...

@@ -34,6 +34,8 @@
   # networking.interfaces.ens18.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;
+  #hardware.opengl.enable = true; #remove
+  #hardware.opengl.driSupport32Bit = true; #remove
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 }
