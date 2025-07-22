@@ -25,7 +25,7 @@
   # === FIX FOR CONFLICTING DEFAULT SESSIONS ===
   # Force Hyprland to be the default session, even if other DEs try to set their own.
   # This assumes 'hyprland' is the session name, which is standard.
-  services.displayManager.defaultSession = lib.mkForce "hyprland";
+  #services.displayManager.defaultSession = lib.mkForce "hyprland";
 
   # ... (rest of your configuration) ...
   services.openssh.enable = true;
