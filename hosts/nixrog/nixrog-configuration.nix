@@ -58,6 +58,9 @@
     vulkan-tools
     glxinfo
     dos2unix
+    cifs-utils
+    #smbclient
+    samba
     #libcamera # Optional, for camera support
   ];
 

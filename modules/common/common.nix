@@ -12,19 +12,7 @@
 
   # Common system-wide packages (CLI tools, etc.).
   environment.systemPackages = with pkgs; [
-    neovim
-    htop
-    pciutils
-    usbutils
-    udisks2
-    kdePackages.kate
-    kdePackages.dolphin
-    upower
-    superfile
-    helvum
-    pavucontrol
-    tmux
-    bc
+    
   ];
 
 }
