@@ -78,6 +78,18 @@
         "type": "github"
       }
     },
+    "dotfiles": {
+      "locked": {
+        "lastModified": 1753295179,
+        "narHash": "sha256-SaTIXh3rh8FMX1oZXY6YCWNuU10bfTji3tXlhP6naxI=",
+        "path": "/home/owdious/git/dotfiles",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/owdious/git/dotfiles",
+        "type": "path"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -475,6 +487,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "dotfiles": "dotfiles",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs_2"

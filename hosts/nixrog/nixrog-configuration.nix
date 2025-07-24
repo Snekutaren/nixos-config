@@ -55,6 +55,8 @@
     libpulseaudio
     alsa-utils # For aplay and amixer
     blueman
+    vulkan-tools
+    glxinfo
     #libcamera # Optional, for camera support
   ];
 

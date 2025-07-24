@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "NixROG 25.05";
 
@@ -15,6 +16,9 @@
 
     hyprland.url = "github:hyprwm/Hyprland"; # IMPORTANT
 
+    dotfiles = {
+    url = "path:/home/owdious/git/dotfiles";
+    };
 
   };
 
@@ -31,11 +35,11 @@
             # Main configuration
             ./hosts/nixrog/nixrog-configuration.nix
 
-            # Integrate Home Manager
             home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.owdious = import ./home/owdious/home.nix;
+   	    home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; }; # <--- Lägg till denna rad
+            home-manager.users.owdious = ./home/owdious/home.nix;
             }
 
             # Integrate Agenix
