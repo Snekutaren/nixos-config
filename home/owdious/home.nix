@@ -65,8 +65,9 @@ home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChan
   files=(
     "$${HOME}/.config/hypr/hyprland.conf"
     "$${HOME}/.config/hypr/scripts/toggle_scroll.sh"
+    "$${HOME}/.config/hypr/scripts/commit_hypr.sh"
     "$${HOME}/.config/fish/config.fish"
-    "$${HOME}/.config/bash/.bash"
+    "$${HOME}/.config/bash/.bashrc"
   )
 
   for file in "$${files[@]}"; do
@@ -80,6 +81,11 @@ home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChan
 
   xdg.configFile."hypr/hyprland.conf".source = "${inputs.dotfiles}/hypr/hyprland.conf";
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
+    source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
+    executable = true;
+  };
+
+  home.file."/usr/local/bin/commit_hypr.sh" = {
     source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
     executable = true;
   };
