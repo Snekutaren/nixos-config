@@ -57,6 +57,7 @@
     blueman
     vulkan-tools
     glxinfo
+    dos2unix
     #libcamera # Optional, for camera support
   ];
 
@@ -77,5 +78,12 @@
   services.pipewire.extraConfig.pipewire."10-disable-x11-bell" = {
   "load-module mod-x11-bell" = false;
   };
+
+  # Correct and current way to enable 32-bit graphics
+        hardware.graphics = {
+          enable = true;
+          enable32Bit = true; # <--- THE CORRECT OPTION FOR 25.05
+        };
+
 
 }

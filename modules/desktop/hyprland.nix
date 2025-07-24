@@ -28,5 +28,6 @@
       wl-clipboard
       wofi
       waybar
+      hyprlock
     ];
 }
