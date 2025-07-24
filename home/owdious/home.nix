@@ -91,7 +91,7 @@ home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChan
   };
 
   home.file."/.bashrc" = {
-    source = "${inputs.dotfiles}/bash/.bashrc";
+    source = "${inputs.dotfiles}/bash/bashrc";
     executable = true;
   };
 
