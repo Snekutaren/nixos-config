@@ -13,6 +13,7 @@
     # For password management (Age/Agnix)
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.home-manager.follows = "home-manager"; # What is this?
 
     hyprland.url = "github:hyprwm/Hyprland"; # IMPORTANT
 

@@ -1,4 +1,4 @@
-# hosts/nixrog/nixrog-configuration.nix
+# hosts/nixrog-configuration.nix
 # Main configuration file for the 'nixrog' NixOS machine.
 
 { config, pkgs, lib, ... }:
@@ -20,17 +20,12 @@
   # ... host-specific settings ...
   networking.hostName = "nixrog";
   system.stateVersion = "25.05";
-
   services.displayManager.defaultSession = lib.mkForce "hyprland";
-
   services.openssh.enable = true;
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true;
-  # networking.useDHCP = lib.mkForce true; # remove, its in hardware.nix
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-#  boot.loader.systemd-boot.enable = true; # move to hardware
-#  boot.loader.efi.canTouchEfiVariables = true; # this too
-
+  
   # Enable sound with PipeWire
   #sound.enable = true;
   services.pulseaudio.enable = false; # Disable PulseAudio to avoid conflicts
@@ -62,7 +57,8 @@
     restic        # Backup too
     git           # Version control system
     wget          # For downloading files
-    jq
+    agenix        # For Age encryption management
+    jq            # For JSON processing
     curl          # For transferring data with URLs
     unzip         # For extracting zip files
     #xdg-user-dirs # For managing user directories

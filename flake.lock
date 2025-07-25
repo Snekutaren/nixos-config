@@ -3,7 +3,9 @@
     "agenix": {
       "inputs": {
         "darwin": "darwin",
-        "home-manager": "home-manager",
+        "home-manager": [
+          "home-manager"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -80,8 +82,8 @@
     },
     "dotfiles": {
       "locked": {
-        "lastModified": 1753430489,
-        "narHash": "sha256-ccvjC3xcai+kMDzosICg5zNKbbCpB0xNgza5VOpQO8M=",
+        "lastModified": 1753448150,
+        "narHash": "sha256-6Oou4S762TgDYf03mCqnx2t5KyRLcdqq7NW0zuWNeP4=",
         "path": "/home/owdious/git/dotfiles",
         "type": "path"
       },
@@ -129,27 +131,6 @@
       }
     },
     "home-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "agenix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1745494811,
-        "narHash": "sha256-YZCh2o9Ua1n9uCvrvi5pRxtuVNml8X2a03qIFfRKpFs=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "abfad3d2958c9e6300a883bd443512c55dfeb1be",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "home-manager_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -244,11 +225,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1753310189,
-        "narHash": "sha256-56A/JkduXotowfl8G4jhXMGrlLgRbQLwIBOE5kM0iNU=",
+        "lastModified": 1753456763,
+        "narHash": "sha256-Y5KkIrfP6qM+XtKl3ZQSVF3oxxtMFTT/tdzq+anMJJY=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "31cc7f3b87d1d9670b66e73e3720da2e2da49acd",
+        "rev": "5c8d675eedcd836cbb0d4eeadf203efc7f73752b",
         "type": "github"
       },
       "original": {
@@ -488,7 +469,7 @@
       "inputs": {
         "agenix": "agenix",
         "dotfiles": "dotfiles",
-        "home-manager": "home-manager_2",
+        "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs_2"
       }
