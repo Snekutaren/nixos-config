@@ -30,44 +30,31 @@
         nixrog = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-      
-          modules = [
-            # Main configuration
-            ./hosts/nixrog/nixrog-configuration.nix
           
+          modules = [
+            
+            # Main configuration
+            ./hosts/nixrog-configuration.nix
+            ./hosts/nixrog-hardware-configuration.nix
+            ./hosts/nixrog-users.nix
+
+            # Define global nixpkgs options here
+            {
+              nixpkgs.config.allowUnfree = true;
+	          }
+          
+            # Integrate Home Manager
             home-manager.nixosModules.home-manager {
       	    home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.owdious = ./home/owdious/home.nix;
             home-manager.backupFileExtension = "backup";
-#            users = {
-#             owdious = {
-#                imports = [
-#                  ./home/owdious/home.nix
-#                ];
-#                home.stateVersion = "25.05"; # <--- THIS MUST BE HERE
-#              };
-#            };
-          }  
-
-#            users = {
-#              owdious = {
-#                imports = [
-#                  ./home/owdious/home.nix
-#                ];
-#            home.stateVersion = "25.05"; # <--- THIS IS THE CORRECT PLACE FOR THIS OPTION FOR A USER
-#              };
-#            };
+            }  
 
             # Integrate Agenix
             agenix.nixosModules.default
 
-            # Define global nixpkgs options here
-            {
-              nixpkgs.config.allowUnfree = true;
-	    }
-	
             
           ];
         };
