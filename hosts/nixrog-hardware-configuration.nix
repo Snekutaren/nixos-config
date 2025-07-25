@@ -2,12 +2,12 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 
-#{ config, lib, pkgs, modulesPath, ... }:
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
+#{ config, lib, pkgs, ... }:
 
 {
   imports =
-   # [ (modulesPath + "./installer/scan/not-detected.nix") ];
+    [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];

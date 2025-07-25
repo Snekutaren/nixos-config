@@ -54,7 +54,6 @@
 
             # Integrate Agenix
             agenix.nixosModules.default
-
             
           ];
         };

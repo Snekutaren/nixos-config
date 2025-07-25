@@ -6,13 +6,13 @@
 {
   imports = [
     # ... (all your existing imports) ...
-    ../../modules/common/common.nix
+    ../modules/common/common.nix
     #../../modules/common/sound.nix
-    ../../modules/common/localization.nix
+    ../modules/common/localization.nix
     #../../modules/common/display-manager.nix
     #../../modules/desktop/gnome.nix
     #../../modules/desktop/plasma.nix
-    ../../modules/desktop/hyprland.nix
+    ../modules/desktop/hyprland.nix
     #../../modules/desktop/deepin.nix
     #../../modules/services/monitoring.nix
   ];
