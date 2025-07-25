@@ -69,10 +69,10 @@
     #unzip         # For extracting zip files
     #xdg-user-dirs # For managing user directories
     xdg-utils     # For desktop integration
-    xdg-desktop-portal # For desktop portal support
-    xdg-desktop-portal-gtk # GTK support for desktop portal
-    xdg-desktop-portal-kde # KDE support for desktop portal
-    xdg-desktop-portal-hyprland # Hyprland support for desktop portal
+    #xdg-desktop-portal # For desktop portal support
+    #xdg-desktop-portal-gtk # GTK support for desktop portal
+    #xdg-desktop-portal-kde # KDE support for desktop portal
+    #xdg-desktop-portal-hyprland # Hyprland support for desktop portal
   ];
 
   # Enable UPower for WirePlumber
