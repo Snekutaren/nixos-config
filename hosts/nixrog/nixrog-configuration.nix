@@ -38,9 +38,9 @@
   services.pulseaudio.enable = false; # Disable PulseAudio to avoid conflicts
 
   # Enable PipeWire and its components
-  services.pipewire = {
+  services.pipewire = { 
     enable = true;
-    alsa.enable = true;
+    alsa.enable = true; # Enable ALSA support
     alsa.support32Bit = true; # Optional, for 32-bit app support
     pulse.enable = true; # Enable PulseAudio compatibility
     jack.enable = true; # Optional, for JACK compatibility
@@ -49,19 +49,30 @@
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
-    pipewire
-    wireplumber
-    pavucontrol
-    libpulseaudio
-    alsa-utils # For aplay and amixer
-    blueman
-    vulkan-tools
-    glxinfo
-    dos2unix
-    cifs-utils
-    #smbclient
-    samba
-    #libcamera # Optional, for camera support
+    pipewire      # PipeWire media server
+    wireplumber   # WirePlumber session manager
+    pavucontrol   # PulseAudio volume control
+    libpulseaudio # For PulseAudio compatibility
+    alsa-utils    # For aplay and amixer
+    blueman       # bluetooth management
+    vulkan-tools  # For Vulkan support
+    glxinfo       # For OpenGL information
+    dos2unix      # For converting text files
+    cifs-utils    # For CIFS/SMB support
+    neofetch      # For system information
+    samba         # For SMB/CIFS support
+    restic        # Backup too
+    #git           # Version control system
+    #wget          # For downloading files
+    jq
+    #curl          # For transferring data with URLs
+    #unzip         # For extracting zip files
+    #xdg-user-dirs # For managing user directories
+    xdg-utils     # For desktop integration
+    xdg-desktop-portal # For desktop portal support
+    xdg-desktop-portal-gtk # GTK support for desktop portal
+    xdg-desktop-portal-kde # KDE support for desktop portal
+    xdg-desktop-portal-hyprland # Hyprland support for desktop portal
   ];
 
   # Enable UPower for WirePlumber
