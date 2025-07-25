@@ -9,7 +9,7 @@
   home.sessionVariables.EDITOR = "nvim";
 
   # Home Manager needs to know your user's home directory
-  home.homeDirectory = "/home/owdious";
+  home.homeDirectory = "./home/owdious";
 
   # Define user-specific packages here
   home.packages = with pkgs; [
