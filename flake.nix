@@ -11,19 +11,19 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # For password management (Age/Agnix)
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.inputs.home-manager.follows = "home-manager"; # What is this?
+     agenix.url = "github:ryantm/agenix";
 
-    hyprland.url = "github:hyprwm/Hyprland"; # IMPORTANT
+    # Hyprland input
+    hyprland.url = "github:hyprwm/Hyprland";
 
+    # Dotfiles input
     dotfiles = {
     url = "path:/home/owdious/git/dotfiles";
     };
 
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, agenix, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
     in {
@@ -38,23 +38,25 @@
             ./hosts/nixrog-configuration.nix
             ./hosts/nixrog-hardware-configuration.nix
             ./hosts/nixrog-users.nix
-
-            # Define global nixpkgs options here
-            {
-              nixpkgs.config.allowUnfree = true;
-	          }
           
             # Integrate Home Manager
-            home-manager.nixosModules.home-manager {
-      	    home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.owdious = ./home/owdious/home.nix;
-            home-manager.backupFileExtension = "backup";
-            }  
+           home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.backupFileExtension = "backup";
+            } 
 
             # Integrate Agenix
             agenix.nixosModules.default
+            {
+              age.identityPaths = [ "/home/owdious/.ssh/id_ed25519" ];
+            }
+
+            # Allow unfree packages
+            ({ ... }: {
+            nixpkgs.config.allowUnfree = true;
+            })
             
           ];
         };

@@ -1,7 +1,7 @@
 # hosts/nixrog-configuration.nix
 # Main configuration file for the 'nixrog' NixOS machine.
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports = [
@@ -25,12 +25,9 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  # Enable sound with PipeWire
-  #sound.enable = true;
-  services.pulseaudio.enable = false; # Disable PulseAudio to avoid conflicts
 
   # Enable PipeWire and its components
+  services.pulseaudio.enable = false; # Disable PulseAudio to avoid conflicts
   services.pipewire = { 
     enable = true;
     alsa.enable = true; # Enable ALSA support
@@ -42,12 +39,13 @@
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
+    inputs.agenix.packages.x86_64-linux.default # Agenix for secret management
     pipewire      # PipeWire media server
     wireplumber   # WirePlumber session manager
     pavucontrol   # PulseAudio volume control
     libpulseaudio # For PulseAudio compatibility
     alsa-utils    # For aplay and amixer
-    blueman       # bluetooth management
+    blueman       # bluetooth GUI management
     vulkan-tools  # For Vulkan support
     glxinfo       # For OpenGL information
     dos2unix      # For converting text files
@@ -57,7 +55,6 @@
     restic        # Backup too
     git           # Version control system
     wget          # For downloading files
-    agenix        # For Age encryption management
     jq            # For JSON processing
     curl          # For transferring data with URLs
     unzip         # For extracting zip files
@@ -78,10 +75,9 @@
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
-  # Optional: Enable Bluetooth if needed
+  # Enable Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-  #  environment.systemPackages = with pkgs; [ blueman ]; # Optional, for GUI Bluetooth management
 
   services.pipewire.extraConfig.pipewire."10-disable-x11-bell" = {
   "load-module mod-x11-bell" = false;
@@ -90,8 +86,6 @@
   # Correct and current way to enable 32-bit graphics
         hardware.graphics = {
           enable = true;
-          enable32Bit = true; # <--- THE CORRECT OPTION FOR 25.05
+          enable32Bit = true;
         };
-
-
 }
