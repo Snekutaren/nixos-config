@@ -17,8 +17,6 @@
   nixpkgs.config.allowUnfree = true; # Allow unfree packages
   services.dbus.enable = true; # Enable D-Bus for inter-process communication
   networking.networkmanager.enable = true; # Enable NetworkManager for network management
-  #services.udev.packages = [ pkgs.xone ];
-  hardware.xone.enable = true;
 
   # Enable PipeWire and its components
   services.pulseaudio.enable = false; # Disable PulseAudio to avoid conflicts
@@ -33,6 +31,9 @@
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
+    baobab     # Best native choice
+    kdePackages.filelight  # Optional: visual ring style
+    qdirstat         # Optional: feature-rich tree map
     inputs.agenix.packages.x86_64-linux.default # Agenix for secret management
     pipewire      # PipeWire media server
     wireplumber   # WirePlumber session manager
@@ -54,7 +55,6 @@
     unzip         # For extracting zip files
     evtest        # For testing input devices
     jstest-gtk    # For joystick testing
-    #xone          # For Xbox controller support
     #xdg-user-dirs # For managing user directories
     xdg-utils     # For desktop integration
     #xdg-desktop-portal # For desktop portal support

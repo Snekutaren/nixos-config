@@ -49,6 +49,9 @@
   # Enable AMD microcode updates when redistributable firmware is allowed
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  hardware.xone.enable = true;
+  hardware.xpad-noone.enable = true;
+
 
 
 }
