@@ -29,6 +29,9 @@
     wireplumber.enable = true; # Enable WirePlumber session manager
   };
 
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
   # System-wide packages
   environment.systemPackages = with pkgs; [
     baobab     # Best native choice
@@ -55,6 +58,8 @@
     unzip         # For extracting zip files
     evtest        # For testing input devices
     jstest-gtk    # For joystick testing
+    wl-gammactl   # For managing screen gamma
+    wlsunset      # For managing screen color temperature
     #xdg-user-dirs # For managing user directories
     xdg-utils     # For desktop integration
     #xdg-desktop-portal # For desktop portal support
