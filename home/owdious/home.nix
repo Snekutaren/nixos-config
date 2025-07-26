@@ -1,5 +1,5 @@
 # home/owdious/home.nix
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib,... }:
 {
   home.stateVersion = "25.05"; # Matching the home-manager release branch
   home.sessionVariables.EDITOR = "nvim";
@@ -48,7 +48,7 @@
   programs.eww = {
     enable = true;
   };
-
+  
 home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
   date="$$(date +%Y-%m-%d_%H-%M-%S)"
 

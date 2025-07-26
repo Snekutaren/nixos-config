@@ -27,18 +27,23 @@
             ./hosts/nixrog-configuration.nix
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.backupFileExtension = "backup";
-            } 
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };  # Note the semicolon here
+                users = {  # Nested properly under home-manager
+                  owdious = {  # User configuration
+                    imports = [
+                      ./home/owdious/home.nix
+                    ];
+                  };
+                };
+              };
+            }
             agenix.nixosModules.default
             {
               age.identityPaths = [ "/home/owdious/.ssh/id_ed25519" ];
             }
-            {
-              nixpkgs.config.allowUnfree = true;
-            } 
           ];
         };
       };

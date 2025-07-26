@@ -13,7 +13,8 @@
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  #boot.extraModulePackages = [ config.boot.kernelPackages.xone ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/NIXOS_ROOT";

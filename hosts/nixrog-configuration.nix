@@ -2,25 +2,28 @@
 {
   imports = [
     ./nixrog-hardware-configuration.nix
-    ../modules/common/common.nix
     ../modules/common/localization.nix
     ../modules/desktop/hyprland.nix
   ];
 
   # ... host-specific settings ...
-  networking.hostName = "nixrog";
-  system.stateVersion = "25.05";
-  services.displayManager.defaultSession = lib.mkForce "hyprland";
-  services.openssh.enable = true;
-  security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  #nixpkgs.config.allowUnfree = true;
+  networking.hostName = "nixrog"; # Set the hostname
+  system.stateVersion = "25.05"; # Matching the NixOS release branch
+  services.displayManager.defaultSession = lib.mkForce "hyprland"; # Set Hyprland as the default session
+  services.openssh.enable = true; # Enable SSH server
+  security.sudo.enable = true; # Enable sudo for all users
+  security.sudo.wheelNeedsPassword = true; # Require password for sudo in the wheel group
+  nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enable experimental features for Nix
+  nixpkgs.config.allowUnfree = true; # Allow unfree packages
+  services.dbus.enable = true; # Enable D-Bus for inter-process communication
+  networking.networkmanager.enable = true; # Enable NetworkManager for network management
+  #services.udev.packages = [ pkgs.xone ];
+  hardware.xone.enable = true;
 
   # Enable PipeWire and its components
   services.pulseaudio.enable = false; # Disable PulseAudio to avoid conflicts
-  services.pipewire = { 
-    enable = true;
+  services.pipewire = {  # PipeWire configuration
+    enable = true; # Enable PipeWire
     alsa.enable = true; # Enable ALSA support
     alsa.support32Bit = true; # Optional, for 32-bit app support
     pulse.enable = true; # Enable PulseAudio compatibility
@@ -49,6 +52,9 @@
     jq            # For JSON processing
     curl          # For transferring data with URLs
     unzip         # For extracting zip files
+    evtest        # For testing input devices
+    jstest-gtk    # For joystick testing
+    #xone          # For Xbox controller support
     #xdg-user-dirs # For managing user directories
     xdg-utils     # For desktop integration
     #xdg-desktop-portal # For desktop portal support
