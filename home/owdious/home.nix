@@ -1,14 +1,8 @@
 # home/owdious/home.nix
 { config, pkgs, inputs, lib, ... }:
-
 {
-  # Restore home-manager state
   home.stateVersion = "25.05"; # Matching the home-manager release branch
-
-  # Set default editor
   home.sessionVariables.EDITOR = "nvim";
-
-  # Home Manager needs to know your user's home directory
   home.homeDirectory = "/home/owdious";
 
   # Define user-specific packages here
@@ -54,8 +48,6 @@
   programs.eww = {
     enable = true;
   };
-
-# home.manager.backupFileExtension = "backup";
 
 home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
   date="$$(date +%Y-%m-%d_%H-%M-%S)"

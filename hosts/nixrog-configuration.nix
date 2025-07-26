@@ -1,20 +1,10 @@
-# hosts/nixrog-configuration.nix
-# Main configuration file for the 'nixrog' NixOS machine.
-
 { config, pkgs, lib, inputs, ... }:
-
 {
   imports = [
-    # ... (all your existing imports) ...
+    ./nixrog-hardware-configuration.nix
     ../modules/common/common.nix
-    #../../modules/common/sound.nix
     ../modules/common/localization.nix
-    #../../modules/common/display-manager.nix
-    #../../modules/desktop/gnome.nix
-    #../../modules/desktop/plasma.nix
     ../modules/desktop/hyprland.nix
-    #../../modules/desktop/deepin.nix
-    #../../modules/services/monitoring.nix
   ];
 
   # ... host-specific settings ...
@@ -25,6 +15,7 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  #nixpkgs.config.allowUnfree = true;
 
   # Enable PipeWire and its components
   services.pulseaudio.enable = false; # Disable PulseAudio to avoid conflicts
@@ -84,8 +75,14 @@
   };
 
   # Correct and current way to enable 32-bit graphics
-        hardware.graphics = {
-          enable = true;
-          enable32Bit = true;
-        };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  users.users.owdious = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "audio"]; # 'networkmanager' for GUI network control
+    password = "password"; # WARNING: Use a hash or set post-install in production!
+  };
 }
