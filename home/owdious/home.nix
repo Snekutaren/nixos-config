@@ -73,8 +73,27 @@ home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChan
     source = "${inputs.dotfiles}/hypr/hyprland.conf";
   };
 
-  xdg.configFile."hypr/hypridle.conf" = {
-    source = "${inputs.dotfiles}/hypr/hypridle.conf";
+  #home.packages = with pkgs; [ hypridle hyprlock ];
+  home.file.".config/hypr/hypridle.conf".text = ''
+    listener {
+        timeout = 1800
+        on-timeout = pidof hyprlock || hyprlock
+    }
+    listener {
+        timeout = 1860
+        on-timeout = hyprctl dispatch dpms off
+        on-resume = hyprctl dispatch dpms on; ~/.config/hypr/resume-dpms.sh
+    }
+  '';
+  home.file.".config/hypr/resume-dpms.sh" = {
+    text = ''
+      #!/bin/bash
+      sleep 60
+      if pidof hyprlock > /dev/null; then
+          hyprctl dispatch dpms off
+      fi
+    '';
+    executable = true;
   };
   
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
