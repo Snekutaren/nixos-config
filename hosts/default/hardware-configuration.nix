@@ -10,9 +10,15 @@
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" ];
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+
+  boot.initrd.luks.devices = {
+    cryptroot = {
+      device = "/dev/disk/by-label/NIXOS_LUKS";
+      preLVM = true; # Ensure this is set for LUKS devices
+    };
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/NIXOS_ROOT";
