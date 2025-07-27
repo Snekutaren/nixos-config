@@ -22,7 +22,8 @@
       qt5.qtwayland
       qt6.qtwayland
       rofi
-      swayidle
+      #swayidle
+      hypridle
       swaylock-effects
       wlogout
       wl-clipboard

@@ -69,14 +69,26 @@ home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChan
   done
 '';
 
-  xdg.configFile."hypr/hyprland.conf".source = "${inputs.dotfiles}/hypr/hyprland.conf";
+  xdg.configFile."hypr/hyprland.conf" = {
+    source = "${inputs.dotfiles}/hypr/hyprland.conf";
+  };
+
+  xdg.configFile."hypr/hypridle.conf" = {
+    source = "${inputs.dotfiles}/hypr/hypridle.conf";
+  };
+  
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
     source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
     executable = true;
   };
+  
+  home.file.".config/hypr/scripts/lock-and-sleep.sh" = {
+    source = "${inputs.dotfiles}/hypr/scripts/lock-and-sleep.sh";
+    executable = true;
+  };
 
   home.file."/usr/local/bin/commit_hypr.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
+    source = "${inputs.dotfiles}/hypr/scripts/commit_hypr.sh";
     executable = true;
   };
 
@@ -84,7 +96,6 @@ home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChan
     source = "${inputs.dotfiles}/bash/.bashrc";
     executable = true;
   };
-
 
 }
 
