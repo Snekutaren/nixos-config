@@ -15,6 +15,8 @@
 
 
     environment.systemPackages = with pkgs; [
+      hyprlock
+      hypridle
       hyprpaper
       kitty
       libnotify
@@ -23,12 +25,11 @@
       qt6.qtwayland
       rofi
       #swayidle
-      hypridle
-      swaylock-effects
+      #swaylock-effects
       wlogout
       wl-clipboard
       wofi
       waybar
-      hyprlock
+      #wlr-randr
     ];
 }

@@ -49,60 +49,62 @@
     enable = true;
   };
   
-home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
-  date="$$(date +%Y-%m-%d_%H-%M-%S)"
+  home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
+    date="$$(date +%Y-%m-%d_%H-%M-%S)"
 
-  files=(
-    "$${HOME}/.config/hypr/hyprland.conf"
-    "$${HOME}/.config/hypr/scripts/toggle_scroll.sh"
-    "$${HOME}/.config/hypr/scripts/commit_hypr.sh"
-    "$${HOME}/.config/fish/config.fish"
-    "$${HOME}/.config/bash/.bashrc"
-  )
+    files=(
+      "$${HOME}/.config/hypr/hyprland.conf"
+      "$${HOME}/.config/hypr/scripts/toggle_scroll.sh"
+      "$${HOME}/.config/hypr/scripts/commit_hypr.sh"
+      "$${HOME}/.config/fish/config.fish"
+      "$${HOME}/.config/bash/.bashrc"
+    )
 
-  for file in "$${files[@]}"; do
-    if [ -f "$$file" ] && [ ! -L "$$file" ]; then
-      backup="$$file.backup-$$date"
-      echo "Backing up existing file: $$file -> $$backup"
-      mv "$$file" "$$backup"
-    fi
-  done
-'';
+    for file in "$${files[@]}"; do
+      if [ -f "$$file" ] && [ ! -L "$$file" ]; then
+        backup="$$file.backup-$$date"
+        echo "Backing up existing file: $$file -> $$backup"
+        mv "$$file" "$$backup"
+      fi
+    done
+  '';
 
   xdg.configFile."hypr/hyprland.conf" = {
     source = "${inputs.dotfiles}/hypr/hyprland.conf";
   };
 
-  #home.packages = with pkgs; [ hypridle hyprlock ];
   home.file.".config/hypr/hypridle.conf".text = ''
     listener {
         timeout = 1800
         on-timeout = pidof hyprlock || hyprlock
     }
     listener {
-        timeout = 1860
-        on-timeout = hyprctl dispatch dpms off
-        on-resume = hyprctl dispatch dpms on; ~/.config/hypr/resume-dpms.sh
     }
   '';
-  home.file.".config/hypr/resume-dpms.sh" = {
+  home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
     text = ''
       #!/bin/bash
-      sleep 60
-      if pidof hyprlock > /dev/null; then
-          hyprctl dispatch dpms off
-      fi
+      pidof hyprlock || hyprlock &
+      sleep 2
+      (
+          while pidof hyprlock > /dev/null; do
+              sleep 60
+              if pidof hyprlock > /dev/null; then
+                  DPMS_STATUS=$(hyprctl monitors | grep dpmsStatus | head -n 1 | awk '{print $2}')
+                  if [ "$DPMS_STATUS" = "1" ]; then
+                      sleep 0.5 && hyprctl dispatch dpms off
+                  fi
+              else
+                  break
+              fi
+          done
+      ) &
     '';
     executable = true;
   };
   
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
     source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
-    executable = true;
-  };
-  
-  home.file.".config/hypr/scripts/lock-and-sleep.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/lock-and-sleep.sh";
     executable = true;
   };
 
