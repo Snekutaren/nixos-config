@@ -8,26 +8,14 @@
   # Define user-specific packages here
   home.packages = with pkgs; [
     brave
-    git
     discord
     heroic
     steam
     vscode
-    kdePackages.kio
-    kdePackages.kio-extras
-    neovim
-    htop
-    pciutils
-    usbutils
-    udisks2
-    kdePackages.kate
-    kdePackages.dolphin
-    upower
-    superfile
-    helvum
-    pavucontrol
-    tmux
-    bc
+    vlc
+    thunderbird
+    gimp
+    libreoffice
   ];
 
   # Enable a shell (e.g., Zsh)

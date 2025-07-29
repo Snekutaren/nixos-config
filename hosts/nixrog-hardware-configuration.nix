@@ -13,6 +13,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [  ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = unstablePkgs.linuxPackages_latest;
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/NIXOS_ROOT";
@@ -28,6 +29,8 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   boot.loader.systemd-boot.enable = true; # move to hardware
   boot.loader.efi.canTouchEfiVariables = true; # this too
