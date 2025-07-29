@@ -24,6 +24,5 @@
     libpulseaudio   # For PulseAudio compatibility
     alsa-utils      # For aplay and amixer
     helvum          # For PipeWire graph visualization
-    lollipop
   ];
 }

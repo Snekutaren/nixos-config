@@ -11,7 +11,14 @@
     #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
 
+     # Enable xdg-desktop-portal for Hyprland
+    xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    };
+
     environment.systemPackages = with pkgs; [
+      #xdg-desktop-portal-hyprland # Hyprland support for desktop portal
       hyprlock
       hypridle
       hyprpaper
@@ -21,12 +28,12 @@
       qt5.qtwayland
       qt6.qtwayland
       rofi
-      #swayidle
-      #swaylock-effects
       wlogout
       wl-clipboard
       wofi
       waybar
       #wlr-randr
+      wl-gammactl   # For managing screen gamma
+      wlsunset      # For managing screen color temperature
     ];
 }

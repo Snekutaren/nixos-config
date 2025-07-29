@@ -14,6 +14,8 @@
   boot.extraModulePackages = [  ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   #boot.kernelPackages = unstablePkgs.linuxPackages_latest;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/NIXOS_ROOT";
@@ -27,22 +29,8 @@
     };
 
   swapDevices = [ ];
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  boot.loader.systemd-boot.enable = true; # move to hardware
-  boot.loader.efi.canTouchEfiVariables = true; # this too
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp11s0.useDHCP = lib.mkDefault true;
-
+  hardware.bluetooth.enable = true;
   hardware.enableAllFirmware = true;
 
   # Enable redistributable firmware (includes AMD CPU microcode)
@@ -52,4 +40,18 @@
 
   hardware.xone.enable = true;
   hardware.xpad-noone.enable = true;
+
+    # Enable AMD Vulkan driver (AMDVLK instead of Mesa RADV) # Witcher3 Wont runwith AMDVLK
+  # Note: AMDVLK is not recommended for all games, RADV is often preferred
+  hardware.amdgpu = {
+    amdvlk.enable = false;
+  };
+
+  # Correct and current way to enable 32-bit graphics
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  #hardware.opengl.enable = true;
 }
