@@ -1,7 +1,7 @@
 # networking.nix
 # This file defines the networking configuration for your NixOS system.
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # -------------------------------------------------------------------------
@@ -123,7 +123,7 @@
 
   # Enable IP forwarding if your system needs to route traffic between networks
   # (e.g., for containers, VPNs, or if acting as a router)
-  networking.ipForwarding = true;
+  # networking.ipForwarding = true;
   # networking.ipv6.extraSysctls = { "net.ipv6.conf.all.forwarding" = 1; }; # For IPv6 forwarding
 
   # -------------------------------------------------------------------------
@@ -131,9 +131,9 @@
   # -------------------------------------------------------------------------
 
   # Enable Podman
-  virtualisation.podman.enable = true;
+  # virtualisation.podman.enable = true;
   # Allow non-root users to run Podman containers
-  virtualisation.podman.enableRootless = true;
+  # virtualisation.podman.enableRootless = true;
 
   # Notes for Podman and nftables:
   # Podman (especially with its default 'netavark' CNI plugin) is generally more

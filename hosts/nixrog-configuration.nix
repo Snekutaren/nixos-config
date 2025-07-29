@@ -19,16 +19,17 @@
   services.openssh.enable = true; # Enable SSH server
   services.dbus.enable = true; # Enable D-Bus for inter-process communication
   services.xserver.videoDrivers = [ "amdgpu" ];
-  services.blueman.enable = true;
-  services.upower.enable = true;
-  services.pipewire.extraConfig.pipewire."10-disable-x11-bell" = {
+  services.blueman.enable = true; # Enable Blueman for Bluetooth management
+  services.upower.enable = true; # Enable UPower for power management
+  services.pipewire.extraConfig.pipewire."10-disable-x11-bell" = { #
   "load-module mod-x11-bell" = false;
   };
 
   security.sudo.enable = true; # Enable sudo for all users
   security.sudo.wheelNeedsPassword = true; # Require password for sudo in the wheel group
-  
-  
+
+  # Game mode for performance tuning  
+  programs.gamemode.enable = true;
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
@@ -98,15 +99,6 @@
   #]) ++ (with nurPkgs.repos.mic92; [
     #nixpkgs-review
   ];
-  
-  # Enable UPower for WirePlumber
- 
-
-  # Game mode for performance tuning  
-  programs.gamemode.enable = true;
-
-  # Enable Bluetooth
-
 
   users.users.owdious = {
     isNormalUser = true;

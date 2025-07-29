@@ -36,9 +36,6 @@
   programs.eww = {
     enable = true;
   };
-
-   # Game mode for performance tuning  
-  programs.gamemode.enable = true;
   
   home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
     date="$$(date +%Y-%m-%d_%H-%M-%S)"
