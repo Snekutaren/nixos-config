@@ -63,12 +63,17 @@
 
   home.file.".config/hypr/hypridle.conf".text = ''
     listener {
-        timeout = 1800
-        on-timeout = pidof hyprlock || hyprlock
+        timeout = 300
+        on-timeout = pidof hyprlock || bash ~/.config/hypr/scripts/lock-and-dpms.sh
+        on-resume = hyprctl dispatch dpms on
+        #on-suspend = hyprctl dispatch dpms off
+        #on-lock = pidof hyprlock || hyprlock
+        #on-unlock = hyprctl dispatch dpms on
     }
     listener {
     }
   '';
+  
   home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
     text = ''
       #!/bin/bash
