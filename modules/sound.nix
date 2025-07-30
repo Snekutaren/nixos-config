@@ -16,6 +16,12 @@
   # Enable RealtimeKit for better audio performance (PipeWire benefits from this)
   security.rtkit.enable = true;
 
+  # Disable X11 bell sound in PipeWire
+  # This prevents the annoying bell sound in X11 applications
+  services.pipewire.extraConfig.pipewire."10-disable-x11-bell" = { #
+  "load-module mod-x11-bell" = false;
+  };
+
   # Tools for managing audio
   environment.systemPackages = with pkgs; [
     pipewire        # PipeWire media server

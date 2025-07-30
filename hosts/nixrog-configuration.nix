@@ -21,9 +21,6 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.blueman.enable = true; # Enable Blueman for Bluetooth management
   services.upower.enable = true; # Enable UPower for power management
-  services.pipewire.extraConfig.pipewire."10-disable-x11-bell" = { #
-  "load-module mod-x11-bell" = false;
-  };
 
   security.sudo.enable = true; # Enable sudo for all users
   security.sudo.wheelNeedsPassword = true; # Require password for sudo in the wheel group
@@ -102,7 +99,7 @@
 
   users.users.owdious = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio"]; # 'networkmanager' for GUI network control
+    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" ]; # 'networkmanager' for GUI network control
     password = "password"; # WARNING: Use a hash or set post-install in production!
   };
 }

@@ -78,8 +78,8 @@
     },
     "dotfiles": {
       "locked": {
-        "lastModified": 1753819617,
-        "narHash": "sha256-781pN5Np4VVgjcYZV0tREpX6bPYeowk9Ei+upk7BOvM=",
+        "lastModified": 1753819881,
+        "narHash": "sha256-kyy6Agu5U41PDXx+7rYBhh1P6uAPWiMYJYRZ4yO9f2c=",
         "path": "/home/owdious/git/dotfiles",
         "type": "path"
       },
@@ -464,6 +464,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1753694789,
+        "narHash": "sha256-cKgvtz6fKuK1Xr5LQW/zOUiAC0oSQoA9nOISB0pJZqM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1752687322,
@@ -482,11 +498,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1753489912,
-        "narHash": "sha256-uDCFHeXdRIgJpYmtcUxGEsZ+hYlLPBhR83fdU+vbC1s=",
+        "lastModified": 1753749649,
+        "narHash": "sha256-+jkEZxs7bfOKfBIk430K+tK9IvXlwzqQQnppC2ZKFj4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "13e8d35b7d6028b7198f8186bc0347c6abaa2701",
+        "rev": "1f08a4df998e21f4e8be8fb6fbf61d11a1a5076a",
         "type": "github"
       },
       "original": {
@@ -504,11 +520,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753818482,
-        "narHash": "sha256-knGSgHl/ypOI7f/lMv73xrCEj8SCNfzROfM2wtq1dZ0=",
+        "lastModified": 1753856227,
+        "narHash": "sha256-g0aX6YWO5GQ3xmWGdYVmXKxyir8j09QSk+vXRXD+AFA=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "475c1a91ec2b0ae0d074373819f781a0a9bf7787",
+        "rev": "785819a2eea6059a4ae1cf76c9296137f3e7900e",
         "type": "github"
       },
       "original": {
@@ -547,6 +563,7 @@
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur"
       }
     },

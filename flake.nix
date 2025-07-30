@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     # Unstable nixpkgs
-    #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home Manager (stable)
     home-manager.url = "github:nix-community/home-manager/release-25.05";
@@ -15,10 +15,10 @@
     # Age for secrets
     agenix.url = "github:ryantm/agenix";
 
-    # Hyprland (WM)
+    # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
-    # NUR (AUR for Nix)
+    # NUR
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -26,7 +26,7 @@
     dotfiles.url = "path:/home/owdious/git/dotfiles";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, nur, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, agenix, nur, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -37,10 +37,10 @@
       };
 
       # Unstable pkgs
-      #unstablePkgs = import nixpkgs-unstable {
-      #  inherit system;
-      # config.allowUnfree = true;
-      #};
+      unstablePkgs = import nixpkgs-unstable {
+        inherit system;
+       config.allowUnfree = true;
+      };
 
       nurPkgs = nur.packages.${system};
 
