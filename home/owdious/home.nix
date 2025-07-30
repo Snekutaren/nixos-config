@@ -16,6 +16,7 @@
     thunderbird
     gimp
     libreoffice
+    blender
   ];
 
   # Enable a shell (e.g., Zsh)

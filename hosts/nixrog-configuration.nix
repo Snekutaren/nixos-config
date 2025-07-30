@@ -13,7 +13,7 @@
   system.stateVersion = "25.05"; # Matching the NixOS release branch
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enable experimental features for Nix
-  #nixpkgs.config.allowUnfree = true; # Allow unfree packages
+  nixpkgs.config.allowUnfree = true; # Allow unfree packages
 
   services.displayManager.defaultSession = lib.mkForce "hyprland"; # Set Hyprland as the default session
   services.openssh.enable = true; # Enable SSH server
@@ -82,10 +82,12 @@
     bc # For arbitrary precision arithmetic
     #xdg-user-dirs # For managing user directories
     xdg-utils     # For desktop integration
+    rocmPackages.rocminfo # ROCm information tool
+    rocmPackages.rocm-smi # ROCm System Management Interface
     #xdg-desktop-portal # For desktop portal support
     #xdg-desktop-portal-gtk # GTK support for desktop portal
     #xdg-desktop-portal-kde # KDE support for desktop portal
-    # ] ++ (with unstablePkgs; [
+    # ] ++ (with pkgs; [
     #neovim
     #vulkan-tools
     #mesa
@@ -99,7 +101,7 @@
 
   users.users.owdious = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" ]; # 'networkmanager' for GUI network control
+    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ]; # 'networkmanager' for GUI network control
     password = "password"; # WARNING: Use a hash or set post-install in production!
   };
 }

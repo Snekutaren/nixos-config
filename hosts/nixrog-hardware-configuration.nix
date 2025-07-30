@@ -12,9 +12,9 @@
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [  ];
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
+  #boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
   #boot.kernelPackages = pkgs.linuxPackages_latest;
-  #boot.kernelPackages = unstablePkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -39,8 +39,8 @@
   # Enable AMD microcode updates when redistributable firmware is allowed
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.xone.enable = true;
-  hardware.xpad-noone.enable = true;
+  hardware.xone.enable = true; # Enable Xbox One controller support
+  hardware.xpad-noone.enable = true;  # Enable Xone/360 controller compatibility support
 
     # Enable AMD Vulkan driver (AMDVLK instead of Mesa RADV) # Witcher3 Wont runwith AMDVLK
   # Note: AMDVLK is not recommended for all games, RADV is often preferred
@@ -55,4 +55,37 @@
   };
 
   #hardware.opengl.enable = true;
+
+
+  # # # ROCm Configuration # # #
+  # Ensure AMD GPU firmware is loaded
+  # hardware.amdgpu.amdgpuFirmware = true;
+
+  # Enable OpenGL and specifically ROCm's OpenCL ICD. This is crucial.
+  hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [
+    # This provides the OpenCL Installable Client Driver for ROCm
+    # Many deep learning frameworks, including parts of PyTorch's ROCm backend,
+    # rely on OpenCL for certain functionalities or as a fallback/detection mechanism.
+    rocmPackages.clr.icd
+    # If you also want to use AMDVLK (Vulkan driver for AMD), add it here:
+    # amdvlk
+  ];
+
+  # Make sure your user is in 'render' and 'video' groups
+  # (You already did this, but re-confirm)
+  # users.users.owdious.extraGroups = [ "render" "video" ]; # Replace owdious with your username
+
+  # Crucial for deep learning workloads: Allow access to GPU devices in the Nix sandbox.
+  # /dev/kfd is the AMD kernel fusion device, core to ROCm.
+  # /dev/dri/renderD* are the direct rendering devices.
+  nix.settings.extra-sandbox-paths = [ "/dev/kfd" "/dev/dri/renderD128" ];
+  # The renderD* number might vary, but D128 is common. You can check with `ls /dev/dri/`.
+  # For good measure, you can even add the entire /dev/dri directory: "/dev/dri"
+
+  # It's sometimes helpful to tell Nixpkgs which GFX targets to compile ROCm for.
+  # You can usually find this by running `rocminfo` or checking your GPU's specs.
+  # For RDNA4 (9000 series): gfx1200, gfx1201
+  nixpkgs.config.rocmTargets = [ "gfx1200" "gfx1201" ]; # Add your GPU's GFX here
+  
 }

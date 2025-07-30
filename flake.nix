@@ -1,22 +1,20 @@
 {
-  description = "NixROG 25.05";
+  description = "NixROG - Consolidated Unstable";
 
   inputs = {
-    # Stable nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Unstable nixpkgs
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Home Manager (stable)
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Age for secrets
     agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
     # NUR
     nur.url = "github:nix-community/NUR";
@@ -24,22 +22,16 @@
 
     # Local dotfiles
     dotfiles.url = "path:/home/owdious/git/dotfiles";
+
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, agenix, nur, ... }@inputs:
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nur, ... }: 
     let
       system = "x86_64-linux";
 
-      # Base pkgs (from stable)
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-      };
-
-      # Unstable pkgs
-      unstablePkgs = import nixpkgs-unstable {
-        inherit system;
-       config.allowUnfree = true;
       };
 
       nurPkgs = nur.packages.${system};
@@ -50,7 +42,8 @@
           inherit system;
 
           specialArgs = {
-            inherit inputs pkgs nurPkgs;
+            inherit inputs nurPkgs;
+            pkgs = pkgs;
           };
 
           modules = [
@@ -71,7 +64,6 @@
                 };
               };
             }
-
             agenix.nixosModules.default
             {
               age.identityPaths = [ "/home/owdious/.ssh/id_ed25519" ];
