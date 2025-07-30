@@ -53,7 +53,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    hardware.graphics.extraPackages = with pkgs; [
+    extraPackages = with pkgs; [
     # This provides the OpenCL Installable Client Driver for ROCm
     # Many deep learning frameworks, including parts of PyTorch's ROCm backend,
     # rely on OpenCL for certain functionalities or as a fallback/detection mechanism.
