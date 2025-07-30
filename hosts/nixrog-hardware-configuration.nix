@@ -14,7 +14,7 @@
   boot.extraModulePackages = [  ];
   #boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
   #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -48,33 +48,24 @@
     amdvlk.enable = false;
   };
 
+  # Enable OpenGL and specifically ROCm's OpenCL ICD. This is crucial.
   # Correct and current way to enable 32-bit graphics
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-  };
-
-  #hardware.opengl.enable = true;
-
-
-  # # # ROCm Configuration # # #
-  # Ensure AMD GPU firmware is loaded
-  # hardware.amdgpu.amdgpuFirmware = true;
-
-  # Enable OpenGL and specifically ROCm's OpenCL ICD. This is crucial.
-  hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [
+    hardware.graphics.extraPackages = with pkgs; [
     # This provides the OpenCL Installable Client Driver for ROCm
     # Many deep learning frameworks, including parts of PyTorch's ROCm backend,
     # rely on OpenCL for certain functionalities or as a fallback/detection mechanism.
     rocmPackages.clr.icd
     # If you also want to use AMDVLK (Vulkan driver for AMD), add it here:
     # amdvlk
-  ];
+    ];
+  };
 
-  # Make sure your user is in 'render' and 'video' groups
-  # (You already did this, but re-confirm)
-  # users.users.owdious.extraGroups = [ "render" "video" ]; # Replace owdious with your username
+  # # # ROCm Configuration # # #
+  # Ensure AMD GPU firmware is loaded
+  # hardware.amdgpu.amdgpuFirmware = true;
 
   # Crucial for deep learning workloads: Allow access to GPU devices in the Nix sandbox.
   # /dev/kfd is the AMD kernel fusion device, core to ROCm.
