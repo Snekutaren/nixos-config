@@ -27,6 +27,9 @@
     # ohMyZsh.enable = true; # Example: Enabling Oh My Zsh  <-- THIS LINE MUST BE COMMENTED/REMOVED
   };
 
+  #
+  programs.gh.enable = true;
+
   # Enable Git configuration
   programs.git = {
     enable = true;
