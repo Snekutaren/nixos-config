@@ -21,7 +21,7 @@
     nur.inputs.nixpkgs.follows = "nixpkgs";
 
     # Local dotfiles
-    dotfiles.url = "path:/home/owdious/git/dotfiles";
+    dotfiles.url = "path:/home/owdious/dotfiles";
 
   };
 
