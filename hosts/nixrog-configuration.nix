@@ -55,6 +55,7 @@
     superfile     # For file management
     neovim        # Modern text editor
     kdePackages.kio # KDE I/O slaves
+    tree
     #kdePackages.kioFuse # FUSE support for KDE I/O slaves
     #kdePackages.kioFusePlugins # Additional FUSE plugins for KDE I/O slaves
     #kdePackages.kioTrash # Trash support for KDE I/O slaves
