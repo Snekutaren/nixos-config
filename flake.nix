@@ -54,7 +54,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit inputs pkgs nurPkgs;
+                  inherit inputs;
                 };
                 users.owdious = {
                   imports = [
