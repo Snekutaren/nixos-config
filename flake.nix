@@ -41,11 +41,6 @@
         nixrog = nixpkgs.lib.nixosSystem {
           inherit system;
 
-          specialArgs = {
-            inherit inputs nurPkgs;
-            pkgs = pkgs;
-          };
-
           modules = [
             ./hosts/nixrog-configuration.nix
 
@@ -54,9 +49,6 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit inputs pkgs nurPkgs;
-                };
                 users.owdious = {
                   imports = [
                     ./home/owdious/home.nix
