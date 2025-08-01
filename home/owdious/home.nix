@@ -65,6 +65,10 @@
     source = "${inputs.dotfiles}/hypr/hyprland.conf";
   };
 
+  xdg.configFile."hypr/hyprpaper.conf" = {
+    source = "${inputs.dotfiles}/hypr/hyprpaper.conf";
+  };
+
   home.file.".config/hypr/hypridle.conf".text = ''
     listener {
         timeout = 300
@@ -102,6 +106,11 @@
   
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
     source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
+    executable = true;
+  };
+
+  home.file.".config/hypr/scripts/random-hyprpaper.sh" = {
+    source = "${inputs.dotfiles}/hypr/scripts/random-hyprpaper.sh";
     executable = true;
   };
 
