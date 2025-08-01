@@ -10,7 +10,7 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [ "usbcore.quirks=1d6b:0003:k" ]; # Remove anoying USB error message
   boot.extraModulePackages = [  ];
   #boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
   boot.kernelPackages = pkgs.linuxPackages_latest;
