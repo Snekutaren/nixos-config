@@ -3,72 +3,49 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Age for secrets
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-
-    # NUR
-    nur.url = "github:nix-community/NUR";
-    nur.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Local dotfiles
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     dotfiles.url = "path:/home/owdious/dotfiles";
-
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nur, ... }: 
+  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
     let
       system = "x86_64-linux";
-
-      pkgs = import nixpkgs {
-        inherit system;
+      pkgs = nixpkgs.legacyPackages.${system} {
         config.allowUnfree = true;
       };
-
-      nurPkgs = nur.packages.${system};
-
     in {
-      nixosConfigurations = {
-        nixrog = nixpkgs.lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-            inherit inputs;
-          };
-
-          modules = [
-            ./hosts/nixrog-configuration.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit inputs;
-                };
-                users.owdious = {
-                  imports = [
-                    ./home/owdious/home.nix
-                  ];
-                };
-              };
-            }
-            agenix.nixosModules.default
-            {
-              age.identityPaths = [ "/home/owdious/.ssh/id_ed25519" ];
-            }
-          ];
-        };
+      nixosConfigurations.nixrog = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs pkgs; };
+        modules = [
+          ./hosts/nixrog-configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs pkgs; };
+              users.owdious.imports = [ ./home/owdious/home.nix ];
+            };
+          }
+          agenix.nixosModules.default {
+            age.identityPaths = [ "/home/owdious/.ssh/id_ed25519" ];
+          }
+        ];
       };
     };
 }
