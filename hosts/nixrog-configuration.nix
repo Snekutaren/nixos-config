@@ -1,4 +1,4 @@
-{ config, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   imports = [
     ./nixrog-hardware-configuration.nix
@@ -33,7 +33,7 @@
   programs.gamemode.enable = true;
 
   # System packages
-  environment.systemPackages = with config.pkgs; [
+  environment.systemPackages = with pkgs; [
     # Disk usage tools
     baobab
     kdePackages.filelight
@@ -92,7 +92,7 @@
     mako
 
     # Secrets management
-    inputs.agenix.packages.${config.pkgs.system}.agenix
+    inputs.agenix.packages.${pkgs.system}.agenix
   ];
 
   # User configuration
