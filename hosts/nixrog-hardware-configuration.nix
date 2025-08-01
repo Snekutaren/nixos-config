@@ -11,8 +11,10 @@
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
   boot.kernelParams = [
-  "usbcore.quirks=1d6b:0003:k" 
-  "xhci_hcd.quirks=0x800000" # AMD-specific quirk for port detection
+    "usbcore.quirks=1d6b:0003:k"
+    "xhci_hcd.quirks=0x800000" # AMD-specific quirk for port detection
+    "quiet"
+    "loglevel=3"
   ];
   boot.extraModulePackages = [  ];
   #boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
