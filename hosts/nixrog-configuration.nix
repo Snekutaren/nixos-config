@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, nurPkgs, lib, ... }:
+{ config, pkgs, nurPkgs, lib, ... }:
 {
   imports = [
     ./nixrog-hardware-configuration.nix

@@ -1,6 +1,6 @@
 # modules/sound.nix
 #{ config, pkgs, ... }:
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
   # Enable PipeWire and its components

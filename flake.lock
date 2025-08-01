@@ -80,8 +80,8 @@
     },
     "dotfiles": {
       "locked": {
-        "lastModified": 1754080065,
-        "narHash": "sha256-GsfwkkXN6yJi1Qy6fXt+K0hho3nJS1/PLanXr3WE58E=",
+        "lastModified": 1754080152,
+        "narHash": "sha256-0mUo058zb9T3AUumn2iPIsBfzHJICDijxgsY9D70OS4=",
         "path": "/home/owdious/dotfiles",
         "type": "path"
       },
