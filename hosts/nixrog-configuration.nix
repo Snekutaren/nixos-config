@@ -10,6 +10,7 @@
 
   # Nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
 
   # Display and video drivers
@@ -98,6 +99,7 @@
   users.users.owdious = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    hashedPassword = "$6$..."; # Generate with `mkpasswd -m sha-512`
+    # WARNING: Replace with a hashed password or manage via agenix in production
+    password = "password";
   };
 }
