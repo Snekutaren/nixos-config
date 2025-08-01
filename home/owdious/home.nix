@@ -62,11 +62,11 @@
   '';
 
   xdg.configFile."hypr/hyprland.conf" = {
-    source = "${inputs.dotfiles}/hypr/hyprland.conf";
+    source = "${dotfiles}/hypr/hyprland.conf";
   };
 
   xdg.configFile."hypr/hyprpaper.conf" = {
-    source = "${inputs.dotfiles}/hypr/hyprpaper.conf";
+    source = "${dotfiles}/hypr/hyprpaper.conf";
   };
 
   home.file.".config/hypr/hypridle.conf".text = ''
@@ -105,22 +105,22 @@
   };
   
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
+    source = "${dotfiles}/hypr/scripts/toggle_scroll.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/random-hyprpaper.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/random-hyprpaper.sh";
+    source = "${dotfiles}/hypr/scripts/random-hyprpaper.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/toggle_monitor_layout.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/toggle_monitor_layout.sh";
+    source = "${dotfiles}/hypr/scripts/toggle_monitor_layout.sh";
     executable = true;
   };
 
   home.file."/.bashrc" = {
-    source = "${inputs.dotfiles}/bash/.bashrc";
+    source = "${dotfiles}/bash/.bashrc";
     executable = true;
   };
 
