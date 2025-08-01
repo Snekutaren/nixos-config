@@ -25,7 +25,7 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nur, ... }: 
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nur, dotfiles, ... }: 
     let
       system = "x86_64-linux";
 
