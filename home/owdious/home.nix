@@ -1,5 +1,5 @@
 # home/owdious/home.nix
-{ config, pkgs, lib,... }:
+{ config, pkgs, inputs, lib,... }:
 {
   home.stateVersion = "25.05"; # Matching the home-manager release branch
   home.sessionVariables.EDITOR = "nvim";

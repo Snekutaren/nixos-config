@@ -49,6 +49,9 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs pkgs nurPkgs;
+                };
                 users.owdious = {
                   imports = [
                     ./home/owdious/home.nix
