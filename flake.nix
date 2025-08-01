@@ -25,20 +25,26 @@
   outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system} {
+      pkgs = import nixpkgs {
+        inherit system;
         config.allowUnfree = true;
       };
     in {
       nixosConfigurations.nixrog = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs; };
+        specialArgs = { inherit inputs; };
         modules = [
+          # Import readOnlyPkgs to safely use the custom pkgs
+          "${nixpkgs}/nixos/modules/misc/nixpkgs/read-only.nix"
+          {
+            nixpkgs.pkgs = pkgs;
+          }
           ./hosts/nixrog-configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs pkgs; };
+              extraSpecialArgs = { inherit inputs; };
               users.owdious.imports = [ ./home/owdious/home.nix ];
             };
           }
