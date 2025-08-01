@@ -114,7 +114,7 @@
     executable = true;
   };
 
-  home.file."-config/hypr/scripts/toggle_monitor_layout.sh" = {
+  home.file.".config/hypr/scripts/toggle_monitor_layout.sh" = {
     source = "${inputs.dotfiles}/hypr/scripts/toggle_monitor_layout.sh";
     executable = true;
   };
