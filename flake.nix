@@ -42,8 +42,7 @@
           inherit system;
 
           specialArgs = {
-            inherit inputs nurPkgs;
-            pkgs = pkgs;
+            inherit inputs;
           };
 
           modules = [
