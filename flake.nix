@@ -25,7 +25,7 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nur, dotfiles, ... }: 
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nur, ... }: 
     let
       system = "x86_64-linux";
 
@@ -40,6 +40,11 @@
       nixosConfigurations = {
         nixrog = nixpkgs.lib.nixosSystem {
           inherit system;
+
+          specialArgs = {
+            inherit inputs nurPkgs;
+            pkgs = pkgs;
+          };
 
           modules = [
             ./hosts/nixrog-configuration.nix
