@@ -41,6 +41,11 @@
         nixrog = nixpkgs.lib.nixosSystem {
           inherit system;
 
+          specialArgs = {
+            inherit inputs nurPkgs;
+            pkgs = pkgs;
+          };
+
           modules = [
             ./hosts/nixrog-configuration.nix
 
