@@ -35,9 +35,8 @@
     in {
       nixosConfigurations.nixrog = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; }; # Removed pkgs from specialArgs
+        specialArgs = { inherit inputs; };
         modules = [
-          # Use readOnlyPkgs to set nixpkgs.pkgs and suppress warning
           "${nixpkgs}/nixos/modules/misc/nixpkgs/read-only.nix"
           {
             nixpkgs.pkgs = pkgs;
@@ -47,7 +46,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; }; # Removed pkgs from extraSpecialArgs
+              extraSpecialArgs = { inherit inputs; };
               users.owdious.imports = [ ./home/owdious/home.nix ];
             };
           }
