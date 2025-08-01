@@ -33,8 +33,8 @@
     baobab     # Best native choice
     kdePackages.filelight  # Optional: visual ring style
     qdirstat         # Optional: feature-rich tree map
-    agenix.inputs.${pkgs.system}.agenix # Agenix for secret managemen
-    #inputs.agenix.packages.${pkgs.system}.agenix # Agenix for secret management
+    #agenix.inputs.${pkgs.system}.agenix # Agenix for secret managemen
+    inputs.agenix.packages.${pkgs.system}.agenix # Agenix for secret management
     blueman       # bluetooth GUI management
     vulkan-tools  # For Vulkan support
     glxinfo       # For OpenGL information
