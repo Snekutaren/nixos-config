@@ -35,14 +35,19 @@
     in {
       nixosConfigurations.nixrog = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs; };
+        specialArgs = { inherit inputs; }; # Removed pkgs from specialArgs
         modules = [
+          # Use readOnlyPkgs to set nixpkgs.pkgs and suppress warning
+          "${nixpkgs}/nixos/modules/misc/nixpkgs/read-only.nix"
+          {
+            nixpkgs.pkgs = pkgs;
+          }
           ./hosts/nixrog-configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs pkgs; };
+              extraSpecialArgs = { inherit inputs; }; # Removed pkgs from extraSpecialArgs
               users.owdious.imports = [ ./home/owdious/home.nix ];
             };
           }
