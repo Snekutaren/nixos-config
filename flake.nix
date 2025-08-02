@@ -47,8 +47,11 @@
             };
           }
           agenix.nixosModules.default {
-            age.secrets.owdious-password.file = [ "./secrets/owdious-password.age" ];
-            age.identityPaths = [ "/home/owdious/.config/keys.txt" ];
+            age.secrets.owdious-password = {
+              file = ./secrets/owdious-password.age;
+              owner = "owdious"; # optional if you want to set ownership on decryption
+            };
+            age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
           }
         ];
       };
