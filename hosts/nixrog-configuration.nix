@@ -104,4 +104,11 @@
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
     hashedPasswordFile = config.age.secrets.owdious-password.path;
   };
+
+    # User configuration
+  users.users.tellus = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
+    hashedPasswordFile = config.age.secrets.owdious-password.path;
+  };
 }
