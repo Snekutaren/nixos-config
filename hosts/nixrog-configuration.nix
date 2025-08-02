@@ -102,7 +102,6 @@
   users.users.owdious = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    # WARNING: Replace with a hashed password or manage via agenix in production
-    password = "password";
+    hashedPasswordFile = config.age.secrets.owdious-password.path;
   };
 }

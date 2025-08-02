@@ -47,7 +47,8 @@
             };
           }
           agenix.nixosModules.default {
-            age.identityPaths = [ "/home/owdious/.ssh/id_ed25519" ];
+            age.secrets.owdious-password.file = inputs.dotfiles + "/secrets/owdious-password.age";
+            age.identityPaths = [ "/home/owdious/.age-key" ];
           }
         ];
       };
