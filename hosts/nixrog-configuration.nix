@@ -2,7 +2,7 @@
 {
   imports = [
     ./nixrog-hardware-configuration.nix
-    ../secrets/secrets.nix
+    ./../secrets/secrets.nix
     ../modules/networking.nix
     ../modules/sound.nix
     ../modules/localization.nix
