@@ -2,6 +2,7 @@
 {
   imports = [
     ./nixrog-hardware-configuration.nix
+    ../secrets/secrets.nix
     ../modules/networking.nix
     ../modules/sound.nix
     ../modules/localization.nix
@@ -106,6 +107,6 @@
   users.users.owdious = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    #hashedPasswordFile = config.age.secrets.owdious.path;  
+    hashedPasswordFile = config.age.secrets.owdious.path;  
     };
 }
