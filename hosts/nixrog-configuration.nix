@@ -106,6 +106,6 @@
   users.users.owdious = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    hashedPasswordFile = config.age.secrets.owdious.path;
+    hashedPasswordFile = config.age.secrets.owdious.age.path;
   };
 }
