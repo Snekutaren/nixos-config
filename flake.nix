@@ -48,7 +48,7 @@
           }
           agenix.nixosModules.default {
             age.secrets.owdious-password.file = [ "./secrets/owdious-password.age" ];
-            age.identityPaths = [ "~/.config/keys.txt" ];
+            age.identityPaths = [ "/home/owdious/.config/keys.txt" ];
           }
         ];
       };
