@@ -40,6 +40,9 @@
     qdirstat
     ncdu
 
+  # Security
+    age
+
     # File management
     superfile
     peazip
