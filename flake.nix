@@ -51,6 +51,7 @@
               file = ./secrets/owdious-password.age;
               owner = "owdious"; # optional if you want to set ownership on decryption
             };
+            #age.secrets = import ./secrets/secrets.nix;
             age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
           }
         ];

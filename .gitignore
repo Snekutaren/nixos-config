@@ -1,3 +1,4 @@
 .dev/
 nixos-config.code-workspace
-keyz.txt
+key.txt
+*.key

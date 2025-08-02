@@ -18,7 +18,6 @@
     };
 
     environment.systemPackages = with pkgs; [
-      #xdg-desktop-portal-hyprland # Hyprland support for desktop portal
       hyprlock
       hypridle
       hyprpaper

@@ -40,6 +40,9 @@
     qdirstat
     ncdu
 
+  # Backup
+    restic
+
   # Security
     age
 
