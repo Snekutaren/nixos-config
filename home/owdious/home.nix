@@ -69,38 +69,12 @@
     source = "${inputs.dotfiles}/hypr/hyprpaper.conf";
   };
 
-  home.file.".config/hypr/hypridle.conf".text = ''
-    listener {
-        timeout = 300
-        on-timeout = pidof hyprlock || bash ~/.config/hypr/scripts/lock-and-dpms.sh
-        on-resume = hyprctl dispatch dpms on
-        #on-suspend = hyprctl dispatch dpms off
-        #on-lock = pidof hyprlock || hyprlock
-        #on-unlock = hyprctl dispatch dpms on
-    }
-    listener {
-    }
-  '';
+  xdg.configFile."hypr/hypridle.conf" = {
+    source = "${inputs.dotfiles}/hypr/hypridle.conf";
+  };
   
-  home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
-    text = ''
-      #!/bin/bash
-        pidof hyprlock || hyprlock &
-        sleep 2
-        (
-            while pidof hyprlock > /dev/null; do
-                sleep 60
-                if pidof hyprlock > /dev/null; then
-                    DPMS_STATUS=$(hyprctl monitors | grep dpmsStatus | head -n 1 | awk '{print $2}')
-                    if [ "$DPMS_STATUS" = "1" ]; then
-                        sleep 0.5 && hyprctl dispatch dpms off
-                    fi
-                else
-                    break
-                fi
-            done
-        ) &
-    '';
+   home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
+    source = "${inputs.dotfiles}/hypr/scripts/lock-and-dpms.sh";
     executable = true;
   };
   
