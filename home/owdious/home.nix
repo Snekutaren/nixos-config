@@ -1,5 +1,5 @@
 # home/owdious/home.nix
-{ config, pkgs, inputs, lib,... }:
+{ config, pkgs, home-manager, inputs, lib,... }:
 {
   home.stateVersion = "25.05"; # Matching the home-manager release branch
   home.sessionVariables.EDITOR = "nvim";
@@ -26,6 +26,9 @@
     # It will be re-added or corrected once the base Zsh setup works.
     # ohMyZsh.enable = true; # Example: Enabling Oh My Zsh  <-- THIS LINE MUST BE COMMENTED/REMOVED
   };
+
+  #
+  programs.gh.enable = true;
 
   # Enable Git configuration
   programs.git = {
@@ -60,6 +63,10 @@
 
   xdg.configFile."hypr/hyprland.conf" = {
     source = "${inputs.dotfiles}/hypr/hyprland.conf";
+  };
+
+  xdg.configFile."hypr/hyprpaper.conf" = {
+    source = "${inputs.dotfiles}/hypr/hyprpaper.conf";
   };
 
   home.file.".config/hypr/hypridle.conf".text = ''
@@ -102,8 +109,13 @@
     executable = true;
   };
 
-  home.file."/usr/local/bin/commit_hypr.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/commit_hypr.sh";
+  home.file.".config/hypr/scripts/random-hyprpaper.sh" = {
+    source = "${inputs.dotfiles}/hypr/scripts/random-hyprpaper.sh";
+    executable = true;
+  };
+
+  home.file.".config/hypr/scripts/toggle_monitor_layout.sh" = {
+    source = "${inputs.dotfiles}/hypr/scripts/toggle_monitor_layout.sh";
     executable = true;
   };
 
