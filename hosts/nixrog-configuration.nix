@@ -31,6 +31,7 @@
 
   # Performance
   programs.gamemode.enable = true;
+  programs.mangohud.enable = true;
 
   # System packages
   environment.systemPackages = with pkgs; [
