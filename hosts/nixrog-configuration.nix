@@ -31,7 +31,6 @@
 
   # Performance
   programs.gamemode.enable = true;
-  programs.mangohud.enable = true;
 
   # System packages
   environment.systemPackages = with pkgs; [
@@ -87,6 +86,7 @@
     jstest-gtk
     rocmPackages.rocminfo
     rocmPackages.rocm-smi
+    mangohud
 
     # GUI applications
     kdePackages.kate
