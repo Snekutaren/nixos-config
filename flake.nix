@@ -38,6 +38,17 @@
         specialArgs = { inherit inputs pkgs; };
         modules = [
           ./hosts/nixrog-configuration.nix
+
+          # Importera agenix modulen
+          agenix.nixosModules.default
+
+          # Separat secrets-import
+          {
+            age.secrets = import ./secrets/secrets.nix;
+            age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
+          }
+
+          # Home Manager
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
@@ -45,10 +56,6 @@
               extraSpecialArgs = { inherit inputs pkgs; };
               users.owdious.imports = [ ./home/owdious/home.nix ];
             };
-          }
-          agenix.nixosModules.default {
-            age.secrets = import ./secrets/secrets.nix;
-            age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
           }
         ];
       };

@@ -1,5 +1,5 @@
 {
-  owdious = {
+  owdious.age = {
     file = ./owdious.age;
     owner = "owdious";
     publicKeys = [
@@ -7,8 +7,9 @@
     ];
   };
 
-  restic = {
+  restic.age = {
     file = ./restic.age;
+    owner = "owdious";
     publicKeys = [
       "age1dmkrdya4cckwfhm8vw3xlyke49lwcq8n69g58ccf5vxz26wh7p7quw0vzj"
     ];
