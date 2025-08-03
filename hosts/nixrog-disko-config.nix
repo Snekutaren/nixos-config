@@ -30,7 +30,7 @@ in
       # We give a symbolic name to our disk for easy reference.
       main = {
         # The actual device path to be used by disko.
-        device = targetDiskEui;
+        device = targetDisk;
         # Define the partition table type.
         type = "disk";
         content = {
