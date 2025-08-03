@@ -177,9 +177,9 @@
     executable = true;
   };
 
-  home.file."/.bashrc" = {
-    source = "${inputs.dotfiles}/bash/.bashrc";
-    executable = true;
-  };
+  #home.file."/.bashrc" = {
+  #  source = "${inputs.dotfiles}/bash/.bashrc";
+  #  executable = true;
+  #};
 
 }
