@@ -3,10 +3,10 @@
   imports = [
     ./nixrog-hardware-configuration.nix
     ../modules/networking.nix
-    ../modules/sound.nix
     ../modules/localization.nix
-    ../modules/hyprland.nix
+    ../modules/sound.nix
     ../modules/backup.nix
+    ../modules/hyprland.nix
   ];
 
   # Nix settings

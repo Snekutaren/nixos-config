@@ -19,6 +19,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:disko-org/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     dotfiles.url = "path:/home/owdious/dotfiles";
   };
 
@@ -37,6 +41,8 @@
         inherit system;
         specialArgs = { inherit inputs pkgs; };
         modules = [
+          disko.nixosModules.default
+          ./hosts/nixrog-disko-config.nix
           ./hosts/nixrog-configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {

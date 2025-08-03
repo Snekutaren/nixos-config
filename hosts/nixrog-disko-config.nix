@@ -1,0 +1,104 @@
+# disko-config.nix
+# This file defines the disk layout for a NixOS installation.
+# It is designed to be used with the `disko` tool from a NixOS Live ISO.
+# This version includes an option to use a password from a file for
+# automated decryption, which is useful with tools like agenix.
+{ config, pkgs, lib, ... }:
+
+let
+  # Use the stable by-id path for the physical disk to avoid issues
+  # with device names changing between boots (e.g., nvme1n1 vs nvme0n1).
+  # We will use the nvme-eui identifier as a best practice.
+  targetDiskEui = "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b459ecf04";
+
+  # The other descriptive device identifier provided by the user.
+  targetDiskWds = "/dev/disk/by-id/nvme-WDS100T1XHE-00AFY0_21474A803146";
+
+  # We use a compile-time assertion to ensure both identifiers resolve to the
+  # same physical device. If they don't, the Nix build will fail with a clear
+  # error message, preventing any accidental data loss.
+  targetDisk = lib.assert (lib.readlink targetDiskEui == lib.readlink targetDiskWds)
+    "Error: The EUI and WDS identifiers point to different devices! Please check your disk layout.";
+in
+{
+  # Ensure the disko module is enabled and will manage our disks.
+  disko.enable = true;
+
+  # Define the devices. The structure mirrors your disk layout.
+  disko.devices = {
+    disk = {
+      # We give a symbolic name to our disk for easy reference.
+      main = {
+        # The actual device path to be used by disko.
+        device = targetDiskEui;
+        # Define the partition table type.
+        type = "disk";
+        content = {
+          # Use a GPT partition table.
+          type = "table";
+          name = "gpt";
+          partitions = [
+            # Partition 1: The EFI System Partition for /boot.
+            {
+              size = "512M";
+              type = "partition";
+              content = {
+                type = "filesystem";
+                # Format as vfat as required for EFI boot.
+                format = "vfat";
+                # The label you want for the filesystem.
+                label = "NIXOS_BOOT";
+                # The mount point for this partition.
+                mountpoint = "/boot";
+              };
+            }
+            # Partition 2: The encrypted root partition.
+            {
+              size = "100%";
+              type = "partition";
+              content = {
+                # This content is a LUKS container.
+                type = "luks";
+                # The label for the LUKS container.
+                name = "NIXOS_LUKS";
+                # The name of the decrypted device mapper device.
+                # This will be /dev/mapper/cryptroot
+                content = {
+                  type = "lvm_pv";
+                  vg = "vg0";
+                  # This is the LVM Volume Group.
+                  # It will contain the logical volumes.
+                  content = {
+                    type = "lvm_vg";
+                    name = "vg0";
+                    # Define the logical volumes within the VG.
+                    lvs = {
+                      # The root logical volume.
+                      root = {
+                        size = "100%FREE";
+                        content = {
+                          type = "filesystem";
+                          format = "ext4";
+                          # The label for the root filesystem.
+                          label = "NIXOS_ROOT";
+                          # The mount point for the root partition.
+                          mountpoint = "/";
+                        };
+                      };
+                    };
+                  };
+                };
+                # --- agenix/password file configuration ---
+                # To use a password from a file for full automation,
+                # uncomment the line below. You would use a file that is
+                # decrypted by agenix. This is for non-interactive setups.
+                # The path should point to the decrypted secret.
+                # passwordFile = "/run/agenix/path-to-your-luks-password-file";
+              };
+            }
+          ];
+        };
+      };
+    };
+  };
+}
