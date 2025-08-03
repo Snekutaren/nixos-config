@@ -26,7 +26,7 @@
     dotfiles.url = "path:/home/owdious/dotfiles";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, agenix, disko, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
