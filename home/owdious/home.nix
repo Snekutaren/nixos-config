@@ -31,6 +31,77 @@
   
   # For the shell to hook into direnv, you need to enable it as a program.
   # This is often already present, but it's good to ensure it's there.
+  programs.bash = {
+    enable = true;
+
+    shellAliases = {
+      ll = "ls -lah";
+      lR = "ls -laR";
+      lRl = "ls -laR | less";
+      comfyui = "nix develop ~/comfyui/nix";
+    };
+
+    extraInit = ''
+      export PATH="$HOME/.local/bin:$PATH"
+      
+      # Define complex commands as functions.
+      # The "ssha" alias as a function.
+      function ssha() {
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/github/github_ed25519
+      }
+
+      # The "git-push" aliases as functions for clarity.
+      # Note: The '|| true' part is fine, but you should handle
+      # the command chain as a single function.
+      function git-push-nixos() {
+        local config_dir="$HOME/nixos-config"
+        git -C "$config_dir" checkout auto
+        git -C "$config_dir" add .
+        git -C "$config_dir" commit -m "$(date)" || true
+        git -C "$config_dir" push
+      }
+
+      function git-push-dot() {
+        local config_dir="$HOME/dotfiles"
+        git -C "$config_dir" checkout auto
+        git -C "$config_dir" add .
+        git -C "$config_dir" commit -m "$(date)" || true
+        git -C "$config_dir" push
+      }
+
+      function git-push-comfyui() {
+        local config_dir="$HOME/comfyui"
+        git -C "$config_dir" checkout auto
+        git -C "$config_dir" add .
+        git -C "$config_dir" commit -m "$(date)" || true
+        git -C "$config_dir" push
+      }
+      
+      # The "push-build-nix" alias as a function.
+      function update-flake() {
+        sudo nix flake update --flake ~/nixos-config -v
+      }
+      function build-nix() {
+        sudo nixos-rebuild switch --flake ~/nixos-config -v
+      }
+      function push-build-nix() {
+        update-flake
+        git-push-nixos
+        git-push-dot
+        build-nix
+      }
+
+      # The "reload-conf" alias as a function.
+      # On NixOS, sourcing ~/.bashrc is often unnecessary.
+      # Hyprland reload should be a separate command.
+      function reload-conf() {
+        echo "Bash configuration reloaded."
+        hyprctl reload
+        echo "Hyprland configuration reloaded."
+      }
+    '';
+  };
 
   # Enable a shell (e.g., Zsh)
   programs.zsh = {
