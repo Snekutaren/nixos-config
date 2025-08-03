@@ -13,6 +13,7 @@
     steam
     vscode
     vlc
+    playerctl # Media player control
     thunderbird
     gimp
     libreoffice

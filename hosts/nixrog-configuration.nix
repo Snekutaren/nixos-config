@@ -6,6 +6,7 @@
     ../modules/sound.nix
     ../modules/localization.nix
     ../modules/hyprland.nix
+    ../modules/backup.nix
   ];
 
   # Nix settings
