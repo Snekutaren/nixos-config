@@ -80,8 +80,8 @@
     },
     "dotfiles": {
       "locked": {
-        "lastModified": 1754216484,
-        "narHash": "sha256-AZXqvuOZ4CsCD4fz5ip3mPtph4vJf61S3I5Sp1n2WHU=",
+        "lastModified": 1754218133,
+        "narHash": "sha256-QCua3w8OSlD/KOnoK/QpgJ/QZBUBrcvG6iKNcRTiQkA=",
         "path": "/home/owdious/dotfiles",
         "type": "path"
       },
@@ -266,11 +266,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1754144468,
-        "narHash": "sha256-SOP9IpcrS3MsfYXUXcGpAao77sRZFovk+3kVjg3zmD8=",
+        "lastModified": 1754221490,
+        "narHash": "sha256-KgNyCyd3GLtptBPXOZCtRkBe1TsnEN+MvegDFGkVBQM=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "824438949e60ad6d6fefdfa37f0af8fbe0849934",
+        "rev": "855d103aef59402e284d0b5e70518564b5023b5f",
         "type": "github"
       },
       "original": {
