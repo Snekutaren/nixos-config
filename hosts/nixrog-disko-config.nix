@@ -40,9 +40,9 @@ in
         # Define the partition table type.
         type = "disk";
         content = {
-          # Use a GPT partition table.
-          type = "table";
-          name = "gpt";
+          # The 'name' attribute has been removed.
+          # The partition table type is now specified directly as 'gpt'.
+          type = "gpt";
           partitions = [
             # Partition 1: The EFI System Partition for /boot.
             {
