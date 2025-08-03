@@ -38,7 +38,7 @@
       ll = "ls -lah";
       lR = "ls -laR";
       lRl = "ls -laR | less";
-      ssha = "eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github/github_ed25519";
+      ssha = "eval '$(ssh-agent -s)' && ssh-add ~/.ssh/github/github_ed25519";
       git-push-nixos="git -C ~/nixos-config checkout auto && git -C ~/nixos-config add . && (git -C ~/nixos-config commit -m "$(date)" || true) && git -C ~/nixos-config push";
       git-push-dot="git -C ~/dotfiles checkout auto && git -C ~/dotfiles add . && (git -C ~/dotfiles commit -m "$(date)" || true) && git -C ~/dotfiles push";
       git-push-comfyui="git -C ~/comfyui checkout auto && git -C ~/comfyui add . && (git -C ~/comfyui commit -m "$(date)" || true) && git -C ~/comfyui push";
