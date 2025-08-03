@@ -19,7 +19,6 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Services
-  services.openssh.enable = true;
   services.dbus.enable = true;
   services.blueman.enable = true;
   services.upower.enable = true;
