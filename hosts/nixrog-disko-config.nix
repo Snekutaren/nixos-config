@@ -43,9 +43,10 @@ in
           # The 'name' attribute has been removed.
           # The partition table type is now specified directly as 'gpt'.
           type = "gpt";
-          partitions = [
+          # This has been changed from a list `[...]` to an attribute set `{...}`.
+          partitions = {
             # Partition 1: The EFI System Partition for /boot.
-            {
+            esp = {
               size = "512M";
               type = "partition";
               content = {
@@ -57,9 +58,9 @@ in
                 # The mount point for this partition.
                 mountpoint = "/boot";
               };
-            }
+            };
             # Partition 2: The encrypted root partition.
-            {
+            root = {
               size = "100%";
               type = "partition";
               content = {
@@ -101,8 +102,8 @@ in
                 # The path should point to the decrypted secret.
                 # passwordFile = "/run/agenix/path-to-your-luks-password-file";
               };
-            }
-          ];
+            };
+          };
         };
       };
     };
