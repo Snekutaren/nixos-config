@@ -9,6 +9,8 @@ let
   # Use the stable by-id path for the physical disk to avoid issues
   # with device names changing between boots (e.g., nvme1n1 vs nvme0n1).
   # We will use the nvme-eui identifier as a best practice.
+  # The user's provided nvme-eui path is:
+  # lrwxrwxrwx 1 root root  13 Aug  3 22:36 nvme-eui.e8238fa6bf530001001b448b459ecf04 -> ../../nvme1n1
   targetDiskEui = "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b459ecf04";
 
   # The other descriptive device identifier provided by the user.
@@ -17,8 +19,12 @@ let
   # We use a compile-time assertion to ensure both identifiers resolve to the
   # same physical device. If they don't, the Nix build will fail with a clear
   # error message, preventing any accidental data loss.
-  targetDisk = lib.assert (lib.readlink targetDiskEui == lib.readlink targetDiskWds)
-    "Error: The EUI and WDS identifiers point to different devices! Please check your disk layout.";
+  # We've replaced the `lib.assert` call with a clear if/then/else expression.
+  targetDisk =
+    if lib.readlink targetDiskEui == lib.readlink targetDiskWds then
+      targetDiskEui
+    else
+      throw "Error: The EUI and WDS identifiers point to different devices! Please check your disk layout.";
 in
 {
   # Ensure the disko module is enabled and will manage our disks.
