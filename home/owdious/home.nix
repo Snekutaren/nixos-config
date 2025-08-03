@@ -20,6 +20,17 @@
     blender
   ];
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    # If you use zsh or another shell, you need to enable it here
+    # Example for zsh:
+    # enableZshIntegration = true;
+  };
+  # For the shell to hook into direnv, you need to enable it as a program.
+  # This is often already present, but it's good to ensure it's there.
+  programs.bash.enable = true; 
+
   # Enable a shell (e.g., Zsh)
   programs.zsh = {
     enable = true;
