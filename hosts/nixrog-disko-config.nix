@@ -64,6 +64,7 @@ in
               type = "8300";
               content = {
                 # This content is a LUKS container.
+                name = "NIXOS_LUKS";
                 type = "luks";
                 # The content of the LUKS container is an LVM physical volume.
                 content = {
