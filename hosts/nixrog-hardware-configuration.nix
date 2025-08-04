@@ -10,10 +10,19 @@
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
-  boot.initrd.luks.devices."cryptroot".device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
+  #boot.initrd.luks.devices."cryptroot".device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.initrd.luks.devices = {
+    cryptroot = {
+      device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
+      allowDiscards = true;
+      # Uncomment if using a persistent keyfile managed by agenix
+      # keyFile = "/etc/luks-keys/cryptroot.key";
+    };
+  };
 
   fileSystems."/" = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
