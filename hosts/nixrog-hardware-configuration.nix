@@ -15,18 +15,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/NIXOS_ROOT";
-    fsType = "ext4";
-  };
+  #fileSystems."/" = {
+  #  device = "/dev/disk/by-label/NIXOS_ROOT";
+  #  fsType = "ext4";
+  #};
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXOS_BOOT";
-    fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
-  };
+  #fileSystems."/boot" = {
+  #  device = "/dev/disk/by-label/NIXOS_BOOT";
+  #  fsType = "vfat";
+  #  options = [ "fmask=0077" "dmask=0077" ];
+  #};
 
-  swapDevices = [];
+  #swapDevices = [];
 
   hardware.bluetooth.enable = true;
   hardware.enableAllFirmware = true;
