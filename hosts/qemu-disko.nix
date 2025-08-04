@@ -1,5 +1,5 @@
-# nixrog-disko-config.nix
-{ lib, ... }: {
+# qemu-disko-config.nix
+{ lib, diskos, inputs, ... }: {
   disko.devices = {
     disk.main = {
       device = "/dev/disk/by-id/virtio-lagg1337abc123";

@@ -28,7 +28,7 @@
     fsType = "ext4";
   };
   fileSystems."/boot" = {
-    device = lib.mkForce "/dev/disk/by-label/NIXOS_BOOT";
+    device = lib.mk "/dev/disk/by-label/NIXOS_BOOT";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
@@ -72,7 +72,7 @@
   environment.systemPackages = with pkgs; [
     # Disk usage tools
     baobab
-    kdePackages.filelight
+    #kdePackages.filelight
     qdirstat
     ncdu
 
@@ -87,9 +87,9 @@
     peazip
     unzip
     file
-    kdePackages.dolphin
-    kdePackages.kio
-    kdePackages.kio-extras
+    #kdePackages.dolphin
+    #kdePackages.kio
+    #kdePackages.kio-extras
 
     # System utilities
     neofetch
@@ -107,21 +107,21 @@
     # Networking
     wget
     curl
-    samba
+    #samba
     cifs-utils
     sshpass
 
     # Development
-    git
+    #git
     neovim
     tmux
     jq
     bc
 
     # GUI applications
-    kdePackages.kate
-    kdePackages.konsole
-    blueman
+    #kdePackages.kate
+    #kdePackages.konsole
+    #blueman
     upower
     mako
 

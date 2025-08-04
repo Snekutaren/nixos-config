@@ -1,4 +1,4 @@
-# home/owdious/home.nix
+# home/qemu/home.nix
 { config, pkgs, home-manager, inputs, lib,... }:
 {
   home.stateVersion = "25.05"; # Matching the home-manager release branch
@@ -22,8 +22,8 @@
   ];
 
   programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
+    enable = false;
+    nix-direnv.enable = false;
     # If you use zsh or another shell, you need to enable it here
     # Example for zsh:
     # enableZshIntegration = true;
@@ -109,14 +109,14 @@
 
   # Enable a shell (e.g., Zsh)
   programs.zsh = {
-    enable = true;
+    enable = false;
     # Temporarily removed ohMyZsh to debug "option does not exist" error.
     # It will be re-added or corrected once the base Zsh setup works.
     # ohMyZsh.enable = true; # Example: Enabling Oh My Zsh  <-- THIS LINE MUST BE COMMENTED/REMOVED
   };
 
   #
-  programs.gh.enable = true;
+  programs.gh.enable = false;
 
   # Enable Git configuration
   programs.git = {
@@ -126,7 +126,7 @@
   };
 
   programs.eww = {
-    enable = true;
+    enable = false;
   };
   
   xdg.configFile."hypr/hyprland.conf" = {

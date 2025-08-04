@@ -1,5 +1,5 @@
 # nixrog-disko-config.nix
-{ lib, ... }: {
+{ lib, diskos, inputs, ... }: {
   disko.devices = {
     disk.main = {
       device = "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b459ecf04"; # (nvme-WDS100T1XHE-00AFY0_21474A803146)
