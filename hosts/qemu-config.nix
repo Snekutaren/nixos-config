@@ -5,7 +5,7 @@
     ../modules/networking.nix
     ../modules/localization.nix
     ../modules/sound.nix
-    ../modules/backup.nix
+    #../modules/backup.nix
     ../modules/hypr/hyprland.nix
   ];
 
