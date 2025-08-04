@@ -129,9 +129,9 @@
   ];
 
   # User configuration
-  users.users.owdious = {
+  users.users.qemu = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    hashedPasswordFile = config.age.secrets.owdious.path;
+    #hashedPasswordFile = config.age.secrets.qemu.path;
   };
 }
