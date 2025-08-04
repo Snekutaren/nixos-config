@@ -150,39 +150,39 @@
   '';
 
   xdg.configFile."hypr/hyprland.conf" = {
-    source = "${inputs.dotfiles}/hypr/hyprland.conf";
+    source = "./hypr/hyprland.conf";
   };
 
   xdg.configFile."hypr/hyprpaper.conf" = {
-    source = "${inputs.dotfiles}/hypr/hyprpaper.conf";
+    source = "./hypr/hyprpaper.conf";
   };
 
   xdg.configFile."hypr/hypridle.conf" = {
-    source = "${inputs.dotfiles}/hypr/hypridle.conf";
+    source = "./hypr/hypridle.conf";
   };
   
    home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/lock-and-dpms.sh";
+    source = "./hypr/scripts/lock-and-dpms.sh";
     executable = true;
   };
   
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/toggle_scroll.sh";
+    source = "./hypr/scripts/toggle_scroll.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/random-hyprpaper.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/random-hyprpaper.sh";
+    source = "./hypr/scripts/random-hyprpaper.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/toggle_monitor_layout.sh" = {
-    source = "${inputs.dotfiles}/hypr/scripts/toggle_monitor_layout.sh";
+    source = "./hypr/scripts/toggle_monitor_layout.sh";
     executable = true;
   };
 
   #home.file."/.bashrc" = {
-  #  source = "${inputs.dotfiles}/bash/.bashrc";
+  #  source = "./bash/.bashrc";
   #  executable = true;
   #};
 

@@ -23,7 +23,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dotfiles.url = "path:/home/owdious/dotfiles";
+    #dotfiles.url = "path:/home/owdious/dotfiles";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, disko, ... }@inputs:
