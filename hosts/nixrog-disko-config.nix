@@ -48,13 +48,12 @@ in
               size = "512M";
               # This has been changed to the correct GPT partition type for EFI.
               type = "EF00";
+              # The partition label has been moved here.
+              label = "NIXOS_BOOT";
               content = {
                 type = "filesystem";
                 # Format as vfat as required for EFI boot.
                 format = "vfat";
-                # The label you want for the filesystem.
-                label = "NIXOS_BOOT";
-                # The mount point for this partition.
                 mountpoint = "/boot";
               };
             };
