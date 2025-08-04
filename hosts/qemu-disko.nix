@@ -10,7 +10,7 @@
           ESP = {
             size = "512M";
             type = "EF00"; # EFI System Partition
-            #label = "NIXOS_BOOT"; # Match existing partition label
+            label = "NIXOS_BOOT"; # Match existing partition label
             content = {
               type = "filesystem";
               format = "vfat";
@@ -20,7 +20,7 @@
           };
           luks = {
             size = "100%";
-            #label = "NIXOS_LUKS"; # Match existing partition label
+            label = "NIXOS_LUKS"; # Match existing partition label
             content = {
               type = "luks";
               name = "cryptroot"; # Maps to /dev/mapper/cryptroot
