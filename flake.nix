@@ -68,7 +68,6 @@
         specialArgs = { inherit inputs pkgs; };
         modules = [
           disko.nixosModules.disko
-          ./hosts/qemu-disko.nix
           ./hosts/qemu-config.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
@@ -78,14 +77,14 @@
               users.qemu.imports = [ ./home/qemu/home.nix ];
             };
           }
-          agenix.nixosModules.default {
+          #agenix.nixosModules.default {
             #age.secrets.qemu = {
             #  file = ./secrets/qemu.age;
             #  owner = "qemu"; # optional if you want to set ownership on decryption
             #};
             #age.secrets = import ./secrets/secrets.nix;
             #age.identityPaths = [ "/home/qemu/.config/age/keys.txt" ];
-          }
+          #}
         ];
       };
 

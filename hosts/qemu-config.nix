@@ -2,6 +2,7 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ./qemu-disko.nix
     ./qemu-networking.nix
     ../modules/localization.nix
     #../modules/sound.nix
@@ -14,14 +15,12 @@
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices = {
-    cryptroot = {
-      device = lib.mkForce "/dev/disk/by-partlabel/NIXOS_LUKS";
-      preLVM = true; # Ensure LUKS is opened before LVM
-      allowDiscards = true;
-      # Uncomment if using a persistent keyfile managed by agenix
-      # keyFile = "/etc/luks-keys/cryptroot.key";
-    };
+  boot.initrd.luks.devices.cryptroot = {
+    device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
+    preLVM = true; # Ensure LUKS is opened before LVM
+    allowDiscards = true;
+    # Uncomment if using a persistent keyfile managed by agenix
+    # keyFile = "/etc/luks-keys/cryptroot.key";
   };
   fileSystems."/" = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
