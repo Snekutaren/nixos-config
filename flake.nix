@@ -62,5 +62,32 @@
           }
         ];
       };
+
+      nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs pkgs; };
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/qemu-disko.nix
+          ./hosts/qemu-config.nix
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
+              users.owdious.imports = [ ./home/owdious/home.nix ];
+            };
+          }
+          agenix.nixosModules.default {
+            #age.secrets.owdious = {
+            #  file = ./secrets/owdious.age;
+            #  owner = "owdious"; # optional if you want to set ownership on decryption
+            #};
+            age.secrets = import ./secrets/secrets.nix;
+            age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
+          }
+        ];
+      };
+
     };
 }
