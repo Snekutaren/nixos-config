@@ -27,7 +27,7 @@ let
 in
 {
   # Ensure the disko module is enabled and will manage our disks.
-  disko.enable = true;
+  #disko.enable = true;
 
   # Define the devices. The structure now follows the correct pattern
   # from the example provided.
