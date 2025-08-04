@@ -99,7 +99,6 @@ in
               type = "filesystem";
               format = "ext4";
               # The label for the root filesystem.
-              label = "NIXOS_ROOT";
               # The mount point for the root partition.
               mountpoint = "/";
             };
