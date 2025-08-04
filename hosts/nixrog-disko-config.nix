@@ -99,7 +99,7 @@ in
             size = "100%FREE";
             content = {
               type = "filesystem";
-              name = "NIXOS_ROOT";
+              #name = "NIXOS_ROOT";
               format = "ext4";
               # The label for the root filesystem.
               # The mount point for the root partition.
