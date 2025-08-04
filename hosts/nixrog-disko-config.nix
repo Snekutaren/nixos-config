@@ -43,21 +43,17 @@ in
         content = {
           # The partition table type is now specified directly as 'gpt'.
           type = "gpt";
-          label = "NIXOS_BOOT";
           partitions = {
             # Partition 1: The EFI System Partition for /boot.
-            esp = {
+            NIXOS_BOOT = {
               size = "512M";
               # This has been changed to the correct GPT partition type for EFI.
               type = "EF00";
-              # The partition label has been moved here.
-              
               content = {
                 type = "filesystem";
                 # Format as vfat as required for EFI boot.
                 format = "vfat";
                 mountpoint = "/boot";
-                
               };
             };
             # Partition 2: The encrypted root partition.
