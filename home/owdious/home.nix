@@ -85,11 +85,14 @@
       function build-nix() {
         sudo nixos-rebuild switch --flake ~/nixos-config -v
       }
+      function build-nix-dry() {
+        sudo nixos-rebuild dry-activate --flake ~/nixos-config -v
+      }
       function push-build-nix() {
-        update-flake
-        git-push-nixos
         git-push-dot
+        update-flake
         build-nix
+        git-push-nixos
       }
 
       # The "reload-conf" alias as a function.

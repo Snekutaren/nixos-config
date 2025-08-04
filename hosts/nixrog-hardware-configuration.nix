@@ -10,21 +10,21 @@
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS_LUKS";
+  boot.initrd.luks.devices."cryptroot".device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  #fileSystems."/" = {
-  #  device = "/dev/disk/by-label/NIXOS_ROOT";
-  #  fsType = "ext4";
- # };
+  fileSystems."/" = {
+    device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
+    fsType = "ext4";
+  };
 
- # fileSystems."/boot" = {
- #   device = "/dev/disk/by-label/NIXOS_BOOT";
- #   fsType = "vfat";
- #   options = [ "fmask=0077" "dmask=0077" ];
- # };
+  fileSystems."/boot" = {
+    device = lib.mkForce "/dev/disk/by-label/NIXOS_BOOT";
+    fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
+  };
 
   #swapDevices = [];
 
