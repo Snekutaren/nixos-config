@@ -23,10 +23,10 @@
               type = "luks";
               name = "cryptroot";
               extraOpenArgs = [ "--type luks2" ]; # Use LUKS2
+              extraFormatArgs = [ "--label" "NIXOS_LUKS" ]; # Set LUKS label
               settings = {
-                keyFile = "/tmp/luks-keyfile"; # Temporary keyfile for fresh install
+                #keyFile = "/tmp/luks-keyfile"; # Temporary keyfile for fresh install
                 allowDiscards = true; # Enable TRIM for NVMe
-                #label = "NIXOS_LUKS"; # Label for LUKS partition
               };
               content = {
                 type = "lvm_pv";
