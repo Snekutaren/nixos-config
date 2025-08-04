@@ -65,8 +65,6 @@ in
               content = {
                 # This content is a LUKS container.
                 type = "luks";
-                # The label for the LUKS container.
-                name = "NIXOS_LUKS";
                 # The content of the LUKS container is an LVM physical volume.
                 content = {
                   type = "lvm_pv";
