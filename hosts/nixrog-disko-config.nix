@@ -40,15 +40,14 @@ in
         # Define the partition table type.
         type = "disk";
         content = {
-          # The 'name' attribute has been removed.
           # The partition table type is now specified directly as 'gpt'.
           type = "gpt";
-          # This has been changed from a list `[...]` to an attribute set `{...}`.
           partitions = {
             # Partition 1: The EFI System Partition for /boot.
             esp = {
               size = "512M";
-              type = "partition";
+              # This has been changed to the correct GPT partition type for EFI.
+              type = "EF00";
               content = {
                 type = "filesystem";
                 # Format as vfat as required for EFI boot.
@@ -62,7 +61,8 @@ in
             # Partition 2: The encrypted root partition.
             root = {
               size = "100%";
-              type = "partition";
+              # This has been changed to a common GPT type for a Linux filesystem.
+              type = "8300";
               content = {
                 # This content is a LUKS container.
                 type = "luks";
