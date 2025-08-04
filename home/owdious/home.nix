@@ -89,6 +89,7 @@
         sudo nixos-rebuild dry-activate --flake ~/nixos-config -v
       }
       function push-build-nix() {
+        ssha
         git-push-dot
         update-flake
         build-nix
