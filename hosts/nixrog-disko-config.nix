@@ -3,7 +3,7 @@
 # It is designed to be used with the `disko` tool from a NixOS Live ISO.
 # This version includes an option to use a password from a file for
 # automated decryption, which is useful with tools like agenix.
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, disko, ... }:
 
 let
   # Use the stable by-id path for the physical disk to avoid issues
