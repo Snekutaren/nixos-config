@@ -150,34 +150,34 @@
   '';
 
   xdg.configFile."hypr/hyprland.conf" = {
-    source = "./modules/hypr/hyprland.conf";
+    source = inputs.self + "/modules/hypr/hyprland.conf";
   };
 
   xdg.configFile."hypr/hyprpaper.conf" = {
-    source = "./modules/hypr/hyprpaper.conf";
+    source = inputs.self + "/modules/hypr/hyprpaper.conf";
   };
 
   xdg.configFile."hypr/hypridle.conf" = {
-    source = "./modules/hypr/hypridle.conf";
+    source = inputs.self + "/modules/hypr/hypridle.conf";
   };
   
    home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
-    source = "./modules/hypr/scripts/lock-and-dpms.sh";
+    source = inputs.self + "/modules/hypr/scripts/lock-and-dpms.sh";
     executable = true;
   };
   
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
-    source = "./modules/hypr/scripts/toggle_scroll.sh";
+    source = inputs.self + "/modules/hypr/scripts/toggle_scroll.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/random-hyprpaper.sh" = {
-    source = "./modules/hypr/scripts/random-hyprpaper.sh";
+    source = inputs.self + "/modules/hypr/scripts/random-hyprpaper.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/toggle_monitor_layout.sh" = {
-    source = "./modules/hypr/scripts/toggle_monitor_layout.sh";
+    source = inputs.self + "/modules/hypr/scripts/toggle_monitor_layout.sh";
     executable = true;
   };
 

@@ -7,18 +7,18 @@
 
   # Define user-specific packages here
   home.packages = with pkgs; [
-    #gamescope
-    #brave
-    #discord
-    #heroic
-    #steam
-    #vscode
-    #vlc
-    #playerctl # Media player control
-    #thunderbird
-    #gimp
-    #libreoffice
-    #blender
+    gamescope
+    brave
+    discord
+    heroic
+    steam
+    vscode
+    vlc
+    playerctl # Media player control
+    thunderbird
+    gimp
+    libreoffice
+    blender
   ];
 
   programs.direnv = {
