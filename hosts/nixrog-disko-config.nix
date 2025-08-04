@@ -67,14 +67,12 @@ in
                 type = "luks";
                 # The label for the LUKS container.
                 name = "NIXOS_LUKS";
-                # The name of the decrypted device mapper device.
-                # This will be /dev/mapper/cryptroot
                 content = {
+                  # The LVM Physical Volume definition.
                   type = "lvm_pv";
-                  vg = "vg0";
-                  # This is the LVM Volume Group.
-                  # It will contain the logical volumes.
+                  # This `content` block now correctly defines the `lvm_vg` as its sole child.
                   content = {
+                    # This is the LVM Volume Group.
                     type = "lvm_vg";
                     name = "vg0";
                     # Define the logical volumes within the VG.
