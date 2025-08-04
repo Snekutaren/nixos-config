@@ -28,7 +28,7 @@
     fsType = "ext4";
   };
   fileSystems."/boot" = {
-    device = lib.mk "/dev/disk/by-label/NIXOS_BOOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXOS_BOOT";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
