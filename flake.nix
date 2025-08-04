@@ -42,8 +42,8 @@
         specialArgs = { inherit inputs pkgs; };
         modules = [
           disko.nixosModules.default
-          ./hosts/nixrog-disko-config.nix
           ./hosts/nixrog-configuration.nix
+          ./hosts/nixrog-disko-config.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
