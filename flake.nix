@@ -75,7 +75,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.owdious.imports = [ ./home/owdious/home.nix ];
+              users.owdious.imports = [ ./home/qemu/home.nix ];
             };
           }
           agenix.nixosModules.default {
