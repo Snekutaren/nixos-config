@@ -19,7 +19,6 @@ let
   # We use a compile-time assertion to ensure both identifiers resolve to the
   # same physical device. If they don't, the Nix build will fail with a clear
   # error message, preventing any accidental data loss.
-  # We've replaced the `lib.assert` call with a clear if/then/else expression.
   targetDisk =
     if lib.readlink targetDiskEui == lib.readlink targetDiskWds then
       targetDiskEui
@@ -30,8 +29,10 @@ in
   # Ensure the disko module is enabled and will manage our disks.
   disko.enable = true;
 
-  # Define the devices. The structure mirrors your disk layout.
+  # Define the devices. The structure now follows the correct pattern
+  # from the example provided.
   disko.devices = {
+    # The 'disk' block defines the physical disk and its partitions.
     disk = {
       # We give a symbolic name to our disk for easy reference.
       main = {
@@ -67,30 +68,12 @@ in
                 type = "luks";
                 # The label for the LUKS container.
                 name = "NIXOS_LUKS";
+                # The content of the LUKS container is an LVM physical volume.
                 content = {
-                  # The LVM Physical Volume definition.
                   type = "lvm_pv";
-                  # This `content` block now correctly defines the `lvm_vg` as its sole child.
-                  content = {
-                    # This is the LVM Volume Group.
-                    type = "lvm_vg";
-                    name = "vg0";
-                    # Define the logical volumes within the VG.
-                    lvs = {
-                      # The root logical volume.
-                      root = {
-                        size = "100%FREE";
-                        content = {
-                          type = "filesystem";
-                          format = "ext4";
-                          # The label for the root filesystem.
-                          label = "NIXOS_ROOT";
-                          # The mount point for the root partition.
-                          mountpoint = "/";
-                        };
-                      };
-                    };
-                  };
+                  # This `vg` attribute links this PV to the top-level
+                  # `lvm_vg` named "vg0" defined below.
+                  vg = "vg0";
                 };
                 # --- agenix/password file configuration ---
                 # To use a password from a file for full automation,
@@ -99,6 +82,29 @@ in
                 # The path should point to the decrypted secret.
                 # passwordFile = "/run/agenix/path-to-your-luks-password-file";
               };
+            };
+          };
+        };
+      };
+    };
+
+    # The 'lvm_vg' block is a top-level definition, separate from the disk.
+    lvm_vg = {
+      # The name of the volume group, which must match the `vg` in `lvm_pv`.
+      vg0 = {
+        type = "lvm_vg";
+        # Define the logical volumes that live inside this volume group.
+        lvs = {
+          # The root logical volume.
+          root = {
+            size = "100%FREE";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              # The label for the root filesystem.
+              label = "NIXOS_ROOT";
+              # The mount point for the root partition.
+              mountpoint = "/";
             };
           };
         };
