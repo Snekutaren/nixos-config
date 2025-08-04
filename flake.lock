@@ -100,8 +100,8 @@
     },
     "dotfiles": {
       "locked": {
-        "lastModified": 1754303431,
-        "narHash": "sha256-IxpRp/f5UKcQlsbe43tJ5XggEjyq1cVUTLkK+ezEkgk=",
+        "lastModified": 1754313507,
+        "narHash": "sha256-RZam+4FIWzLwrpSsWNSDQXQaX2TfM+D35THxn70aNPc=",
         "path": "/home/owdious/dotfiles",
         "type": "path"
       },
@@ -495,11 +495,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754302807,
-        "narHash": "sha256-JLJpMPQJ8J5pZ5EV5qY+TjCb22IevrQ0XMZXb50hr/M=",
+        "lastModified": 1754312340,
+        "narHash": "sha256-l0ntf02OABMwfW6K2FB/p3FDG2TCMNQzPPD9EyfIgio=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "9edce8ab128c10d6c351e6bdb76c35b45b3da03c",
+        "rev": "65583f6d80b5fa36ce4c36dc1b5d0e87646203d5",
         "type": "github"
       },
       "original": {
