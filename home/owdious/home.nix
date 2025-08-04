@@ -162,7 +162,7 @@
   };
   
    home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
-    source = "./modules/hypr/scripts/lock-and-dpms.sh";
+    source = "../../modules/hypr/scripts/lock-and-dpms.sh";
     executable = true;
   };
   
