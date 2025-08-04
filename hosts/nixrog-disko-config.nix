@@ -27,7 +27,7 @@ let
 in
 {
   # Ensure the disko module is enabled and will manage our disks.
-  #disko.enable = true;
+  disko.enable = true;
 
   # Define the devices. The structure now follows the correct pattern
   # from the example provided.
@@ -48,6 +48,7 @@ in
             esp = {
               size = "512M";
               # This has been changed to the correct GPT partition type for EFI.
+              name = "NIXOS_BOOT";
               type = "EF00";
               # The partition label has been moved here.
               content = {
@@ -98,6 +99,7 @@ in
             size = "100%FREE";
             content = {
               type = "filesystem";
+              name = "NIXOS_ROOT";
               format = "ext4";
               # The label for the root filesystem.
               # The mount point for the root partition.
