@@ -129,26 +129,6 @@
     enable = true;
   };
   
-  home.activation.removeDotfileConflicts = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
-    date="$$(date +%Y-%m-%d_%H-%M-%S)"
-
-    files=(
-      "$${HOME}/.config/hypr/hyprland.conf"
-      "$${HOME}/.config/hypr/scripts/toggle_scroll.sh"
-      "$${HOME}/.config/hypr/scripts/commit_hypr.sh"
-      "$${HOME}/.config/fish/config.fish"
-      "$${HOME}/.config/bash/.bashrc"
-    )
-
-    for file in "$${files[@]}"; do
-      if [ -f "$$file" ] && [ ! -L "$$file" ]; then
-        backup="$$file.backup-$$date"
-        echo "Backing up existing file: $$file -> $$backup"
-        mv "$$file" "$$backup"
-      fi
-    done
-  '';
-
   xdg.configFile."hypr/hyprland.conf" = {
     source = inputs.self + "/modules/hypr/hyprland.conf";
   };

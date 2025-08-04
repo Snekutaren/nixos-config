@@ -33,7 +33,7 @@
         inherit system;
         config = {
           allowUnfree = true;
-          rocmTargets = [ "gfx1200" "gfx1201" ];
+          rocmTargets = [ "gfx1201" ];
         };
       };
     in {
@@ -83,7 +83,7 @@
             #  file = ./secrets/qemu.age;
             #  owner = "qemu"; # optional if you want to set ownership on decryption
             #};
-            age.secrets = import ./secrets/secrets.nix;
+            #age.secrets = import ./secrets/secrets.nix;
             #age.identityPaths = [ "/home/qemu/.config/age/keys.txt" ];
           }
         ];
