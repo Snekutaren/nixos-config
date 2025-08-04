@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
     cryptroot = {
-      device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
+      device = lib.mkForce "/dev/disk/by-partlabel/NIXOS_LUKS";
       preLVM = true; # Ensure LUKS is opened before LVM
       allowDiscards = true;
       # Uncomment if using a persistent keyfile managed by agenix
