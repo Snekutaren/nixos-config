@@ -75,16 +75,16 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.owdious.imports = [ ./home/qemu/home.nix ];
+              users.qemu.imports = [ ./home/qemu/home.nix ];
             };
           }
           agenix.nixosModules.default {
-            #age.secrets.owdious = {
-            #  file = ./secrets/owdious.age;
-            #  owner = "owdious"; # optional if you want to set ownership on decryption
+            #age.secrets.qemu = {
+            #  file = ./secrets/qemu.age;
+            #  owner = "qemu"; # optional if you want to set ownership on decryption
             #};
             age.secrets = import ./secrets/secrets.nix;
-            age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
+            #age.identityPaths = [ "/home/qemu/.config/age/keys.txt" ];
           }
         ];
       };
