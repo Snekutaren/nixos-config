@@ -50,12 +50,13 @@ in
               # This has been changed to the correct GPT partition type for EFI.
               type = "EF00";
               # The partition label has been moved here.
-              label = "NIXOS_BOOT";
+              
               content = {
                 type = "filesystem";
                 # Format as vfat as required for EFI boot.
                 format = "vfat";
                 mountpoint = "/boot";
+                label = "NIXOS_BOOT";
               };
             };
             # Partition 2: The encrypted root partition.
