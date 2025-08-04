@@ -2,7 +2,7 @@
 { lib, ... }: {
   disko.devices = {
     disk.main = {
-      device = "/dev/disk/by-id/lagg1337abc123";
+      device = "/dev/disk/by-id/virtio-lagg1337abc123";
       type = "disk";
       content = {
         type = "gpt";
