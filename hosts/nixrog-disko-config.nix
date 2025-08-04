@@ -26,7 +26,7 @@
               settings = {
                 keyFile = "/tmp/luks-keyfile"; # Temporary keyfile for fresh install
                 allowDiscards = true; # Enable TRIM for NVMe
-                label = "NIXOS_LUKS"; # Label for LUKS partition
+                #label = "NIXOS_LUKS"; # Label for LUKS partition
               };
               content = {
                 type = "lvm_pv";
