@@ -3,7 +3,7 @@
 # It is designed to be used with the `disko` tool from a NixOS Live ISO.
 # This version includes an option to use a password from a file for
 # automated decryption, which is useful with tools like agenix.
-{ config, pkgs, lib, disko, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   # Use the stable by-id path for the physical disk to avoid issues
@@ -27,7 +27,7 @@ let
 in
 {
   # Ensure the disko module is enabled and will manage our disks.
-  disko.enable = true;
+  #disko.enable = true;
 
   # Define the devices. The structure now follows the correct pattern
   # from the example provided.
