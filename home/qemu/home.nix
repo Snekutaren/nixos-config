@@ -47,8 +47,8 @@
       # Define complex commands as functions.
       # The "ssha" alias as a function.
       function ssha() {
-        eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/github/github_ed25519
+        bash eval "$(ssh-agent -s)"
+        bash ssh-add ~/.ssh/github/github_ed25519
       }
 
       # The "git-push" aliases as functions for clarity.

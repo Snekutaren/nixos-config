@@ -16,19 +16,19 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
     cryptroot = {
-      device = lib.mkDefault "/dev/disk/by-label/NIXOS_LUKS";
-      preLVM = true;
+      device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
+      preLVM = true; # Ensure LUKS is opened before LVM
       allowDiscards = true;
       # Uncomment if using a persistent keyfile managed by agenix
       # keyFile = "/etc/luks-keys/cryptroot.key";
     };
   };
   fileSystems."/" = {
-    device = lib.mkDefault "/dev/disk/by-label/NIXOS_ROOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
     fsType = "ext4";
   };
   fileSystems."/boot" = {
-    device = lib.mkDefault "/dev/disk/by-label/NIXOS_BOOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXOS_BOOT";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
