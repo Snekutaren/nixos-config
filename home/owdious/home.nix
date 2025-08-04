@@ -150,15 +150,15 @@
   '';
 
   xdg.configFile."hypr/hyprland.conf" = {
-    source = "./hypr/hyprland.conf";
+    source = inputs.self + "/modules/hypr/hyprland.conf";
   };
 
   xdg.configFile."hypr/hyprpaper.conf" = {
-    source = "./hypr/hyprpaper.conf";
+    source = inputs.self + "/modules/hypr/hyprpaper.conf";
   };
 
   xdg.configFile."hypr/hypridle.conf" = {
-    source = "./hypr/hypridle.conf";
+    source = inputs.self + "/modules/hypr/hypridle.conf";
   };
   
    home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
