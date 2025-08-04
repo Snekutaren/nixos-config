@@ -162,22 +162,22 @@
   };
   
    home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
-    source = "path:/../modules/hypr/scripts/lock-and-dpms.sh";
+    source = inputs.self + "/modules/hypr/scripts/lock-and-dpms.sh";
     executable = true;
   };
   
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
-    source = "./hypr/scripts/toggle_scroll.sh";
+    source = inputs.self + "/modules/hypr/scripts/toggle_scroll.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/random-hyprpaper.sh" = {
-    source = "./hypr/scripts/random-hyprpaper.sh";
+    source = inputs.self + "/modules/hypr/scripts/random-hyprpaper.sh";
     executable = true;
   };
 
   home.file.".config/hypr/scripts/toggle_monitor_layout.sh" = {
-    source = "./hypr/scripts/toggle_monitor_layout.sh";
+    source = inputs.self + "/modules/hypr/scripts/toggle_monitor_layout.sh";
     executable = true;
   };
 
