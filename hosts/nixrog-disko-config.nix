@@ -10,7 +10,7 @@
           ESP = {
             size = "512M";
             type = "EF00"; # EFI System Partition
-            label = "NIXOS_BOOT"; # Match existing partition label
+            #label = "NIXOS_BOOT"; # Match existing partition label
             content = {
               type = "filesystem";
               format = "vfat";

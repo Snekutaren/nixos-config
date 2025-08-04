@@ -15,7 +15,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              extraArgs = [ "-n NIXOS_BOOT" ]; # Filesystem label
+              extraArgs = [ "-n" "NIXOS_BOOT" ]; # Filesystem label
             };
           };
           luks = {
@@ -48,7 +48,7 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              extraArgs = [ "-L NIXOS_ROOT" ]; # Filesystem label
+              extraArgs = [ "-L" "NIXOS_ROOT" ]; # Filesystem label
             };
           };
         };
