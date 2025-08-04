@@ -41,7 +41,7 @@
         inherit system;
         specialArgs = { inherit inputs pkgs; };
         modules = [
-          disko.nixosModules.default
+          disko.nixosModules.disko
           ./hosts/nixrog-disko-config.nix
           ./hosts/nixrog-configuration.nix
           home-manager.nixosModules.home-manager {
