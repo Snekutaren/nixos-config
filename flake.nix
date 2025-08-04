@@ -67,7 +67,7 @@
         inherit system;
         specialArgs = { inherit inputs pkgs; };
         modules = [
-          disko.nixosModules.disko
+          disko.nixosModules.qemu
           ./hosts/qemu-disko.nix
           ./hosts/qemu-config.nix
           home-manager.nixosModules.home-manager {
