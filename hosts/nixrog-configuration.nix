@@ -9,6 +9,9 @@
     ../modules/hyprland.nix
   ];
 
+  # Ensures fileSystems entries are generated for regular nixos-rebuild (non-destructive).
+  disko.enableConfig = true;
+
   # Nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

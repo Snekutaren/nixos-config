@@ -29,7 +29,7 @@
   outputs = { self, nixpkgs, home-manager, agenix, disko, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
+      pkgs = import nixpkgs { # necessary? just have it called nixpks?
         inherit system;
         config = {
           allowUnfree = true;
@@ -41,14 +41,14 @@
         inherit system;
         specialArgs = { inherit inputs pkgs; };
         modules = [
+          disko.nixosModules.disko
+          #./hosts/nixrog-disko-config.nix
           ./hosts/nixrog-configuration.nix
-          disko.nixosModules.default
-          ./hosts/nixrog-disko-config.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs pkgs; };
+              extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
               users.owdious.imports = [ ./home/owdious/home.nix ];
             };
           }
