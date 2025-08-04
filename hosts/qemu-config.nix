@@ -15,6 +15,7 @@
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.lvm.enable = true;
   boot.initrd.luks.devices.cryptroot = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
     preLVM = true; # Ensure LUKS is opened before LVM
