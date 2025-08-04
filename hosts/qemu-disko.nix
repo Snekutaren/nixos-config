@@ -1,6 +1,6 @@
 # qemu-disko-config.nix
-{ lib, disko, inputs, ... }: {
-  qemu.devices = {
+{ lib, inputs, ... }: {
+  diskoq.devices = {
     disk.main = {
       device = "/dev/disk/by-id/virtio-lagg1337abc123";
       type = "disk";
