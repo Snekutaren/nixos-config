@@ -10,7 +10,7 @@
     (inputs.self + "/machines/qemu/qemu-disko.nix")
     (inputs.self + "/machines/qemu/qemu-network.nix")
     (inputs.self + "/machines/qemu/qemu-packages.nix")
-    (inputs.self + "/machines/nixrog/qemu-users.nix")
+    (inputs.self + "/machines/qemu/qemu-users.nix")
 
     # Common system modules
     (inputs.self + "/modules/localization.nix")

@@ -40,7 +40,7 @@
     qemuPkgs = import nixpkgs {
       inherit system;
       config = {
-        allowUnfree = false;
+        allowUnfree = true;
       };
     };
   in {
