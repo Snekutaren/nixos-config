@@ -17,7 +17,7 @@
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
     shell = pkgs.bashInteractive;
     #hashedPassword = "$6$mKObq3ioVxnsLIAT$NFRKW3GM5vJxces3XzuwoEWcc2rMAZbjjIBls7nbCh2rgKtDDHVDzsyWQ6Y6MF0O9KtZCbpP15jNBxyI95FWS0";
-    hashedPasswordFile = config.age.secrets."users.tellus.hashedPasswordFile".path;
+    #passwordFile = config.age.secrets.nixrog-tellus.path;
   };
   home-manager = {
     useGlobalPkgs = true;
