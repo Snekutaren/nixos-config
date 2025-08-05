@@ -1,6 +1,7 @@
+# machines/nixrog/nixrog-config.nix
 { config, pkgs, inputs, lib, modulesPath, ... }:
+
 {
-  #nixpkgs.config.allowUnfree = true;
   imports = [
     # Hardware profiles
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -15,6 +16,16 @@
     #(inputs.self + "/modules/backup.nix")
     (inputs.self + "/modules/hypr/hyprland.nix")
   ];
+
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      extra-sandbox-paths = [ "/dev/kfd" "/dev/dri/renderD128" ];
+    };
+  };
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  system.stateVersion = "25.05";
 
   boot = {
     initrd = {
@@ -33,6 +44,8 @@
       efi.canTouchEfiVariables = true;
     };
   };
+
+  disko.enableConfig = true;
 
   fileSystems = {
     "/" = {
@@ -64,18 +77,6 @@
       ];
     };
   };
-
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      extra-sandbox-paths = [ "/dev/kfd" "/dev/dri/renderD128" ];
-    };
-  };
-
-  disko.enableConfig = true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  system.stateVersion = "25.05";
 
   services = {
     xserver = {

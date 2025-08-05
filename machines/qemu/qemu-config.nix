@@ -5,18 +5,19 @@
     # Hardware profiles
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-
     # Machine-specific modules
     (inputs.self + "/machines/qemu/qemu-disko.nix")
     (inputs.self + "/machines/qemu/qemu-network.nix")
     (inputs.self + "/machines/qemu/qemu-packages.nix")
     (inputs.self + "/machines/qemu/qemu-users.nix")
-
     # Common system modules
     (inputs.self + "/modules/localization.nix")
     (inputs.self + "/modules/sound.nix")
-    (inputs.self + "/modules/hypr/hyprland.nix")
   ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  system.stateVersion = "25.05";
 
   boot = {
     initrd = {
@@ -36,6 +37,8 @@
       efi.canTouchEfiVariables = true;
     };
   };
+
+  disko.enableConfig = true;
 
   fileSystems."/" = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
@@ -74,15 +77,5 @@
     enable = true;
     wheelNeedsPassword = true;
   };
-
-  disko.enableConfig = true;
-
-  nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  system.stateVersion = "25.05";
-  #nixpkgs.config.allowUnfree = true;
 
 }
