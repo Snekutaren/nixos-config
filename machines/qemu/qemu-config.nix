@@ -3,20 +3,20 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./qemu-disko.nix
+    (inputs.self + "/machines/qemu/qemu-disko.nix")
     (inputs.self + "/machines/qemu/qemu-network.nix")
-    ../../modules/localization.nix
-    #../modules/sound.nix
-    #../modules/backup.nix
-    #../modules/hypr/hyprland.nix
+    (inputs.self + "/modules/localization.nix")
+    (inputs.self + "/modules/sound.nix")
+    #(inputs.self + "/modules/backup.nix")
+    (inputs.self + "/modules/hypr/hyprland.nix")
   ];
 
    # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  services.xserver.enable = true;
 
   # Enable the Pantheon Desktop Environment.
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.desktopManager.pantheon.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.pantheon.enable = true;
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "uhci_hcd" "ehci_pci" "virtio_pci" "virtio_blk" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
@@ -24,7 +24,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.lvm.enable = true;
   boot.initrd.luks.devices.cryptroot = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
     preLVM = true; # Ensure LUKS is opened before LVM
@@ -53,8 +52,6 @@
     enable = false;
     enable32Bit = true;
   };
-
-  nix.settings.extra-sandbox-paths = [ "/dev/kfd" "/dev/dri/renderD128" ];
 
   # Ensures fileSystems entries are generated for regular nixos-rebuild (non-destructive).
   disko.enableConfig = true;
@@ -121,7 +118,7 @@
     sshpass
 
     # Development
-    #git
+    git
     neovim
     tmux
     jq

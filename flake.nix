@@ -68,7 +68,7 @@
         specialArgs = { inherit inputs pkgs; };
         modules = [
           disko.nixosModules.disko
-          ./machines/qemu-config.nix
+          ./machines/qemu/qemu-config.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
