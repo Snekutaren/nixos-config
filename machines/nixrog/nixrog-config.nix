@@ -5,10 +5,10 @@
     #./nixrog-hardware-configuration.nix
     ./nixrog-disko.nix
     ./nixrog-network.nix
-    ../modules/localization.nix
-    ../modules/sound.nix
-    ../modules/backup.nix
-    ../modules/hypr/hyprland.nix
+    ../../modules/localization.nix
+    ../../modules/sound.nix
+    ../../modules/backup.nix
+    ../../modules/hypr/hyprland.nix
   ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
