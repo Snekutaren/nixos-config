@@ -1,6 +1,5 @@
 # machines/nixrog/nixrog-config.nix
 { config, pkgs, inputs, lib, modulesPath, ... }:
-
 {
   imports = [
     # Hardware profiles
@@ -16,17 +15,14 @@
     #(inputs.self + "/modules/backup.nix")
     (inputs.self + "/modules/hypr/hyprland.nix")
   ];
-
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       extra-sandbox-paths = [ "/dev/kfd" "/dev/dri/renderD128" ];
     };
   };
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
-
   boot = {
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
@@ -44,9 +40,7 @@
       efi.canTouchEfiVariables = true;
     };
   };
-
   disko.enableConfig = true;
-
   fileSystems = {
     "/" = {
       device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
@@ -58,7 +52,6 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
   };
-
   hardware = {
     bluetooth.enable = true;
     enableAllFirmware = true;
@@ -77,7 +70,6 @@
       ];
     };
   };
-
   services = {
     xserver = {
       videoDrivers = [ "amdgpu" ];
@@ -86,11 +78,9 @@
     blueman.enable = true;
     upower.enable = true;
   };
-
   security.sudo = {
     enable = true;
     wheelNeedsPassword = true;
   };
-
   programs.gamemode.enable = true;
 }
