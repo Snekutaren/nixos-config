@@ -14,11 +14,9 @@
     (inputs.self + "/modules/localization.nix")
     (inputs.self + "/modules/sound.nix")
   ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
-
   boot = {
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "uhci_hcd" "ehci_pci" "virtio_pci" "virtio_blk" ];
@@ -37,45 +35,42 @@
       efi.canTouchEfiVariables = true;
     };
   };
-
   disko.enableConfig = true;
-
   fileSystems."/" = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
     fsType = "ext4";
   };
-
   fileSystems."/boot" = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_BOOT";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
-
   hardware = {
-    bluetooth.enable = true;
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    amdgpu.amdvlk.enable = false;
-    graphics = {
-      enable = false;
-      enable32Bit = true;
-    };
   };
-
   services = {
     xserver = {
       enable = true;
-      displayManager.lightdm.enable = true;
-      desktopManager.pantheon.enable = true;
+      videoDrivers = [
+        "modesetting"  # Generic driver for modern virtual GPUs (e.g. virtio-vga)
+        "qxl"          # For QEMU QXL/SPICE display adapter
+        "vesa"         # Fallback driver for generic VGA
+        "fbdev"        # Framebuffer device fallback
+        "cirrus"       # Legacy QEMU adapter (deprecated, but included for completeness)
+        "vmware"       # For VM environments using vmware adapter
+        "ast"          # ASPEED virtual graphics (used in some server VMs)
+      ];
+      displayManager = {
+        lightdm.enable = false;
+        gdm.enable = true;
+      };
+      desktopManager.gnome.enable = true;
     };
     dbus.enable = true;
-    upower.enable = true;
   };
-
   security.sudo = {
     enable = true;
     wheelNeedsPassword = true;
   };
-
 }
