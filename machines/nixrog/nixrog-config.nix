@@ -52,6 +52,11 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
   };
+  age = {
+    identityPaths = [ 
+      "~/.config/age/age.key" 
+    ];
+  };
   hardware = {
     bluetooth.enable = true;
     enableAllFirmware = true;

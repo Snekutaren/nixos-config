@@ -10,17 +10,15 @@
     # hashedPasswordFile = config.age.secrets.owdious.path;
     shell = pkgs.bashInteractive;
   };
-
-  users.users.tesser = {
+  users.users.tellus = {
     isNormalUser = true;
-    home = "/home/tesser";
-    description = "tesser user";
+    home = "/home/tellus";
+    description = "tellus user";
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    # Optional: use agenix for secure password
-    # hashedPasswordFile = config.age.secrets.tesser.path;
     shell = pkgs.bashInteractive;
+    #hashedPassword = "$6$mKObq3ioVxnsLIAT$NFRKW3GM5vJxces3XzuwoEWcc2rMAZbjjIBls7nbCh2rgKtDDHVDzsyWQ6Y6MF0O9KtZCbpP15jNBxyI95FWS0";
+    hashedPasswordFile = config.age.secrets."users.tellus.hashedPasswordFile".path;
   };
-  
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

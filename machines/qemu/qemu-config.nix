@@ -45,6 +45,11 @@
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
+  age = {
+    identityPaths = [ 
+      "~/.config/age/age.key"  
+    ];
+  };
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;

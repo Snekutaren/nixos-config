@@ -34,6 +34,7 @@
     dos2unix
     tree
     eza
+    qrencode
 
     # Networking
     wget

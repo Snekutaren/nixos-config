@@ -17,6 +17,7 @@
     gimp
     libreoffice
     blender
+    moonlight-qt
   ];
 
   programs.direnv = {
@@ -96,56 +97,44 @@
       }
     '';
   };
-
   programs.zsh = {
     enable = true;
     # ohMyZsh.enable = true; # Temporarily disabled to debug errors
   };
-
   programs.gh.enable = true;
-
   programs.git = {
     enable = true;
     userName = "Snekutaren";
     userEmail = "snekutaren@gmail.com";
   };
-
   programs.eww = {
     enable = true;
   };
-
   xdg.configFile."hypr/hyprland.conf" = {
     source = inputs.self + "/modules/hypr/hyprland.conf";
   };
-
   xdg.configFile."hypr/hyprpaper.conf" = {
     source = inputs.self + "/modules/hypr/hyprpaper.conf";
   };
-
   xdg.configFile."hypr/hypridle.conf" = {
     source = inputs.self + "/modules/hypr/hypridle.conf";
   };
-
   home.file.".config/hypr/scripts/lock-and-dpms.sh" = {
     source = inputs.self + "/modules/hypr/scripts/lock-and-dpms.sh";
     executable = true;
   };
-
   home.file.".config/hypr/scripts/toggle_scroll.sh" = {
     source = inputs.self + "/modules/hypr/scripts/toggle_scroll.sh";
     executable = true;
   };
-
   home.file.".config/hypr/scripts/random-hyprpaper.sh" = {
     source = inputs.self + "/modules/hypr/scripts/random-hyprpaper.sh";
     executable = true;
   };
-
   home.file.".config/hypr/scripts/toggle_monitor_layout.sh" = {
     source = inputs.self + "/modules/hypr/scripts/toggle_monitor_layout.sh";
     executable = true;
   };
-
   # Uncomment and adjust if you want to manage .bashrc via home-manager
   # home.file."/.bashrc" = {
   #   source = ./bash/.bashrc;

@@ -1,6 +1,5 @@
 {
   description = "NixROG - Consolidated Unstable";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
@@ -24,11 +23,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
   outputs = { self, nixpkgs, home-manager, agenix, disko, ... }@inputs:
   let
     system = "x86_64-linux";
-
     nixrogPkgs = import nixpkgs {
       inherit system;
       config = {
@@ -36,12 +33,12 @@
         rocmTargets = [ "gfx1201" ];
       };
     };
-
     qemuPkgs = import nixpkgs {
       inherit system;
       config = {
         allowUnfree = true;
       };
+      #sharedModules = import ./modules/common.nix;
     };
   in {
     nixosConfigurations.nixrog = nixpkgs.lib.nixosSystem {
@@ -52,9 +49,10 @@
         ./machines/nixrog/nixrog-config.nix
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
+        agenix.nixosModules.default
+        ./secrets/agenix-secrets.nix
       ];
     };
-
     nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
       inherit system;
       pkgs = qemuPkgs;
@@ -63,6 +61,8 @@
         ./machines/qemu/qemu-config.nix
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
+        agenix.nixosModules.default
+        ./secrets/agenix-secrets.nix
       ];
     };
   };
