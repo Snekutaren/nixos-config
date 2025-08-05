@@ -41,15 +41,14 @@
         inherit system;
         specialArgs = { inherit inputs pkgs; };
         modules = [
-          disko.nixosModules.disko
-          #./machines/nixrog/nixrog-disko.nix
           ./machines/nixrog/nixrog-config.nix
+          disko.nixosModules.disko
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.owdious.imports = [ ./machines/nixrog/nixrog-home-owdious.nix ];
+              users.owdious.imports = [ ./machines/nixrog/nixrog-home.nix ];
             };
           }
           agenix.nixosModules.default {
@@ -67,14 +66,14 @@
         inherit system;
         specialArgs = { inherit inputs pkgs; };
         modules = [
-          disko.nixosModules.disko
           ./machines/qemu/qemu-config.nix
+          disko.nixosModules.disko
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.qemu.imports = [ ./machines/qemu/qemu-home-qemu.nix ];
+              users.qemu.imports = [ ./machines/qemu/qemu-home.nix ];
             };
           }
           #agenix.nixosModules.default {

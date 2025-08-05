@@ -1,144 +1,86 @@
 { config, pkgs, inputs, lib, modulesPath, ... }:
 {
   imports = [
+    # Hardware profiles
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
+
+    # Machine-specific modules
     (inputs.self + "/machines/qemu/qemu-disko.nix")
     (inputs.self + "/machines/qemu/qemu-network.nix")
+    (inputs.self + "/machines/qemu/qemu-packages.nix")
+    (inputs.self + "/machines/qemu/qemu-home.nix")
+
+    # Common system modules
     (inputs.self + "/modules/localization.nix")
     (inputs.self + "/modules/sound.nix")
-    #(inputs.self + "/modules/backup.nix")
     (inputs.self + "/modules/hypr/hyprland.nix")
+    (inputs.self + "/modules/user-qemu.nix")
   ];
 
-   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the Pantheon Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.pantheon.enable = true;
-
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "uhci_hcd" "ehci_pci" "virtio_pci" "virtio_blk" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices.cryptroot = {
-    device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
-    preLVM = true; # Ensure LUKS is opened before LVM
-    allowDiscards = true;
-    # Uncomment if using a persistent keyfile managed by agenix
-    # keyFile = "/etc/luks-keys/cryptroot.key";
+  boot = {
+    initrd = {
+      availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "uhci_hcd" "ehci_pci" "virtio_pci" "virtio_blk" ];
+      kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
+      luks.devices.cryptroot = {
+        device = lib.mkForce "/dev/disk/by-label/NIXOS_LUKS";
+        preLVM = true;
+        allowDiscards = true;
+        # keyFile = "/etc/luks-keys/cryptroot.key";
+      };
+    };
+    kernelModules = [ "kvm-amd" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
+
   fileSystems."/" = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_ROOT";
     fsType = "ext4";
   };
+
   fileSystems."/boot" = {
     device = lib.mkForce "/dev/disk/by-label/NIXOS_BOOT";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
 
-  hardware.bluetooth.enable = true;
-  hardware.enableAllFirmware = true;
-  hardware.enableRedistributableFirmware = true;
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.amdgpu = {
-    amdvlk.enable = false;
+  hardware = {
+    bluetooth.enable = true;
+    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    amdgpu.amdvlk.enable = false;
+    graphics = {
+      enable = false;
+      enable32Bit = true;
+    };
   };
-  hardware.graphics = {
-    enable = false;
-    enable32Bit = true;
+
+  services = {
+    xserver = {
+      enable = true;
+      displayManager.lightdm.enable = true;
+      desktopManager.pantheon.enable = true;
+    };
+    dbus.enable = true;
+    upower.enable = true;
   };
 
-  # Ensures fileSystems entries are generated for regular nixos-rebuild (non-destructive).
-  disko.enableConfig = true;
-
-  # Nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  system.stateVersion = "25.05";
-
-  # Display and video drivers
-  #services.displayManager.defaultSession = lib.mkForce "hyprland";
-
-  # Services
-  services.dbus.enable = true;
-  services.upower.enable = true;
-
-  # Security
   security.sudo = {
     enable = true;
     wheelNeedsPassword = true;
   };
 
-  # System packages
-  environment.systemPackages = with pkgs; [
-    # Disk usage tools
-    baobab
-    #kdePackages.filelight
-    qdirstat
-    ncdu
+  disko.enableConfig = true;
 
-  # Backup
-    restic
-
-  # Security
-    age
-
-    # File management
-    superfile
-    peazip
-    unzip
-    file
-    #kdePackages.dolphin
-    #kdePackages.kio
-    #kdePackages.kio-extras
-
-    # System utilities
-    neofetch
-    htop
-    lsof
-    strace
-    pciutils
-    usbutils
-    udisks2
-    gparted
-    dos2unix
-    tree
-    eza
-
-    # Networking
-    wget
-    curl
-    #samba
-    cifs-utils
-    sshpass
-
-    # Development
-    git
-    neovim
-    tmux
-    jq
-    bc
-
-    # GUI applications
-    #kdePackages.kate
-    #kdePackages.konsole
-    #blueman
-    upower
-    mako
-
-    # Secrets management
-    inputs.agenix.packages.${pkgs.system}.agenix
-  ];
-
-  # User configuration
-  users.users.qemu = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    #hashedPasswordFile = config.age.secrets.qemu.path;
+  nix = {
+    settings.experimental-features = [ "nix-command" "flakes" ];
   };
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  system.stateVersion = "25.05";
 }
