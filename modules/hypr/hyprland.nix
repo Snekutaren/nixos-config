@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
     services.xserver.displayManager.lightdm.enable = true;
