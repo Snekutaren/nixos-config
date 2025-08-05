@@ -10,6 +10,16 @@
     # hashedPasswordFile = config.age.secrets.owdious.path;
     shell = pkgs.bashInteractive;
   };
+
+  users.users.tesser = {
+    isNormalUser = true;
+    home = "/home/tesser";
+    description = "tesser user";
+    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
+    # Optional: use agenix for secure password
+    # hashedPasswordFile = config.age.secrets.tesser.path;
+    shell = pkgs.bashInteractive;
+  };
   
   home-manager = {
     useGlobalPkgs = true;
