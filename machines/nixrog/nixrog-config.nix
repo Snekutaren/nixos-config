@@ -1,5 +1,6 @@
 { config, pkgs, inputs, lib, modulesPath, ... }:
 {
+  #nixpkgs.config.allowUnfree = true;
   imports = [
     # Hardware profiles
     (modulesPath + "/installer/scan/not-detected.nix")

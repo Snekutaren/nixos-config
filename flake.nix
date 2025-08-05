@@ -26,67 +26,44 @@
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, disko, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { # necessary? just have it called nixpks?
-        inherit system;
-        config = {
-          allowUnfree = true;
-          rocmTargets = [ "gfx1201" ];
-        };
-      };
-    in {
-      nixosConfigurations.nixrog = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs pkgs; };
-        modules = [
-          ./machines/nixrog/nixrog-config.nix
-          disko.nixosModules.disko
-          home-manager.nixosModules.home-manager
-          #home-manager.nixosModules.home-manager {
-          #  home-manager = {
-          #    useGlobalPkgs = true;
-          #    useUserPackages = true;
-          #    extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-          #    users.owdious.imports = [ ./machines/nixrog/nixrog-home.nix ];
-          #  };
-          #}
-          #agenix.nixosModules.default {
-            #age.secrets.owdious = {
-            #  file = ./secrets/owdious.age;
-            #  owner = "owdious"; # optional if you want to set ownership on decryption
-            #};
-            #age.secrets = import ./secrets/secrets.nix;
-            #age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
-          #}
-        ];
-      };
+  let
+    system = "x86_64-linux";
 
-      nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs pkgs; };
-        modules = [
-          ./machines/qemu/qemu-config.nix
-          disko.nixosModules.disko
-          home-manager.nixosModules.home-manager
-          #home-manager.nixosModules.home-manager {
-          #  home-manager = {
-          #    useGlobalPkgs = true;
-          #    useUserPackages = true;
-          #    extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-          #    users.qemu.imports = [ ./machines/qemu/qemu-home.nix ];
-          #  };
-          #}
-          #agenix.nixosModules.default {
-            #age.secrets.qemu = {
-            #  file = ./secrets/qemu.age;
-            #  owner = "qemu"; # optional if you want to set ownership on decryption
-            #};
-            #age.secrets = import ./secrets/secrets.nix;
-            #age.identityPaths = [ "/home/qemu/.config/age/keys.txt" ];
-          #}
-        ];
+    nixrogPkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+        rocmTargets = [ "gfx1201" ];
       };
-
     };
+
+    qemuPkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = false;
+      };
+    };
+  in {
+    nixosConfigurations.nixrog = nixpkgs.lib.nixosSystem {
+      inherit system;
+      pkgs = nixrogPkgs;
+      specialArgs = { inherit inputs; pkgs = nixrogPkgs; };
+      modules = [
+        ./machines/nixrog/nixrog-config.nix
+        disko.nixosModules.disko
+        home-manager.nixosModules.home-manager
+      ];
+    };
+
+    nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
+      inherit system;
+      pkgs = qemuPkgs;
+      specialArgs = { inherit inputs; pkgs = qemuPkgs; };
+      modules = [
+        ./machines/qemu/qemu-config.nix
+        disko.nixosModules.disko
+        home-manager.nixosModules.home-manager
+      ];
+    };
+  };
 }
