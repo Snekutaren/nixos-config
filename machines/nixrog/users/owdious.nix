@@ -41,7 +41,7 @@
       export PATH="$HOME/.local/bin:$PATH"
       
       function ssha() {
-        eval "$(ssh-agent -s)"
+        pidof ssh-agent || eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/github/github_ed25519
       }
 
