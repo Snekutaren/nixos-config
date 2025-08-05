@@ -23,7 +23,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #dotfiles.url = "path:/home/owdious/dotfiles";
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, disko, ... }@inputs:
@@ -43,14 +42,15 @@
         modules = [
           ./machines/nixrog/nixrog-config.nix
           disko.nixosModules.disko
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.owdious.imports = [ ./machines/nixrog/nixrog-home.nix ];
-            };
-          }
+          home-manager.nixosModules.home-manager
+          #home-manager.nixosModules.home-manager {
+          #  home-manager = {
+          #    useGlobalPkgs = true;
+          #    useUserPackages = true;
+          #    extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
+          #    users.owdious.imports = [ ./machines/nixrog/nixrog-home.nix ];
+          #  };
+          #}
           #agenix.nixosModules.default {
             #age.secrets.owdious = {
             #  file = ./secrets/owdious.age;
@@ -68,14 +68,15 @@
         modules = [
           ./machines/qemu/qemu-config.nix
           disko.nixosModules.disko
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.qemu.imports = [ ./machines/qemu/qemu-home.nix ];
-            };
-          }
+          home-manager.nixosModules.home-manager
+          #home-manager.nixosModules.home-manager {
+          #  home-manager = {
+          #    useGlobalPkgs = true;
+          #    useUserPackages = true;
+          #    extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
+          #    users.qemu.imports = [ ./machines/qemu/qemu-home.nix ];
+          #  };
+          #}
           #agenix.nixosModules.default {
             #age.secrets.qemu = {
             #  file = ./secrets/qemu.age;

@@ -3,17 +3,15 @@
   imports = [
     # Hardware profiles
     (modulesPath + "/installer/scan/not-detected.nix")
-
     # Machine-specific modules
     (inputs.self + "/machines/nixrog/nixrog-disko.nix")
     (inputs.self + "/machines/nixrog/nixrog-network.nix")
     (inputs.self + "/machines/nixrog/nixrog-packages.nix")
-    (inputs.self + "/machines/nixrog/nixrog-home.nix")
-
+    (inputs.self + "/machines/nixrog/nixrog-users.nix")
     # Common system modules
     (inputs.self + "/modules/localization.nix")
     (inputs.self + "/modules/sound.nix")
-    (inputs.self + "/modules/backup.nix")
+    #(inputs.self + "/modules/backup.nix")
     (inputs.self + "/modules/hypr/hyprland.nix")
   ];
 

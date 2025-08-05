@@ -1,3 +1,4 @@
+# machines/qemu/qemu-config.nix
 { config, pkgs, inputs, lib, modulesPath, ... }:
 {
   imports = [
@@ -9,13 +10,12 @@
     (inputs.self + "/machines/qemu/qemu-disko.nix")
     (inputs.self + "/machines/qemu/qemu-network.nix")
     (inputs.self + "/machines/qemu/qemu-packages.nix")
-    (inputs.self + "/machines/qemu/qemu-home.nix")
+    (inputs.self + "/machines/nixrog/qemu-users.nix")
 
     # Common system modules
     (inputs.self + "/modules/localization.nix")
     (inputs.self + "/modules/sound.nix")
     (inputs.self + "/modules/hypr/hyprland.nix")
-    (inputs.self + "/modules/user-qemu.nix")
   ];
 
   boot = {
@@ -83,4 +83,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
+
 }
