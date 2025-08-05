@@ -17,3 +17,4 @@
     extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
     users.qemu.imports = [ (inputs.self + "/machines/qemu/users/qemu.nix") ];
     };
+}
