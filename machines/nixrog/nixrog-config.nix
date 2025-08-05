@@ -7,7 +7,7 @@
     ./nixrog-network.nix
     ../../modules/localization.nix
     ../../modules/sound.nix
-    ../../modules/backup.nix
+    #../../modules/backup.nix
     ../../modules/hypr/hyprland.nix
   ];
 
@@ -153,6 +153,6 @@
   users.users.owdious = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    hashedPasswordFile = config.age.secrets.owdious.path;
+    #hashedPasswordFile = config.age.secrets.owdious.path;
   };
 }

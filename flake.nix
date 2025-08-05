@@ -49,7 +49,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              #users.owdious.imports = [ "/machines/nixrog/nixrog-home-owdious.nix" ];
+              users.owdious.imports = [ ./machines/nixrog/nixrog-home-owdious.nix ];
             };
           }
           agenix.nixosModules.default {
@@ -74,7 +74,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.qemu.imports = [ "./machines/qemu/qemu-home-qemu.nix" ];
+              users.qemu.imports = [ ./machines/qemu/qemu-home-qemu.nix ];
             };
           }
           #agenix.nixosModules.default {
