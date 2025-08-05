@@ -3,7 +3,8 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     #./nixrog-hardware-configuration.nix
-    ../modules/networking.nix
+    ./nixrog-disko.nix
+    ./nixrog-network.nix
     ../modules/localization.nix
     ../modules/sound.nix
     ../modules/backup.nix
@@ -62,7 +63,6 @@
   system.stateVersion = "25.05";
 
   # Display and video drivers
-  services.displayManager.defaultSession = lib.mkForce "hyprland";
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Services

@@ -2,17 +2,22 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
     ./qemu-disko.nix
-    ./qemu-networking.nix
-    ../modules/localization.nix
+    (inputs.self + "/machines/qemu/qemu-network.nix")
+    ../../modules/localization.nix
     #../modules/sound.nix
     #../modules/backup.nix
     #../modules/hypr/hyprland.nix
   ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
+  #services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.desktopManager.pantheon.enable = true;
+
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "uhci_hcd" "ehci_pci" "virtio_pci" "virtio_blk" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.lvm.enable = true;
@@ -56,7 +61,7 @@
   system.stateVersion = "25.05";
 
   # Display and video drivers
-  services.displayManager.defaultSession = lib.mkForce "hyprland";
+  #services.displayManager.defaultSession = lib.mkForce "hyprland";
 
   # Services
   services.dbus.enable = true;

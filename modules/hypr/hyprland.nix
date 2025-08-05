@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+    services.xserver.displayManager.lightdm.enable = true;
+    services.displayManager.defaultSession = lib.mkForce "hyprland";
+
     # Hyprland NixOS Module
     programs.hyprland = {
     enable = true;

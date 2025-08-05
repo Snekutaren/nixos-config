@@ -42,14 +42,14 @@
         specialArgs = { inherit inputs pkgs; };
         modules = [
           disko.nixosModules.disko
-          ./hosts/nixrog-disko-config.nix
-          ./hosts/nixrog-configuration.nix
+          #./machines/nixrog/nixrog-disko.nix
+          ./machines/nixrog/nixrog-config.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.owdious.imports = [ ./home/owdious/home.nix ];
+              users.owdious.imports = [ inputs.self + "./machines/nixrog/nixrog-home-owdious.nix" ];
             };
           }
           agenix.nixosModules.default {
@@ -57,7 +57,7 @@
             #  file = ./secrets/owdious.age;
             #  owner = "owdious"; # optional if you want to set ownership on decryption
             #};
-            age.secrets = import ./secrets/secrets.nix;
+            #age.secrets = import ./secrets/secrets.nix;
             age.identityPaths = [ "/home/owdious/.config/age/keys.txt" ];
           }
         ];
@@ -68,13 +68,13 @@
         specialArgs = { inherit inputs pkgs; };
         modules = [
           disko.nixosModules.disko
-          ./hosts/qemu-config.nix
+          ./machines/qemu-config.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
-              users.qemu.imports = [ ./home/qemu/home.nix ];
+              users.qemu.imports = [ inputs.self + "./machines/qemu/qemu-home-qemu.nix" ];
             };
           }
           #agenix.nixosModules.default {
