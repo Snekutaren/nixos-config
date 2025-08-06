@@ -50,7 +50,7 @@
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
-        #./secrets/agenix-secrets.nix
+        ./secrets/secrets.nix
       ];
     };
     nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
