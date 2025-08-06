@@ -18,6 +18,7 @@
     libreoffice
     blender
     moonlight-qt
+    steam-run
   ];
 
   programs.direnv = {
@@ -39,8 +40,9 @@
     };
 
     initExtra = ''
+
       export PATH="$HOME/.local/bin:$PATH"
-      
+      export HOME=
       function ssha() {
         pidof ssh-agent || eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/github/github_ed25519
