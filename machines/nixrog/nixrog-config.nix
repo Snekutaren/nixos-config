@@ -79,6 +79,10 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
     };
+    getty.autoLogin = {
+      enable = true;
+      user = "owdious";
+    };
     dbus.enable = true;
     blueman.enable = true;
     upower.enable = true;
