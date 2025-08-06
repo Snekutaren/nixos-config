@@ -1,6 +1,6 @@
-# secrets/agenix-secrets.nix
+# secrets/secrets.nix
 let
   nixrogKey = "age13vfwxc02qv6yw4fchu7hjrpg3y6d5x72jxm5afujquqf8tncrv0sjw07af"; # From keygen output
 in {
-  "users/tellus/nixrog-tellus.age".publicKeys = [nixrogKey];
+  "nixrog-tellus.age".publicKeys = [nixrogKey];
 }
