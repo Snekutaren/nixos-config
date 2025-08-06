@@ -22,6 +22,9 @@
     kdePackages.kio
     kdePackages.kio-extras
 
+    # Tabby ML
+    pkgs.tabby
+
     # System utilities
     neofetch
     htop
@@ -35,6 +38,7 @@
     tree
     eza
     qrencode
+    dnsutils
 
     # Networking
     wget

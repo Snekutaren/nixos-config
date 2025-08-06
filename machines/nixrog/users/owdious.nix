@@ -75,6 +75,7 @@
       }
 
       function build-nix() {
+        declare -f build-nix
         sudo nixos-rebuild switch --flake ~/nixos-config -v
       }
 
