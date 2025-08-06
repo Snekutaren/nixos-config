@@ -1,28 +1,34 @@
 { config, inputs, lib, pkgs, ... }:
-
 {
   users.users.owdious = {
     isNormalUser = true;
     home = "/home/owdious";
     description = "owdious user";
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
-    # Optional: use agenix for secure password
-    # hashedPasswordFile = config.age.secrets.owdious.path;
     shell = pkgs.bashInteractive;
+    hashedPasswordFile = config.age.secrets.nixrog-owdious.path;
   };
   users.users.tellus = {
     isNormalUser = true;
     home = "/home/tellus";
     description = "tellus user";
-    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
+    extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.bashInteractive;
-    #hashedPassword = "$6$mKObq3ioVxnsLIAT$NFRKW3GM5vJxces3XzuwoEWcc2rMAZbjjIBls7nbCh2rgKtDDHVDzsyWQ6Y6MF0O9KtZCbpP15jNBxyI95FWS0";
-    #passwordFile = config.age.secrets.nixrog-tellus.path;
+    hashedPasswordFile = config.age.secrets.nixrog-tellus.path;
   };
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs pkgs; }; # necessary? just have it called nixpks - and import it with imputs here?
+    extraSpecialArgs = { inherit inputs pkgs; };
     users.owdious.imports = [ (inputs.self + "/machines/nixrog/users/owdious.nix") ];
+  };
+  age = {
+    identityPaths = [ "/home/owdious/.config/age/age.key" ];
+    secrets.nixrog-tellus = {
+      file = "${inputs.self}/secrets/nixrog-tellus.age";
     };
+    secrets.nixrog-owdious = {
+      file = "${inputs.self}/secrets/nixrog-owdious.age";
+    };
+  };
 }
