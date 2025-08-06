@@ -47,10 +47,12 @@
       specialArgs = { inherit inputs; pkgs = nixrogPkgs; };
       modules = [
         ./machines/nixrog/nixrog-config.nix
+        ./secrets/secrets.nix
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
-        agenix.nixosModules.default
-        ./secrets/secrets.nix
+        agenix.nixosModules.default {
+          age.secrets.nixrog-tellus.file = ./secrets/nixrog-tellus.age;
+        }
       ];
     };
     nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
