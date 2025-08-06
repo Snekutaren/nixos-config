@@ -1,3 +1,4 @@
+#nixos-config/machines/nixrog/nixrog-users.nix
 { config, inputs, lib, pkgs, ... }:
 {
   users.users.owdious = {
@@ -24,11 +25,11 @@
   };
   age = {
     identityPaths = [ "/home/owdious/.config/age/age.key" ];
-    secrets.nixrog-tellus = {
-      file = "${inputs.self}/secrets/nixrog-tellus.age";
-    };
     secrets.nixrog-owdious = {
       file = "${inputs.self}/secrets/nixrog-owdious.age";
+    };
+    secrets.nixrog-tellus = {
+      file = "${inputs.self}/secrets/nixrog-tellus.age";
     };
   };
 }

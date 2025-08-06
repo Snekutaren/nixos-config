@@ -1,3 +1,4 @@
+#nixos-config/flake.nix
 {
   description = "NixROG - Consolidated Unstable";
   inputs = {

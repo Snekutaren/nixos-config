@@ -1,6 +1,5 @@
-# secrets/secrets.nix
-let
-  nixrogKey = "age13vfwxc02qv6yw4fchu7hjrpg3y6d5x72jxm5afujquqf8tncrv0sjw07af"; # From keygen output
-in {
-  "nixrog-tellus.age".publicKeys = [ nixrogKey ];
+#nixos-config/secrets/secrets.nix
+{
+  "nixrog-owdious.age".publicKeys = [ (builtins.readFile /home/owdious/.config/age/age.pub) ];
+  "nixrog-tellus.age".publicKeys = [ (builtins.readFile /home/owdious/.config/age/age.pub) ];
 }
