@@ -21,6 +21,7 @@ function ssha() {
     ssh-add ~/.ssh/github/github_ed25519
 }
 function git-push-nixos() {
+    ssha
     local config_dir="$HOME/nixos-config"
     git -C "$config_dir" checkout auto
     git -C "$config_dir" add .
@@ -28,8 +29,9 @@ function git-push-nixos() {
     git -C "$config_dir" push
 }
 function git-push-dot() {
+    ssha
     local config_dir="$HOME/dotfiles"
-    git -C "$config_dir" checkout autoa
+    git -C "$config_dir" checkout auto
     git -C "$config_dir" add .
     git -C "$config_dir" commit -m "$(date)" || true
     git -C "$config_dir" push
@@ -51,10 +53,8 @@ function build-nix() {
 function build-nix-dry() {
     sudo nixos-rebuild dry-activate --flake ~/nixos-config -v
 }
-function push-build-nix() {
+function build-nix-push() {
     ssha
-    git-push-dot
-    update-flake
     build-nix
     git-push-nixos
 }
