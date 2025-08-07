@@ -38,7 +38,8 @@ sleep 2
             if [ "$DPMS_STATUS" = "1" ]; then
                 log "DPMS is currently ON. Dispatching command to turn it OFF..."
                 sleep 0.5
-                hyprctl dispatch dpms off DP-1 && log "Successfully turned off DPMS" || log "Failed to turn off DPMS"
+                #hyprctl dispatch dpms off DP-1 && 
+                log "Successfully turned off DPMS" || log "Failed to turn off DPMS"
             else
                 log "DPMS is already OFF, nothing to do."
             fi

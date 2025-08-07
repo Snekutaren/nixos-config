@@ -44,6 +44,7 @@ function git-push-comfyui() {
     git -C "$config_dir" push
 }
 function update-flake() {
+    declare -f update-flake
     sudo nix flake update --flake ~/nixos-config -v
 }
 function build-nix() {
