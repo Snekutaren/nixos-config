@@ -18,8 +18,6 @@
     kdePackages.dolphin
     kdePackages.kio
     kdePackages.kio-extras
-    # Tabby ML
-    pkgs.tabby
     # System utilities
     neofetch
     htop

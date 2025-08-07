@@ -1,3 +1,5 @@
 .dev/
 nixos-config.code-workspace
 *.key
+.config
+.vscode

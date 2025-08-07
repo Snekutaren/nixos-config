@@ -11,20 +11,19 @@
     steam
     vscode
     vlc
-    playerctl # Media player control
+    playerctl
     thunderbird
     gimp
     libreoffice
     blender
     moonlight-qt
-    #steam-run
+    steam-run
+    pkgs.tabby
   ];
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    # If you use zsh or another shell, enable the integration here
-    # Example for zsh:
-    # enableZshIntegration = true;
+    enableZshIntegration = false;
   };
   programs.bash = {
     enable = true;
@@ -32,7 +31,7 @@
   };
   programs.zsh = {
     enable = true;
-    # ohMyZsh.enable = true; # Temporarily disabled to debug errors
+    #ohMyZsh.enable = false;
   };
   programs.gh.enable = true;
   programs.git = {
@@ -66,8 +65,4 @@
       executable = true;
     };
   };
-  # home.file."/.bashrc" = {
-  #   source = ./bash/.bashrc;
-  #   executable = true;
-  # };
 }
