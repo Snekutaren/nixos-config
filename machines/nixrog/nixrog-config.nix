@@ -52,11 +52,6 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
   };
-  #age = {
-  #  identityPaths = [ 
-  #    "~/.config/age/age.key" 
-  #  ];
-  #};
   hardware = {
     bluetooth.enable = true;
     enableAllFirmware = true;
@@ -79,13 +74,11 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
     };
-    getty = {
-      defaultUser = "owdious";
-      autoLogin.enable = true;
-    };
     dbus.enable = true;
     blueman.enable = true;
     upower.enable = true;
+    getty.autologinUser = "owdious";
+    getty.autologinOnce = true;
   };
   security.sudo = {
     enable = true;
