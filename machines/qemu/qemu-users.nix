@@ -16,8 +16,10 @@
     users.qemu.imports = [ (inputs.self + "/machines/qemu/users/qemu.nix") ];
   };
   age = {
-    identityPaths = [ "/tmp/age.key" ];
-    identityPaths = [ "${config.users.users.qemu.home}/.config/age/age.key" ];
+    identityPaths = [ 
+      "${config.users.users.qemu.home}/.config/age/age.key" 
+      "/tmp/age.key"
+    ];
     secrets.qemu-qemu = {
       file = "${inputs.self}/secrets/qemu-qemu.age";
     };
