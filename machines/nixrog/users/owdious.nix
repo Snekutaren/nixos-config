@@ -65,4 +65,32 @@
       executable = true;
     };
   };
+  # Kvantum theme config for Qt
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+    [General]
+    theme=Catppuccin-Mocha
+  '';
+  # GTK theme config
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+      package = pkgs.catppuccin-gtk;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    cursorTheme = {
+      name = "Catppuccin-Mocha-Dark-Cursors";
+      package = pkgs.catppuccin-cursors;
+      size = 24;
+    };
+  };
+  # Ensure Qt uses Kvantum
+  qt = {
+    enable = true;
+    platformTheme.name = "qtct";
+    style.name = "kvantum";
+  };
 }
