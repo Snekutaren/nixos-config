@@ -18,7 +18,7 @@
     };
   age = {
     identityPaths = [ "/home/qemu/.config/age/age.key" ];
-    secrets.nixrog-owdious = {
+    secrets.qemu-qemu = {
       file = "${inputs.self}/secrets/qemu-qemu.age";
     };
   };
