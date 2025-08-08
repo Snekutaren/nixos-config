@@ -5,17 +5,24 @@ venv_prompt() {
     echo "($(basename "$VIRTUAL_ENV")) "
   fi
 }
-
-alias ll='ls -lah'
-alias lR='ls -laR'
-alias lRl='ls -laR | less'
+for cmd in nv vi vim nano; do alias $cmd='nvim'; done
+alias ls='eza -a --icons --git --color=always'
+alias ll='eza -lah --icons --git --color=always'
+alias tree='eza --tree --icons --git --color=always'
+alias treel='eza --tree --icons --git --color=always | less'
 alias comfyui='nix develop ~/comfyui/nix'
+alias reload='source ~/.bashrc'
 alias bng='cd $BEAMNG'
 export BEAMNG="/home/owdious/.local/share/Steam/steamapps/compatdata/284160/pfx/drive_c/users/steamuser/AppData/Local/BeamNG.drive/0.36/mods"
 
 #export PS1='$(venv_prompt)\u@\h:\w\$ '
 
 export PATH="$HOME/.local/bin:$PATH"
+
+function watchtree() {
+  watch -c "eza --tree --icons --git --color=always $*"
+}
+
 function ssha() {
     pidof ssh-agent || eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/github/github_ed25519
