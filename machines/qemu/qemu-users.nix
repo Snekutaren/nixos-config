@@ -18,7 +18,7 @@
   age = {
     identityPaths = [ 
       "${config.users.users.qemu.home}/.config/age/age.key" 
-      "/etc/age/age.key"
+      "/etc/age/age.key" # translates to /mnt/etc/age/age.key when installing..
     ];
     secrets.qemu-qemu = {
       file = "${inputs.self}/secrets/qemu-qemu.age";
