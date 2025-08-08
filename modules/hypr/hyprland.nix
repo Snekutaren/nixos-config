@@ -1,18 +1,13 @@
 { config, pkgs, lib, ... }:
 {
-  #services.displayManager.defaultSession = lib.mkForce "hyprland";
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
-  
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
-
-  # Remove the systemd service - we'll start Hyprland from shell profile instead
-
   environment.systemPackages = with pkgs; [
     hyprlock
     hypridle
@@ -38,18 +33,15 @@
     catppuccin-papirus-folders
     #papirus-icon-theme
   ];
-
-  # Set environment variables system-wide for Wayland
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     QT_QPA_PLATFORM = "wayland";
     WLR_NO_HARDWARE_CURSORS = "0";
-    #GTK_THEME = "Catppuccin-Mocha-Standard-Lavender-Dark";
-    #QT_STYLE_OVERRIDE = "kvantum";
-    #XCURSOR_THEME = "Catppuccin-Mocha-Dark-Cursors";
+    GTK_THEME = "Catppuccin-Mocha-Standard-Lavender-Dark";
+    QT_STYLE_OVERRIDE = "kvantum";
+    XCURSOR_THEME = "Catppuccin-Mocha-Dark-Cursors";
     XCURSOR_SIZE = "24";
   };
-
   systemd.user.services.hyprland = {
     description = "Hyprland Wayland Compositor";
     after = [ "graphical.target" "dbus.service" ];
@@ -68,7 +60,7 @@
       WorkingDirectory = "/home/owdious";
       Environment = [
         "HOME=/home/owdious"
-        #"PATH=/run/current-system/sw/bin:/home/owdious/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin"
+        "PATH=/home/owdious/.local/bin:/run/wrappers/bin:/home/owdious/.nix-profile/bin:/nix/profile/bin:/home/owdious/.local/state/nix/profile/bin:/etc/profiles/per-user/owdious/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
         "XDG_SESSION_TYPE=wayland"
         "XDG_CONFIG_HOME=/home/owdious/.config"
         "XDG_DATA_HOME=/home/owdious/.local/share"
