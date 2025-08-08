@@ -17,7 +17,7 @@
     users.qemu.imports = [ (inputs.self + "/machines/qemu/users/qemu.nix") ];
     };
   age = {
-    identityPaths = [ "/home/owdious/.config/age/age.key" ];
+    identityPaths = [ "/home/qemu/.config/age/age.key" ];
     secrets.nixrog-owdious = {
       file = "${inputs.self}/secrets/qemu-qemu.age";
     };

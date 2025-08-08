@@ -44,8 +44,8 @@
   };
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim;
-    extraConfig = builtins.readFile (inputs.self + "/modules/nvim/init.lua");
+    #package = pkgs.neovim;
+    #extraConfig = builtins.readFile (inputs.self + "/modules/nvim-init.lua");
   };
   xdg.configFile = {
     "hypr/hyprland.conf".source = inputs.self + "/modules/hypr/hyprland.conf";

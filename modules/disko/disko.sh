@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 mkdir -p  /tmp/nixos-config
 git clone -b auto https://github.com/snekutaren/nixos-config.git /tmp/nixos-config
 #sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /tmp/nixos-config/hosts/qemu-disko.nix
