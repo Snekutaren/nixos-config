@@ -50,7 +50,7 @@
         ./machines/nixrog/nixrog-config.nix
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
-        agenix.nixosModules.default 
+        agenix.nixosModules.default
       ];
     };
     nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
@@ -61,6 +61,7 @@
         ./machines/qemu/qemu-config.nix
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
+        agenix.nixosModules.default
       ];
     };
   };
