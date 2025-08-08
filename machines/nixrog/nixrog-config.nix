@@ -79,6 +79,10 @@
     upower.enable = true;
     getty.autologinUser = "owdious";
     getty.autologinOnce = true;
+    openssh = {
+      enable = true;
+      ports = [ 6622 ];
+    };
   };
   security.sudo = {
     enable = true;

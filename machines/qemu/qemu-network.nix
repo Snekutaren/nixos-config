@@ -76,7 +76,7 @@
 
         # --- Open specific ports for services you run on this host ---
         # Example: Allow SSH (port 6622) from anywhere
-        #tcp dport 6622 accept
+        tcp dport 6622 accept
 
         # Example: Allow HTTP (port 80) if you run a web server
         # tcp dport 80 accept
