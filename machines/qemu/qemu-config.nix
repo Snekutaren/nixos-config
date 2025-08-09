@@ -61,14 +61,14 @@
         "vmware"       # For VM environments using vmware adapter
         "ast"          # ASPEED virtual graphics (used in some server VMs)
       ];
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-      xrandrHeads = {
-        Virtual-1 = {
-          preferredResolution = "1920x1080";
-        };
-      };
+      xrandrHeads = [ "Virtual-1" ];
+
+      displayManager.sessionCommands = ''
+        xrandr --output Virtual-1 --mode 1920x1080
+      '';
     };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     dbus.enable = true;
     openssh = {
         enable = true;

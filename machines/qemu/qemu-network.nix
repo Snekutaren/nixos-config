@@ -39,12 +39,7 @@
   # Set specific DNS servers if needed, otherwise DHCP usually handles this.
   #networking.resolvconf.enable = true; # Use resolvconf for DNS management
   #networking.nameservers = [ "1.1.1.1" "8.8.8.8" ]; # Example public DNS servers
-
-  services.openssh = {
-  enable = true;
-  ports = [ 6622 ];
-};
-
+  
   # -------------------------------------------------------------------------
   # Firewall Configuration (Using nftables)
   # -------------------------------------------------------------------------

@@ -13,7 +13,7 @@ alias treel='eza --tree --icons --git --color=always | less'
 alias comfyui='nix develop ~/comfyui/nix'
 alias reload='source ~/.bashrc'
 alias sshno='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
-alias sshno='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+alias scpno='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias bng='cd $BEAMNG'
 export BEAMNG="/home/owdious/.local/share/Steam/steamapps/compatdata/284160/pfx/drive_c/users/steamuser/AppData/Local/BeamNG.drive/0.36/mods"
 
