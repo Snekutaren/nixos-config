@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, home-manager, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   home.stateVersion = "25.05"; # Matching the home-manager release branch
   home.homeDirectory = "/home/owdious";
@@ -97,5 +97,12 @@
     enable = true;
     platformTheme.name = "qtct";
     style.name = "kvantum";
+  };
+    home.pointerCursor = {
+    gtk.enable = true;
+    # x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 16;
   };
 }

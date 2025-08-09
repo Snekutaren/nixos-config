@@ -66,14 +66,16 @@
       displayManager.sessionCommands = ''
         xrandr --output Virtual-1 --mode 1920x1080
       '';
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
     };
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-    dbus.enable = true;
+  dbus.enable = true;
     openssh = {
         enable = true;
         ports = [ 6622 ];
     };
+  #displayManager.gdm.enable = true;
+  #desktopManager.gnome.enable = true;
   };
   security.sudo = {
     enable = true;

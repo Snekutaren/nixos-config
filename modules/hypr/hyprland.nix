@@ -2,17 +2,21 @@
 {
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    withUWSM = false; # recommended for most users
+    xwayland.enable = true; # Xwayland can be disabled.
   };
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
   environment.systemPackages = with pkgs; [
-    hyprlock
-    hypridle
-    hyprpaper
     hyprshot
+    hyprlock # Hyprland's GPU-accelerated screen locking utility.
+    hypridle # Hyprland's idle daemon.
+    hyprpaper # Hyprland's wallpaper utility.
+    hyprsunset # Application to enable a blue-light filter on Hyprland.
+    hyprpicker # Wayland color picker that does not suck.
+    hyprpolkitagent # Polkit authentication agent written in QT/QML.
     kitty
     libnotify
     mako
@@ -25,7 +29,7 @@
     waybar
     #wlr-randr
     wl-gammactl
-    wlsunset
+    #theme packages
     kdePackages.qtstyleplugin-kvantum
     catppuccin-gtk
     catppuccin-kvantum
@@ -34,6 +38,7 @@
     #papirus-icon-theme
   ];
   environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
     QT_QPA_PLATFORM = "wayland";
     WLR_NO_HARDWARE_CURSORS = "0";
