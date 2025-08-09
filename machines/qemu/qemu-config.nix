@@ -14,7 +14,20 @@
     (inputs.self + "/modules/localization.nix")
     (inputs.self + "/modules/sound.nix")
   ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [
+        "https://cache.nixos.org/"
+        "http://10.0.20.100:5000/default"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "localcache:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
+      ];
+      trusted-users = [ "root" "qemu" ];
+    };
+  };
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
   boot = {

@@ -1,4 +1,5 @@
-{ config, pkgs, inputs, lib, ... }:
+#nixos-config/machines/nixrog/nixrog-packages.nix
+{ config, pkgs, inputs, lib, attic, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Disk usage tools
@@ -19,6 +20,7 @@
     kdePackages.kio
     kdePackages.kio-extras
     # System utilities
+    inotify-tools
     neofetch
     htop
     lsof
@@ -60,5 +62,7 @@
     mako
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
+    # Attic
+    attic.packages.${pkgs.system}.attic
   ];
 }

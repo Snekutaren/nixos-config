@@ -1,3 +1,4 @@
+#nixos-config/flake.nix
 {
   description = "Consolidated Unstable + Stable";
   inputs = {
@@ -27,8 +28,12 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    attic = {
+      url = "github:zhaofengli/attic";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
-  outputs = { self, nixpkgs-unstable, nixpkgs-stable, home-manager-stable, home-manager-unstable, agenix, disko, ... }@inputs:
+  outputs = { self, nixpkgs-unstable, nixpkgs-stable, home-manager-stable, home-manager-unstable, agenix, disko, attic, ... }@inputs:
   let
     system = "x86_64-linux";
     nixrogPkgs = import nixpkgs-unstable {
@@ -48,12 +53,13 @@
     nixosConfigurations.nixrog = nixpkgs-unstable.lib.nixosSystem {
       inherit system;
       pkgs = nixrogPkgs;
-      specialArgs = { inherit inputs; pkgs = nixrogPkgs; };
+      specialArgs = { inherit inputs attic; pkgs = nixrogPkgs; };
       modules = [
         ./machines/nixrog/nixrog-config.nix
         disko.nixosModules.disko
         home-manager-unstable.nixosModules.home-manager
         agenix.nixosModules.default
+        attic.nixosModules.atticd
       ];
     };
     nixosConfigurations.qemu = nixpkgs-stable.lib.nixosSystem {
@@ -65,6 +71,7 @@
         disko.nixosModules.disko
         home-manager-stable.nixosModules.home-manager
         agenix.nixosModules.default
+        attic.nixosModules.atticd
       ];
       #configuration = {
       #  isStable = true;  # Eller false om du vill unstable
