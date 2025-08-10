@@ -9,7 +9,7 @@
   # -------------------------------------------------------------------------
 
   # Set your hostname. This is a crucial first step for network identification.
-  networking.hostName = "nix-qemu"; # Set the hostname
+  networking.hostName = "nixqemu"; # Set the hostname
 
   # Configure your network interfaces.
   # This example assumes a wired connection (Ethernet).

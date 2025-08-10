@@ -21,12 +21,20 @@
     wget curl cifs-utils sshpass dnsutils
 
     # Development
-    git neovim tmux jq bc
+    neovim tmux jq bc
 
     # GUI utilities
     upower mako
 
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
+    inputs.attic.packages.${pkgs.system}.attic
+
+    # test
+    chromium
+    firefox
+    lutris
+    wine
+
   ];
 }

@@ -33,7 +33,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
-  outputs = { self, nixpkgs-unstable, nixpkgs-stable, home-manager-stable, home-manager-unstable, agenix, disko, attic, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nur, home-manager-stable, home-manager-unstable, agenix, disko, attic, ... }@inputs:
   let
     system = "x86_64-linux";
     nixrogPkgs = import nixpkgs-unstable {
@@ -43,7 +43,7 @@
         rocmTargets = [ "gfx1201" ];
       };
     };
-    qemuPkgs = import nixpkgs-stable {
+    nixqemuPkgs = import nixpkgs-stable {
       inherit system;
       config = {
         allowUnfree = true;
@@ -62,10 +62,10 @@
         attic.nixosModules.atticd
       ];
     };
-    nixosConfigurations.qemu = nixpkgs-stable.lib.nixosSystem {
+    nixosConfigurations.nixqemu = nixpkgs-stable.lib.nixosSystem {
       inherit system;
-      pkgs = qemuPkgs;
-      specialArgs = { inherit inputs; pkgs = qemuPkgs; };
+      pkgs = nixqemuPkgs;
+      specialArgs = { inherit inputs; pkgs = nixqemuPkgs; };
       modules = [
         ./machines/qemu/qemu-config.nix
         disko.nixosModules.disko
@@ -73,9 +73,6 @@
         agenix.nixosModules.default
         attic.nixosModules.atticd
       ];
-      #configuration = {
-      #  isStable = true;  # Eller false om du vill unstable
-      #};
     };
   };
 }

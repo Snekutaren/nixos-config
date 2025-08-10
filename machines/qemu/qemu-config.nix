@@ -1,5 +1,5 @@
 # machines/qemu/qemu-config.nix
-{ config, pkgs, inputs, lib, modulesPath, ... }:
+{ config, pkgs, inputs, lib, modulesPath, attic, ... }:
 {
   imports = [
     # Hardware profiles
@@ -9,6 +9,7 @@
     (inputs.self + "/machines/qemu/qemu-disko.nix")
     (inputs.self + "/machines/qemu/qemu-network.nix")
     (inputs.self + "/machines/qemu/qemu-packages.nix")
+    #(inputs.self + "/machines/nixrog/nixrog-packages.nix")
     (inputs.self + "/machines/qemu/qemu-users.nix")
     # Common system modules
     (inputs.self + "/modules/localization.nix")
@@ -18,12 +19,12 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       substituters = [
-        "https://cache.nixos.org/"
         "http://10.0.20.100:5000/default"
+        #"https://cache.nixos.org/"
       ];
       trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "localcache:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
+        "default:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
+        #"cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
       trusted-users = [ "root" "qemu" ];
     };
@@ -87,8 +88,16 @@
         enable = true;
         ports = [ 6622 ];
     };
+
+  #attic.autoPush = {
+  #  enable = true;
+  #  # Replace 'default' with your cache name if it's different
+  #  cache = "default";
+  #};
+
   #displayManager.gdm.enable = true;
   #desktopManager.gnome.enable = true;
+
   };
   security.sudo = {
     enable = true;

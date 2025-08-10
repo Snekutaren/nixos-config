@@ -1,5 +1,5 @@
 #nixos-config/machines/nixrog/nixrog-packages.nix
-{ config, pkgs, inputs, lib, attic, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Disk usage tools
@@ -35,6 +35,7 @@
     qrencode
     dnsutils
     # Networking
+    iperf3
     wget
     curl
     samba
@@ -60,9 +61,20 @@
     blueman
     upower
     mako
+    # test
+    chromium
+    firefox
+    lutris
+    wine
+    rocmPackages.rocm-smi
+    rocmPackages.rocm-runtime
+    rocmPackages.rocblas
+    rocmPackages.miopen
+    rocmPackages.rpp
+
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
     # Attic
-    attic.packages.${pkgs.system}.attic
+    inputs.attic.packages.${pkgs.system}.attic
   ];
 }

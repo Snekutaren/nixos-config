@@ -24,13 +24,11 @@ export PATH="$HOME/.local/bin:$PATH"
 function watchtree() {
   watch -c "eza --tree --icons --git --color=always $*"
 }
-
 function ssha() {
     pidof ssh-agent || eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/github/github_ed25519
 }
 function git-push-nixos() {
-    ssha
     local config_dir="$HOME/nixos-config"
     git -C "$config_dir" checkout auto
     git -C "$config_dir" add .
@@ -38,7 +36,6 @@ function git-push-nixos() {
     git -C "$config_dir" push
 }
 function git-push-dot() {
-    ssha
     local config_dir="$HOME/dotfiles"
     git -C "$config_dir" checkout auto
     git -C "$config_dir" add .
@@ -52,21 +49,32 @@ function git-push-comfyui() {
     git -C "$config_dir" commit -m "$(date)" || true
     git -C "$config_dir" push
 }
-function update-flake() {
-    declare -f update-flake
-    sudo nix flake update --flake ~/nixos-config -v
+function check-flake() {
+    sudo nix flake check ~/nixos-config -v
 }
-function build-nix() {
-    declare -f build-nix
-    sudo nixos-rebuild switch --flake ~/nixos-config -v
+function update-flake() {
+    sudo nix flake update ~/nixos-config -v
+}
+function build-attic-push() {
+    local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
+    attic push -j 8 default $SYSTEM_PATH
 }
 function build-nix-dry() {
+    local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
+    attic push -j 8 default $SYSTEM_PATH
     sudo nixos-rebuild dry-activate --flake ~/nixos-config -v
 }
-function build-nix-push() {
-    ssha
-    build-nix
-    git-push-nixos
+function build-nix-test() {
+    local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
+    attic push -j 8 default $SYSTEM_PATH
+    sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v
+}
+function deploy-nix() {
+    check-flake && \
+    build-attic-push && \
+    sudo nixos-rebuild dry-activate --flake ~/nixos-config -v && \
+    sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v && \
+    sudo nixos-rebuild switch --flake ~/nixos-config#nixrog -v
 }
 function reload-conf() {
     echo "Bash configuration reloaded."

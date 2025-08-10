@@ -20,12 +20,12 @@
       experimental-features = [ "nix-command" "flakes" ];
       extra-sandbox-paths = [ "/dev/kfd" "/dev/dri/renderD128" ];
       substituters = [
-        "https://cache.nixos.org/"
         "http://10.0.20.100:5000/default"
+        "https://cache.nixos.org/"
       ];
       trusted-public-keys = [
+        "default:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "localcache:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
       ];
       trusted-users = [ "root" "owdious" ];
     };
