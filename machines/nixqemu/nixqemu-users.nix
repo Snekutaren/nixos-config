@@ -1,4 +1,4 @@
-#nixos-config/machines/qemu/qemu-users.nix
+#nixos-config/machines/nixqemu/qemu-users.nix
 { config, inputs, lib, pkgs, ... }:
 {
   users.users.qemu = {
@@ -16,7 +16,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs pkgs; };
-    users.qemu.imports = [ (inputs.self + "/machines/qemu/users/qemu.nix") ];
+    users.qemu.imports = [ (inputs.self + "/machines/nixqemu/users/qemu.nix") ];
   };
   age = {
     identityPaths = [ 

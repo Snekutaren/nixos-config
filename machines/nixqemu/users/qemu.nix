@@ -61,14 +61,14 @@
       function build-nix-test() {
           local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
           attic push -j 8 default $SYSTEM_PATH
-          sudo nixos-rebuild test --flake ~/nixos-config#qemu -v
+          sudo nixos-rebuild test --flake ~/nixos-config#nixqemu -v
       }
       function deploy-nix() {
           check-flake && \
           build-attic-push && \
           sudo nixos-rebuild dry-activate --flake ~/nixos-config -v && \
-          sudo nixos-rebuild test --flake ~/nixos-config#qemu -v && \
-          sudo nixos-rebuild switch --flake ~/nixos-config#qemu -v
+          sudo nixos-rebuild test --flake ~/nixos-config#nixqemu -v && \
+          sudo nixos-rebuild switch --flake ~/nixos-config#nixqemu -v
       }
     '';
   };

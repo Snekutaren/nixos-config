@@ -1,4 +1,4 @@
-# qemu-disko-config.nix
+# nixqemu-disko-config.nix
 { lib, ... }: {
   disko.devices = {
     disk.main = {

@@ -1,4 +1,4 @@
-# machines/qemu/qemu-config.nix
+# machines/nixqemu/nixqemu-config.nix
 { config, pkgs, inputs, lib, modulesPath, attic, ... }:
 {
   imports = [
@@ -6,11 +6,11 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     # Machine-specific modules
-    (inputs.self + "/machines/qemu/qemu-disko.nix")
-    (inputs.self + "/machines/qemu/qemu-network.nix")
-    (inputs.self + "/machines/qemu/qemu-packages.nix")
+    (inputs.self + "/machines/nixqemu/nixqemu-disko.nix")
+    (inputs.self + "/machines/nixqemu/nixqemu-network.nix")
+    (inputs.self + "/machines/nixqemu/nixqemu-packages.nix")
     #(inputs.self + "/machines/nixrog/nixrog-packages.nix")
-    (inputs.self + "/machines/qemu/qemu-users.nix")
+    (inputs.self + "/machines/nixqemu/nixqemu-users.nix")
     # Common system modules
     (inputs.self + "/modules/localization.nix")
     (inputs.self + "/modules/sound.nix")

@@ -7,7 +7,7 @@ KEY_HOME="/home/$USER/.config/age/"
 mkdir -p "/tmp/nixos-config"
 git clone -b auto https://github.com/snekutaren/nixos-config.git /tmp/nixos-config
 
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko#disko -- --mode disko /tmp/nixos-config/machines/qemu/qemu-disko.nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko#disko -- --mode disko /tmp/nixos-config/machines/nixqemu/nixqemu-disko.nix
 
 #sudo cryptsetup luksAddKey /dev/disk/by-label/NIXOS_LUKS
 
@@ -20,7 +20,7 @@ else
   echo "/tmp/age.key not found!"
 fi
 
-sudo nixos-install --root "/mnt" --flake "/tmp/nixos-config#qemu" -v
+sudo nixos-install --root "/mnt" --flake "/tmp/nixos-config#nixqemu" -v
 
 echo "Copying age.key to $KEY_HOME .."
 

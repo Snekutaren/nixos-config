@@ -67,7 +67,7 @@
       pkgs = nixqemuPkgs;
       specialArgs = { inherit inputs; pkgs = nixqemuPkgs; };
       modules = [
-        ./machines/qemu/qemu-config.nix
+        ./machines/nixqemu/qemu-config.nix
         disko.nixosModules.disko
         home-manager-stable.nixosModules.home-manager
         agenix.nixosModules.default
