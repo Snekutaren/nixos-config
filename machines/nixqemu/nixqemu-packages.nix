@@ -35,6 +35,14 @@
     firefox
     lutris
     wine
-
+    chromium
+    firefox
+    lutris
+    wine
+    rocmPackages.rocm-smi
+    rocmPackages.rocm-runtime
+    rocmPackages.rocblas
+    rocmPackages.miopen
+    rocmPackages.rpp
   ];
 }

@@ -8,10 +8,10 @@ venv_prompt() {
 for cmd in nv vi vim nano; do alias $cmd='nvim'; done
 alias ls='eza -a --icons --git --color=always'
 alias ll='eza -lah --icons --git --color=always'
+alias lr='eza -lahR --icons --git --color=always'
 alias tree='eza --tree --icons --git --color=always'
 alias treel='eza --tree --icons --git --color=always | less'
 alias comfyui='nix develop ~/comfyui/nix'
-alias reload='source ~/.bashrc'
 alias sshno='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scpno='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias bng='cd $BEAMNG'
@@ -53,7 +53,7 @@ function check-flake() {
     sudo nix flake check ~/nixos-config -v
 }
 function update-flake() {
-    sudo nix flake update ~/nixos-config -v
+    sudo nix flake update --flake ~/nixos-config -v
 }
 function build-attic-push() {
     local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
@@ -76,8 +76,13 @@ function deploy-nix() {
     sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v && \
     sudo nixos-rebuild switch --flake ~/nixos-config#nixrog -v
 }
-function reload-conf() {
+function reload-bash() {
     echo "Bash configuration reloaded."
+    source ~/.bashrc
+    echo "Bash configuration reloaded."
+}
+function reload-hypr() {
+    echo "Hyprland configuration reloaded."
     hyprctl reload
     echo "Hyprland configuration reloaded."
 }

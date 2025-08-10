@@ -19,12 +19,12 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       substituters = [
-        "http://10.0.20.100:5000/default"
-        #"https://cache.nixos.org/"
+        "http://10.0.20.100:5000/default?priority=1"
+        "https://cache.nixos.org?priority=10"
       ];
       trusted-public-keys = [
         "default:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
-        #"cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
       trusted-users = [ "root" "qemu" ];
     };

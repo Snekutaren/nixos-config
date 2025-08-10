@@ -13,29 +13,31 @@
     enable = true;
     nix-direnv.enable = true;
     # If you use zsh or another shell, you need to enable it here
-    # Example for zsh:
     # enableZshIntegration = true;
   };
 
   programs.bash = {
     enable = true;
-
     shellAliases = {
       ll = "ls -lah";
-      lR = "ls -laR";
-      lRl = "ls -laR | less";
+      lr = "ls -lahR";
+      lrl = "ls -lahR | less";
     };
-
     initExtra = ''
       export PATH="$HOME/.local/bin:$PATH"
       for cmd in nv vi vim nano; do alias $cmd='nvim'; done
       alias ls='eza -a --icons --git --color=always'
       alias ll='eza -lah --icons --git --color=always'
+      alias lr='eza -lahR --icons --git --color=always'
       alias tree='eza --tree --icons --git --color=always'
       alias treel='eza --tree --icons --git --color=always | less'
-      alias reload='source ~/.bashrc'
-      function reload-conf() {
+      function reload-bash() {
         echo "Bash configuration reloaded."
+        source ~/.bashrc
+        echo "Bash configuration reloaded."
+      }
+      function reload-hypr() {
+        echo "Hyprland configuration reloaded."
         hyprctl reload
         echo "Hyprland configuration reloaded."
       }
@@ -44,10 +46,10 @@
         ssh-add ~/.ssh/github/github_ed25519
       }
       function check-flake() {
-      sudo nix flake check --flake ~/nixos-config -v
+      sudo nix flake check ~/nixos-config -v
       }
       function update-flake() {
-          sudo nix flake update ~/nixos-config -v
+          sudo nix flake update --flake ~/nixos-config -v
       }
       function build-attic-push() {
           local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
