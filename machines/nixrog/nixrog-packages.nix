@@ -34,6 +34,7 @@
     eza
     qrencode
     dnsutils
+    fd
     # Networking
     iperf3
     wget
@@ -47,6 +48,14 @@
     tmux
     jq
     bc
+    # Build Beam MP Launcher
+    vcpkg
+    cmake
+    gcc
+    clang
+    perl
+    pkg-config
+    gnumake
     # Graphics and input
     vulkan-tools
     glxinfo
@@ -71,7 +80,8 @@
     rocmPackages.rocblas
     rocmPackages.miopen
     rocmPackages.rpp
-
+    qemu
+    bridge-utils
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
     # Attic
