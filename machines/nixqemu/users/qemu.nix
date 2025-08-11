@@ -24,6 +24,7 @@
       lrl = "ls -lahR | less";
     };
     initExtra = ''
+      export TERM=xterm-256color
       export PATH="$HOME/.local/bin:$PATH"
       for cmd in nv vi vim nano; do alias $cmd='nvim'; done
       alias ls='eza -a --icons --git --color=always'
@@ -32,45 +33,39 @@
       alias tree='eza --tree --icons --git --color=always'
       alias treel='eza --tree --icons --git --color=always | less'
       function reload-bash() {
-        echo "Bash configuration reloaded."
         source ~/.bashrc
         echo "Bash configuration reloaded."
-      }
-      function reload-hypr() {
-        echo "Hyprland configuration reloaded."
-        hyprctl reload
-        echo "Hyprland configuration reloaded."
       }
       function ssha() {
         pidof ssh-agent || eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/github/github_ed25519
       }
       function check-flake() {
-      sudo nix flake check ~/nixos-config -v
+        sudo nix flake check ~/nixos-config -v
       }
       function update-flake() {
-          sudo nix flake update --flake ~/nixos-config -v
+        sudo nix flake update --flake ~/nixos-config -v
       }
       function build-attic-push() {
-          local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
-          attic push -j 8 default $SYSTEM_PATH
+        local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
+        attic push -j 8 default $SYSTEM_PATH
       }      
       function build-nix-dry() {
-          local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
-          attic push -j 8 default $SYSTEM_PATH
-          sudo nixos-rebuild dry-activate --flake ~/nixos-config -v
+        local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
+        attic push -j 8 default $SYSTEM_PATH
+        sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixqemu -v
       }
       function build-nix-test() {
-          local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
-          attic push -j 8 default $SYSTEM_PATH
-          sudo nixos-rebuild test --flake ~/nixos-config#nixqemu -v
+        local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)
+        attic push -j 8 default $SYSTEM_PATH
+        sudo nixos-rebuild test --flake ~/nixos-config#nixqemu -v
       }
       function deploy-nix() {
-          check-flake && \
-          build-attic-push && \
-          sudo nixos-rebuild dry-activate --flake ~/nixos-config -v && \
-          sudo nixos-rebuild test --flake ~/nixos-config#nixqemu -v && \
-          sudo nixos-rebuild switch --flake ~/nixos-config#nixqemu -v
+        check-flake && \
+        build-attic-push && \
+        sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixqemu -v && \
+        sudo nixos-rebuild test --flake ~/nixos-config#nixqemu -v && \
+        sudo nixos-rebuild switch --flake ~/nixos-config#nixqemu -v
       }
     '';
   };

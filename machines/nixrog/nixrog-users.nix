@@ -5,7 +5,7 @@
     isNormalUser = true;
     home = "/home/owdious";
     description = "owdious user";
-    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" "libvirtd" ];
     shell = pkgs.bashInteractive;
     hashedPasswordFile = config.age.secrets.nixrog-owdious.path;
   };

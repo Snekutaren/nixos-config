@@ -43,7 +43,7 @@
         rocmTargets = [ "gfx1201" ];
       };
     };
-    nixqemuPkgs = import nixpkgs-stable {
+    nixqemuPkgs = import nixpkgs-unstable {
       inherit system;
       config = {
         allowUnfree = true;
@@ -62,14 +62,14 @@
         attic.nixosModules.atticd
       ];
     };
-    nixosConfigurations.nixqemu = nixpkgs-stable.lib.nixosSystem {
+    nixosConfigurations.nixqemu = nixpkgs-unstable.lib.nixosSystem {
       inherit system;
       pkgs = nixqemuPkgs;
       specialArgs = { inherit inputs; pkgs = nixqemuPkgs; };
       modules = [
         ./machines/nixqemu/nixqemu-config.nix
         disko.nixosModules.disko
-        home-manager-stable.nixosModules.home-manager
+        home-manager-unstable.nixosModules.home-manager
         agenix.nixosModules.default
         attic.nixosModules.atticd
       ];

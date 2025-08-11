@@ -20,6 +20,7 @@
     steam-run
     pkgs.tabby
   ];
+  #programs.virt-manager.enable = true;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;

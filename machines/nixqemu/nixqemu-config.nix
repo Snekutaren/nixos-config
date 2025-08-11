@@ -26,7 +26,7 @@
         "default:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
-      trusted-users = [ "root" "qemu" ];
+      trusted-users = [ "root" "qemu" "nixos" ];
     };
   };
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -80,8 +80,8 @@
       displayManager.sessionCommands = ''
         xrandr --output Virtual-1 --mode 1920x1080
       '';
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      #displayManager.gdm.enable = true;
+      #desktopManager.gnome.enable = true;
     };
   dbus.enable = true;
     openssh = {
@@ -95,8 +95,8 @@
   #  cache = "default";
   #};
 
-  #displayManager.gdm.enable = true;
-  #desktopManager.gnome.enable = true;
+  displayManager.gdm.enable = true;
+  desktopManager.gnome.enable = true;
 
   };
   security.sudo = {

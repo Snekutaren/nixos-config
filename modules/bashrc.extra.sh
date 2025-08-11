@@ -62,7 +62,7 @@ function build-attic-push() {
 function build-nix-dry() {
     local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
     attic push -j 8 default $SYSTEM_PATH
-    sudo nixos-rebuild dry-activate --flake ~/nixos-config -v
+    sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixrog -v
 }
 function build-nix-test() {
     local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
@@ -72,7 +72,7 @@ function build-nix-test() {
 function deploy-nix() {
     check-flake && \
     build-attic-push && \
-    sudo nixos-rebuild dry-activate --flake ~/nixos-config -v && \
+    sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixrog -v && \
     sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v && \
     sudo nixos-rebuild switch --flake ~/nixos-config#nixrog -v
 }
