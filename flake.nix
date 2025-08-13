@@ -28,12 +28,12 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    attic = {
-      url = "github:zhaofengli/attic";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    #attic = {
+    #  url = "github:zhaofengli/attic";
+    #  inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #};
   };
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nur, home-manager-stable, home-manager-unstable, agenix, disko, attic, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nur, home-manager-stable, home-manager-unstable, agenix, disko, ... }@inputs:
   let
     system = "x86_64-linux";
     nixrogPkgs = import nixpkgs-unstable {
@@ -53,13 +53,13 @@
     nixosConfigurations.nixrog = nixpkgs-unstable.lib.nixosSystem {
       inherit system;
       pkgs = nixrogPkgs;
-      specialArgs = { inherit inputs attic; pkgs = nixrogPkgs; };
+      specialArgs = { inherit inputs; pkgs = nixrogPkgs; };
       modules = [
         ./machines/nixrog/nixrog-config.nix
         disko.nixosModules.disko
         home-manager-unstable.nixosModules.home-manager
         agenix.nixosModules.default
-        attic.nixosModules.atticd
+        #attic.nixosModules.atticd
       ];
     };
     nixosConfigurations.nixqemu = nixpkgs-unstable.lib.nixosSystem {
@@ -71,7 +71,14 @@
         disko.nixosModules.disko
         home-manager-unstable.nixosModules.home-manager
         agenix.nixosModules.default
-        attic.nixosModules.atticd
+        #attic.nixosModules.atticd
+      ];
+    };
+    nixosConfigurations.pre-install-qemu = nixpkgs-unstable.lib.nixosSystem {
+      inherit system;
+      pkgs = nixqemuPkgs;
+      modules = [
+        ./machines/nixqemu/pre-install-cache.nix
       ];
     };
   };

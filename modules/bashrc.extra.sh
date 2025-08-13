@@ -15,6 +15,7 @@ alias comfyui='nix develop ~/comfyui/nix'
 alias sshno='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scpno='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias bng='cd $BEAMNG'
+alias rm='trash-put --'
 export BEAMNG="/home/owdious/.local/share/Steam/steamapps/compatdata/284160/pfx/drive_c/users/steamuser/AppData/Local/BeamNG.drive/0.36/mods"
 
 #export PS1='$(venv_prompt)\u@\h:\w\$ '
@@ -57,32 +58,31 @@ function update-flake() {
 }
 function build-attic-push() {
     local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
-    attic push -j 8 default $SYSTEM_PATH
+    #attic push -j 8 default $SYSTEM_PATH
 }
 function build-nix-dry() {
     local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
-    attic push -j 8 default $SYSTEM_PATH
+    #attic push -j 8 default $SYSTEM_PATH
     sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixrog -v
 }
 function build-nix-test() {
     local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
-    attic push -j 8 default $SYSTEM_PATH
+    #attic push -j 8 default $SYSTEM_PATH
     sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v
 }
 function deploy-nix() {
     check-flake && \
-    build-attic-push && \
+    #build-attic-push && \
     sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixrog -v && \
     sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v && \
     sudo nixos-rebuild switch --flake ~/nixos-config#nixrog -v
+    reload-bash
 }
 function reload-bash() {
-    echo "Bash configuration reloaded."
     source ~/.bashrc
     echo "Bash configuration reloaded."
 }
 function reload-hypr() {
-    echo "Hyprland configuration reloaded."
     hyprctl reload
     echo "Hyprland configuration reloaded."
 }

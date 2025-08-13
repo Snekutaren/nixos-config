@@ -20,6 +20,11 @@
     kdePackages.kio
     kdePackages.kio-extras
     # System utilities
+    trash-cli
+    lm_sensors
+    sysstat
+    pv
+    btop
     inotify-tools
     neofetch
     htop
@@ -28,6 +33,7 @@
     pciutils
     usbutils
     udisks2
+    parted
     gparted
     dos2unix
     tree
@@ -35,6 +41,10 @@
     qrencode
     dnsutils
     fd
+    ntfs3g
+    f3
+    e2fsprogs
+    fio
     # Networking
     iperf3
     wget
@@ -71,20 +81,13 @@
     upower
     mako
     # test
-    chromium
-    firefox
     lutris
     wine
-    rocmPackages.rocm-smi
-    rocmPackages.rocm-runtime
-    rocmPackages.rocblas
-    rocmPackages.miopen
-    rocmPackages.rpp
     qemu
     bridge-utils
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
     # Attic
-    inputs.attic.packages.${pkgs.system}.attic
+    #inputs.attic.packages.${pkgs.system}.attic
   ];
 }

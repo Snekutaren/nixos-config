@@ -28,21 +28,6 @@
 
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
-    inputs.attic.packages.${pkgs.system}.attic
-
-    # test
-    chromium
-    firefox
-    lutris
-    wine
-    chromium
-    firefox
-    lutris
-    wine
-    rocmPackages.rocm-smi
-    rocmPackages.rocm-runtime
-    rocmPackages.rocblas
-    rocmPackages.miopen
-    rocmPackages.rpp
+    #inputs.attic.packages.${pkgs.system}.attic
   ];
 }

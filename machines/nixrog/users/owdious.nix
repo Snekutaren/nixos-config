@@ -20,7 +20,6 @@
     steam-run
     pkgs.tabby
   ];
-  #programs.virt-manager.enable = true;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -72,33 +71,33 @@
     };
   };
   # Kvantum theme config for Qt
-  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
-    [General]
-    theme=Catppuccin-Mocha
-  '';
+  #xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+  #  [General]
+  #  theme=Catppuccin-Mocha
+  #'';
   # GTK theme config
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Lavender-Dark";
-      package = pkgs.catppuccin-gtk;
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    cursorTheme = {
-      name = "Catppuccin-Mocha-Dark-Cursors";
-      package = pkgs.catppuccin-cursors;
-      size = 24;
-    };
-  };
+  #gtk = {
+  #  enable = true;
+  #  theme = {
+  #    name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+  #    package = pkgs.catppuccin-gtk;
+  #  };
+  #  iconTheme = {
+  #    name = "Papirus-Dark";
+  #    package = pkgs.papirus-icon-theme;
+  #  };
+  #  cursorTheme = {
+  #    name = "Catppuccin-Mocha-Dark-Cursors";
+  #    package = pkgs.catppuccin-cursors;
+  #    size = 24;
+  #  };
+  #};
   # Ensure Qt uses Kvantum
-  qt = {
-    enable = true;
-    platformTheme.name = "qtct";
-    style.name = "kvantum";
-  };
+  #qt = {
+  #  enable = true;
+  #  platformTheme.name = "qtct";
+  #  style.name = "kvantum";
+  #};
     home.pointerCursor = {
     gtk.enable = true;
     # x11.enable = true;

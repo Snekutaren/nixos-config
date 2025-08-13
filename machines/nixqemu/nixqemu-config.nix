@@ -19,11 +19,11 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       substituters = [
-        "http://10.0.20.100:5000/default?priority=1"
+        "http://10.0.20.100:5000?priority=1"
         "https://cache.nixos.org?priority=10"
       ];
       trusted-public-keys = [
-        "default:bA7oAEsF4sbVd1KDEINX7ZC9WUtp14lS66ucSnfC1fo="
+        "truenas-nix-cache:F3PBg47BlOWSyBJ/J4dQKHCupuWPBVHeFwnx59uzzi8="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
       trusted-users = [ "root" "qemu" "nixos" ];
@@ -88,12 +88,6 @@
         enable = true;
         ports = [ 6622 ];
     };
-
-  #attic.autoPush = {
-  #  enable = true;
-  #  # Replace 'default' with your cache name if it's different
-  #  cache = "default";
-  #};
 
   displayManager.gdm.enable = true;
   desktopManager.gnome.enable = true;
