@@ -27,7 +27,7 @@
               name = "cryptroot"; # Maps to /dev/mapper/cryptroot
               extraFormatArgs = [ "--label=NIXOS_LUKS" ]; # Set LUKS label
               settings = {
-                #keyFile = "/tmp/luks-keyfile"; # Temporary keyfile for fresh install
+                keyFile = "/tmp/luks-keyfile"; # Temporary keyfile for fresh install
                 allowDiscards = true; # Enable TRIM for NVMe
               };
               content = {

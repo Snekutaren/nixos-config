@@ -53,7 +53,7 @@
     nixosConfigurations.nixrog = nixpkgs-unstable.lib.nixosSystem {
       inherit system;
       pkgs = nixrogPkgs;
-      specialArgs = { inherit inputs; pkgs = nixrogPkgs; };
+      specialArgs = { inherit inputs; };
       modules = [
         ./machines/nixrog/nixrog-config.nix
         disko.nixosModules.disko
@@ -65,20 +65,13 @@
     nixosConfigurations.nixqemu = nixpkgs-unstable.lib.nixosSystem {
       inherit system;
       pkgs = nixqemuPkgs;
-      specialArgs = { inherit inputs; pkgs = nixqemuPkgs; };
+      specialArgs = { inherit inputs; };
       modules = [
         ./machines/nixqemu/nixqemu-config.nix
         disko.nixosModules.disko
         home-manager-unstable.nixosModules.home-manager
         agenix.nixosModules.default
         #attic.nixosModules.atticd
-      ];
-    };
-    nixosConfigurations.pre-install-qemu = nixpkgs-unstable.lib.nixosSystem {
-      inherit system;
-      pkgs = nixqemuPkgs;
-      modules = [
-        ./machines/nixqemu/pre-install-cache.nix
       ];
     };
   };

@@ -27,11 +27,15 @@
   };
   programs.bash = {
     enable = true;
-    initExtra = builtins.readFile (inputs.self + "/modules/bashrc.extra.sh");
+    #initExtra = builtins.readFile (inputs.self + "/modules/bashrc.extra.sh");
   };
+  #programs.bash-language-server.enable = true;
   programs.zsh = {
     enable = true;
     #ohMyZsh.enable = false;
+  };
+  programs.neovim = {
+    enable = true;
   };
   programs.gh.enable = true;
   programs.git = {
@@ -41,11 +45,6 @@
   };
   programs.eww = {
     enable = true;
-  };
-  programs.neovim = {
-    enable = true;
-    #package = pkgs.neovim;
-    #extraConfig = builtins.readFile (inputs.self + "/modules/nvim-init.lua");
   };
   xdg.configFile = {
     "hypr/hyprland.conf".source = inputs.self + "/modules/hypr/hyprland.conf";

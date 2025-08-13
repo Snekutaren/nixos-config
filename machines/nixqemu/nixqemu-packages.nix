@@ -26,6 +26,9 @@
     # GUI utilities
     upower mako
 
+    #
+    bash-language-server
+
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
     #inputs.attic.packages.${pkgs.system}.attic

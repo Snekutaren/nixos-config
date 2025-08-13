@@ -12,11 +12,11 @@ substituters = http://10.0.20.100:5000?priority=1 https://cache.nixos.org?priori
 trusted-public-keys = truenas-nix-cache:F3PBg47BlOWSyBJ/J4dQKHCupuWPBVHeFwnx59uzzi8= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
 experimental-features = nix-command flakes
 EOF
-
-# 2. Restart the nix-daemon.
-# This must be run with sudo for systemctl to work.
 sudo systemctl restart nix-daemon
 
+if [ -d "/tmp/nixos-config" ]; then
+  sudo rm -rf /tmp/nixos-config
+fi
 mkdir -p "/tmp/nixos-config"
 git clone -b auto https://github.com/snekutaren/nixos-config.git /tmp/nixos-config
 
@@ -36,14 +36,12 @@ fi
 sudo -E nixos-install --root "/mnt" --flake "/tmp/nixos-config#nixqemu" -v
 
 echo "Copying age.key to $KEY_HOME .."
-
 sudo mkdir -p "$KEY_HOME"
 if [ -f "/tmp/age.key" ]; then
   sudo cp "/tmp/age.key" "$KEY_HOME/age.key"
-  sudo chown "$USER:users" "$KEY_HOME/age.key"
+  sudo chown "root" "$KEY_HOME/age.key"
   sudo chmod 600 "$KEY_HOME/age.key"
 else
   echo "/tmp/age.key not found!"
 fi
-
 sudo ls -la "$KEY_HOME"

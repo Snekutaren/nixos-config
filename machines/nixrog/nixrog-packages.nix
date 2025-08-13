@@ -1,5 +1,5 @@
 #nixos-config/machines/nixrog/nixrog-packages.nix
-{ config, pkgs, inputs, lib, ... }:
+{ pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Disk usage tools
@@ -54,7 +54,7 @@
     sshpass
     # Development
     git
-    neovim
+    #neovim
     tmux
     jq
     bc
@@ -89,5 +89,6 @@
     inputs.agenix.packages.${pkgs.system}.agenix
     # Attic
     #inputs.attic.packages.${pkgs.system}.attic
+    bash-language-server
   ];
 }

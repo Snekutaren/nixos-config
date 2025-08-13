@@ -1,5 +1,5 @@
 #nixos-config/machines/nixrog/nixrog-users.nix
-{ config, inputs, lib, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 {
   users.users.owdious = {
     isNormalUser = true;

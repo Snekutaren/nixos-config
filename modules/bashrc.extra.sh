@@ -57,16 +57,16 @@ function update-flake() {
     sudo nix flake update --flake ~/nixos-config -v
 }
 function build-attic-push() {
-    local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
+    #local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
     #attic push -j 8 default $SYSTEM_PATH
 }
 function build-nix-dry() {
-    local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
+    #local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
     #attic push -j 8 default $SYSTEM_PATH
     sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixrog -v
 }
 function build-nix-test() {
-    local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
+    #local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
     #attic push -j 8 default $SYSTEM_PATH
     sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v
 }
@@ -75,7 +75,8 @@ function deploy-nix() {
     #build-attic-push && \
     sudo nixos-rebuild dry-activate --flake ~/nixos-config#nixrog -v && \
     sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v && \
-    sudo nixos-rebuild switch --flake ~/nixos-config#nixrog -v
+    sudo nixos-rebuild switch --flake ~/nixos-config#nixrog -v && \
+    copy-to-cache && \
     reload-bash
 }
 function reload-bash() {
@@ -85,4 +86,8 @@ function reload-bash() {
 function reload-hypr() {
     hyprctl reload
     echo "Hyprland configuration reloaded."
+}
+function copy-to-cache() {
+    nix copy --to ssh://x570-machine-vm /run/current-system
+    echo "Current build pushed to local cache."
 }
