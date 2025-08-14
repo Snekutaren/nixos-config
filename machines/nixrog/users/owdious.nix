@@ -27,7 +27,7 @@
   };
   programs.bash = {
     enable = true;
-    #initExtra = builtins.readFile (inputs.self + "/modules/bashrc.extra.sh");
+    initExtra = builtins.readFile (inputs.self + "/modules/bashrc.extra.sh");
   };
   #programs.bash-language-server.enable = true;
   programs.zsh = {

@@ -59,6 +59,7 @@ function update-flake() {
 function build-attic-push() {
     #local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)
     #attic push -j 8 default $SYSTEM_PATH
+    echo "function can't be empty"
 }
 function build-nix-dry() {
     #local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixrog.config.system.build.toplevel)

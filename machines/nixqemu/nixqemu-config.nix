@@ -19,7 +19,7 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       substituters = [
-        "http://10.0.20.100:5000?priority=1"
+        "http://local.nix-cache:5000?priority=1"
         "https://cache.nixos.org?priority=10"
       ];
       trusted-public-keys = [

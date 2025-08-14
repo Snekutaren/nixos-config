@@ -10,7 +10,7 @@ current_factor=$("$HYPRCTL_PATH" getoption input:scroll_factor | head -n 1 | awk
 # Check if the current factor is "high" using numeric comparison
 # We use 'bc' for reliable floating-point comparison.
 if (( $(echo "$current_factor > 5.0" | bc -l) )); then
-    "$HYPRCTL_PATH" keyword input:scroll_factor 2.5
+    "$HYPRCTL_PATH" keyword input:scroll_factor 1.0
 else
     "$HYPRCTL_PATH" keyword input:scroll_factor 8.0
 fi
