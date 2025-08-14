@@ -15,7 +15,7 @@
     superfile peazip unzip file
 
     # System utilities
-    neofetch htop lsof strace pciutils usbutils udisks2 gparted dos2unix tree eza
+    neofetch htop lsof strace pciutils usbutils udisks2 gparted dos2unix tree eza neovim
 
     # Networking
     wget curl cifs-utils sshpass dnsutils
