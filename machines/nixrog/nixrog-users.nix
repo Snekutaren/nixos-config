@@ -24,7 +24,9 @@
     users.owdious.imports = [ (inputs.self + "/machines/nixrog/users/owdious.nix") ];
   };
   age = {
-    identityPaths = [ "/home/owdious/.config/age/age.key" ];
+    identityPaths = [ "/home/owdious/.config/age/age.key"
+    "/etc/age/age.key" # translates to /mnt/etc/age/age.key when installing..
+     ];
     secrets.nixrog-owdious = {
       file = "${inputs.self}/secrets/nixrog-owdious.age";
     };
