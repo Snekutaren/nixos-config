@@ -44,7 +44,7 @@
         sudo nix flake check ~/nixos-config -v
       }
       function update-flake() {
-        sudo nix flake update --flake ~/nixos-config -v
+        sudo nix flake update --commit-lock-file --flake ~/nixos-config -v
       }
       function build-attic-push() {
         local SYSTEM_PATH=$(nix build --no-link --print-out-paths ~/nixos-config#nixosConfigurations.nixqemu.config.system.build.toplevel)

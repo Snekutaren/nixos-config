@@ -25,7 +25,7 @@
   };
   age = {
     identityPaths = [ "/home/owdious/.config/age/age.key"
-    "/etc/age/age.key" # translates to /mnt/etc/age/age.key when installing..
+    "/tmp/age.key" # for first install
      ];
     secrets.nixrog-owdious = {
       file = "${inputs.self}/secrets/nixrog-owdious.age";

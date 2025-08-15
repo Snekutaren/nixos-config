@@ -28,10 +28,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    #attic = {
-    #  url = "github:zhaofengli/attic";
-    #  inputs.nixpkgs.follows = "nixpkgs-unstable";
-    #};
   };
   outputs = { self, nixpkgs-stable, nixpkgs-unstable, nur, home-manager-stable, home-manager-unstable, agenix, disko, ... }@inputs:
   let
@@ -59,7 +55,6 @@
         disko.nixosModules.disko
         home-manager-unstable.nixosModules.home-manager
         agenix.nixosModules.default
-        #attic.nixosModules.atticd
       ];
     };
     nixosConfigurations.nixqemu = nixpkgs-unstable.lib.nixosSystem {
@@ -71,7 +66,6 @@
         disko.nixosModules.disko
         home-manager-unstable.nixosModules.home-manager
         agenix.nixosModules.default
-        #attic.nixosModules.atticd
       ];
     };
   };
