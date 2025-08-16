@@ -20,6 +20,8 @@
     kdePackages.kio
     kdePackages.kio-extras
     # System utilities
+    coreutils
+    findutils
     trash-cli
     lm_sensors
     sysstat
@@ -67,6 +69,7 @@
     pkg-config
     gnumake
     # Graphics and input
+    vulkan-loader
     vulkan-tools
     glxinfo
     evtest
@@ -100,5 +103,12 @@
     # Attic
     #inputs.attic.packages.${pkgs.system}.attic
     bash-language-server
+    #Steam
+    steam
+    steam-run
+    #steamPackages.steamvr
+    # VR
+    #openxr-tools
+    #alvr-server
   ];
 }

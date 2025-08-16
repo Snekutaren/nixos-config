@@ -43,6 +43,7 @@
         # keyFile = "/etc/luks-keys/cryptroot.key";
       };
     };
+    kernel.sysctl."net.bridge.bridge-nf-call-iptables" = 0;
     kernelPackages = pkgs.linuxPackages_latest;
     #kernelPackages = pkgs.linuxPackages_6_15;
     loader = {
@@ -179,4 +180,5 @@
   #  QT_QPA_PLATFORMTHEME = "qt5ct";   # Use qt5ct to apply themes
   #  QT_STYLE_OVERRIDE    = "breeze";  # Optional, force a style
   #};
+  programs.zsh.enable = true;
 }

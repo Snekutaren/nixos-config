@@ -6,7 +6,8 @@
     home = "/home/owdious";
     description = "owdious user";
     extraGroups = [ "wheel" "networkmanager" "audio" "gamemode" "render" "video" "libvirtd" ];
-    shell = pkgs.bashInteractive;
+    #shell = pkgs.bashInteractive;
+    shell = pkgs.zsh;  # <-- sets Zsh as default
     hashedPasswordFile = config.age.secrets.nixrog-owdious.path;
   };
   users.users.tellus = {

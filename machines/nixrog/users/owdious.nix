@@ -26,7 +26,7 @@
     enableZshIntegration = false;
   };
   programs.bash = {
-    enable = false;
+    enable = true;
     initExtra = builtins.readFile (inputs.self + "/modules/bashrc");
   };
   #programs.bash-language-server.enable = true;
