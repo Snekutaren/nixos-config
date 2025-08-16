@@ -65,7 +65,7 @@ function deploy-nix() {
     sudo nixos-rebuild test --flake ~/nixos-config#nixrog -v && \
     sudo nixos-rebuild switch --flake ~/nixos-config#nixrog -v && \
     copy-to-cache && \
-    reload-bash
+    reload-zsh
 }
 function reload-zsh() {
     source ~/.zshrc

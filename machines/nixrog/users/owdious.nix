@@ -27,7 +27,7 @@
   };
   programs.bash = {
     enable = false;
-    initExtra = builtins.readFile (inputs.self + "/modules/bashrc.extra.sh");
+    initExtra = builtins.readFile (inputs.self + "/modules/.bashrc.sh");
   };
   #programs.bash-language-server.enable = true;
   programs.zsh = {
@@ -42,7 +42,7 @@
       theme = "agnoster"; 
       plugins = [ "git" "docker" "sudo" "podman" ];
     };
-    initExtra = builtins.readFile (inputs.self + "/modules/zshextra.sh");
+    initContent = builtins.readFile (inputs.self + "/modules/.zshrc.sh");
   };
   programs.neovim = {
     enable = true;
