@@ -26,13 +26,23 @@
     enableZshIntegration = false;
   };
   programs.bash = {
-    enable = true;
+    enable = false;
     initExtra = builtins.readFile (inputs.self + "/modules/bashrc.extra.sh");
   };
   #programs.bash-language-server.enable = true;
   programs.zsh = {
     enable = true;
-    #ohMyZsh.enable = false;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    shellAliases = {
+    };
+    oh-my-zsh = {
+      enable = true;
+      theme = "agnoster"; 
+      plugins = [ "git" "docker" "sudo" "podman" ];
+    };
+    initExtra = builtins.readFile (inputs.self + "/modules/zshextra.sh");
   };
   programs.neovim = {
     enable = true;
@@ -97,7 +107,7 @@
   #  platformTheme.name = "qtct";
   #  style.name = "kvantum";
   #};
-    home.pointerCursor = {
+  home.pointerCursor = {
     gtk.enable = true;
     # x11.enable = true;
     package = pkgs.bibata-cursors;

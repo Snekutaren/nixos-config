@@ -2,8 +2,8 @@
 set -euo pipefail
 
 USER=owdious
-REMOTE="nixos@nixos"
-SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+REMOTE="nixos-nixos"
+SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=10m -o ControlPath=~/.ssh/cm-%r@%h:%p"
 
 # Append qemu.pub to authorized_keys
 ssh $SSH_OPTS "$REMOTE" "mkdir -p /home/nixos/.ssh && cat >> /home/nixos/.ssh/authorized_keys" < /home/"$USER"/.ssh/nixqemu.pub

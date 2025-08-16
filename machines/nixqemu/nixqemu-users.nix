@@ -20,8 +20,8 @@
   };
   age = {
     identityPaths = [ 
-      "${config.users.users.qemu.home}/.config/age/age.key" 
-       "/tmp/age.key" # for first install
+      "/home/qemu/.config/age/age.key" 
+      #"/mnt/tmp/age.key" # for first install
     ];
     secrets.nixqemu-qemu = {
       file = "${inputs.self}/secrets/nixqemu-qemu.age";

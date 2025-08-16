@@ -32,6 +32,7 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
   boot = {
+    #isContainer = true;
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" "uhci_hcd" "ehci_pci" "virtio_pci" "virtio_blk" ];
       kernelModules = [ "dm-snapshot" "cryptd" "cifs" ];

@@ -29,6 +29,32 @@
     #
     bash-language-server
 
+    #
+    lutris
+    wine
+    qemu
+    telegram-desktop
+    bridge-utils
+    gamescope
+    brave
+    discord
+    heroic
+    steam
+    vscode
+    vlc
+    playerctl
+    thunderbird
+    gimp
+    libreoffice
+    blender
+    moonlight-qt
+    steam-run
+    pkgs.tabby
+    chromium
+    krita
+    colobot
+    docker
+
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
     #inputs.attic.packages.${pkgs.system}.attic

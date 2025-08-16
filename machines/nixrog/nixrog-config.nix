@@ -20,7 +20,7 @@
       experimental-features = [ "nix-command" "flakes" ];
       extra-sandbox-paths = [ "/dev/kfd" "/dev/dri/renderD128" ];
       substituters = [
-        "http://local-nix-cache:5000?priority=1"
+        "http://local.nix-cache:5000?priority=1"
         "https://cache.nixos.org?priority=10"
       ];
       trusted-public-keys = [
@@ -175,4 +175,8 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd.qemu.swtpm.enable = true;
+  #environment.variables = {
+  #  QT_QPA_PLATFORMTHEME = "qt5ct";   # Use qt5ct to apply themes
+  #  QT_STYLE_OVERRIDE    = "breeze";  # Optional, force a style
+  #};
 }

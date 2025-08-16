@@ -1,4 +1,4 @@
-# nixos-config/modules/bashrc.extra.sh
+# nixos-config/modules/zshextra.sh
 
 for cmd in nv vi vim nano; do alias $cmd='nvim'; done
 alias ls='eza -a --icons --git --color=always'
@@ -15,13 +15,10 @@ alias checkvenv='[ -n "$VIRTUAL_ENV" ] && echo "In venv: $VIRTUAL_ENV" || echo "
 
 export BEAMNG="/home/owdious/.local/share/Steam/steamapps/compatdata/284160/pfx/drive_c/users/steamuser/AppData/Local/BeamNG.drive/0.36/mods"
 export PATH="$HOME/.local/bin:$PATH"
-#export PS1='$(venv_prompt)\u@\h:\w\$ '
 
-venv_prompt() {
-  if [ -n "$VIRTUAL_ENV" ]; then
-    echo "($(basename "$VIRTUAL_ENV")) "
-  fi
-}
+# Zsh prompt configuration
+#PROMPT='$%n@%m:%~%# '
+
 function watchtree() {
   watch -c "eza --tree --icons --git --color=always $*"
 }
@@ -70,9 +67,9 @@ function deploy-nix() {
     copy-to-cache && \
     reload-bash
 }
-function reload-bash() {
-    source ~/.bashrc
-    echo "Bash configuration reloaded."
+function reload-zsh() {
+    source ~/.zshrc
+    echo "Zsh configuration reloaded."
 }
 function reload-hypr() {
     hyprctl reload

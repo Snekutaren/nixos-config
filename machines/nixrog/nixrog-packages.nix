@@ -77,6 +77,10 @@
     # GUI applications
     kdePackages.kate
     kdePackages.konsole
+    #libsForQt5.qt5ct       # Qt5 theme configurator
+    #qt6ct       # Qt6 theme configurator
+    #kdePackages.breeze-qt5 # Example theme for Qt5
+    #kvantum-qt5 # Optional, for Kvantum themes
     blueman
     upower
     mako
@@ -84,7 +88,13 @@
     lutris
     wine
     qemu
+    telegram-desktop
+    kdePackages.kcalc
     bridge-utils
+    # Other dependencies like language servers
+    lunarvim
+    ripgrep
+    fd
     # Secrets management
     inputs.agenix.packages.${pkgs.system}.agenix
     # Attic
